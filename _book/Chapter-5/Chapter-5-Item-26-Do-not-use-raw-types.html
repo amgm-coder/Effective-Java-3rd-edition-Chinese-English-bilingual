@@ -1,0 +1,1928 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 26: Do not use raw types（不要使用原始类型） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-5-Item-27-Eliminate-unchecked-warnings.html" />
+    
+    
+    <link rel="prev" href="Chapter-5-Introduction.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Chapter-5-Introduction.html">
+            
+                <a href="Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Chapter-5-Introduction.html">
+            
+                <a href="Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 26: Do not use raw types（不要使用原始类型）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-5-generics&#xFF08;&#x6CDB;&#x578B;&#xFF09;">Chapter 5. Generics&#xFF08;&#x6CDB;&#x578B;&#xFF09;</h2>
+<h3 id="item-26-dont-use-raw-types&#xFF08;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF09;">Item 26: Don&#x2019;t use raw types&#xFF08;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF09;</h3>
+<p>First, a few terms. A class or interface whose declaration has one or more type parameters is a generic class or interface [JLS, 8.1.2, 9.1.2]. For example, the List interface has a single type parameter, E, representing its element type. The full name of the interface is <code>List&lt;E&gt;</code> (read &#x201C;list of E&#x201D;), but people often call it List for short. Generic classes and interfaces are collectively known as generic types.</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x672F;&#x8BED;&#x3002;&#x58F0;&#x660E;&#x4E2D;&#x5177;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x6216;&#x63A5;&#x53E3;&#x5C31;&#x662F;&#x6CDB;&#x578B;&#x7C7B;&#x6216;&#x6CDB;&#x578B;&#x63A5;&#x53E3; [JLS, 8.1.2, 9.1.2]&#x3002;&#x4F8B;&#x5982;&#xFF0C;List &#x63A5;&#x53E3;&#x6709;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x53C2;&#x6570; E&#xFF0C;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x5176;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x3002;&#x8BE5;&#x63A5;&#x53E3;&#x7684;&#x5168;&#x540D;&#x662F; <code>List&lt;E&gt;</code>&#xFF08;&#x8BFB;&#x4F5C;&#x300C;List of E&#x300D;&#xFF09;&#xFF0C;&#x4F46;&#x4EBA;&#x4EEC;&#x901A;&#x5E38;&#x7B80;&#x79F0;&#x4E3A; List&#x3002;&#x6CDB;&#x578B;&#x7C7B;&#x548C;&#x6CDB;&#x578B;&#x63A5;&#x53E3;&#x7EDF;&#x79F0;&#x4E3A;&#x6CDB;&#x578B;&#x3002;</p>
+<p>Each generic type defines a set of parameterized types, which consist of the class or interface name followed by an angle-bracketed list of actual type parameters corresponding to the generic type&#x2019;s formal type parameters [JLS, 4.4, 4.5]. For example, <code>List&lt;String&gt;</code> (read &#x201C;list of string&#x201D;) is a parameterized type representing a list whose elements are of type String. (String is the actual type parameter corresponding to the formal type parameter E.)</p>
+<p>&#x6BCF;&#x4E2A;&#x6CDB;&#x578B;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x7EC4;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x5305;&#x62EC;&#x7C7B;&#x540D;&#x6216;&#x63A5;&#x53E3;&#x540D;&#xFF0C;&#x4EE5;&#x53CA;&#x5E26;&#x5C16;&#x62EC;&#x53F7;&#x7684;&#x53C2;&#x6570;&#x5217;&#x8868;&#xFF0C;&#x53C2;&#x6570;&#x5217;&#x8868;&#x662F;&#x4E0E;&#x6CDB;&#x578B;&#x7684;&#x5F62;&#x5F0F;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x76F8;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B; [JLS, 4.4, 4.5]&#x3002;&#x4F8B;&#x5982;&#xFF0C;<code>List&lt;String&gt;</code>&#xFF08;&#x8BFB;&#x4F5C;&#x300C;List of String&#x300D;&#xFF09;&#x662F;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF0C;&#x8868;&#x793A;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x4E3A; String &#x7C7B;&#x578B;&#x7684; List&#x3002;&#xFF08;String &#x662F;&#x4E0E;&#x5F62;&#x5F0F;&#x7C7B;&#x578B;&#x53C2;&#x6570; E &#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x3002;&#xFF09;</p>
+<p>Finally, each generic type defines a raw type, which is the name of the generic type used without any accompanying type parameters [JLS, 4.8]. For example, the raw type corresponding to <code>List&lt;E&gt;</code> is List. Raw types behave as if all of the generic type information were erased from the type declaration. They exist primarily for compatibility with pre-generics code.</p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x6BCF;&#x4E2A;&#x6CDB;&#x578B;&#x90FD;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF0C;&#x5B83;&#x662F;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x76F8;&#x5173;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x6CDB;&#x578B;&#x7684;&#x540D;&#x79F0; [JLS, 4.8]&#x3002;&#x4F8B;&#x5982;&#xFF0C;<code>List&lt;E&gt;</code> &#x5BF9;&#x5E94;&#x7684;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x662F; List&#x3002;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x884C;&#x4E3A;&#x5C31;&#x597D;&#x50CF;&#x6240;&#x6709;&#x6CDB;&#x578B;&#x4FE1;&#x606F;&#x90FD;&#x4ECE;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#x4E2D;&#x5220;&#x9664;&#x4E86;&#x4E00;&#x6837;&#x3002;&#x5B83;&#x4EEC;&#x7684;&#x5B58;&#x5728;&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x4E0E;&#x4E4B;&#x524D;&#x7684;&#x6CDB;&#x578B;&#x4EE3;&#x7801;&#x517C;&#x5BB9;&#x3002;</p>
+<p>Before generics were added to Java, this would have been an exemplary collection declaration. As of Java 9, it is still legal, but far from exemplary:</p>
+<p>&#x5728;&#x5C06;&#x6CDB;&#x578B;&#x6DFB;&#x52A0;&#x5230; Java &#x4E4B;&#x524D;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5178;&#x578B;&#x7684;&#x96C6;&#x5408;&#x58F0;&#x660E;&#x3002;&#x5C31; Java 9 &#x800C;&#x8A00;&#xFF0C;&#x5B83;&#x4ECD;&#x7136;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x4F46;&#x4E0D;&#x5E94;&#x6548;&#x4EFF;&#xFF1A;</p>
+<pre><code>// Raw collection type - don&apos;t do this!
+// My stamp collection. Contains only Stamp instances.
+private final Collection stamps = ... ;
+</code></pre><p>If you use this declaration today and then accidentally put a coin into your stamp collection, the erroneous insertion compiles and runs without error (though the compiler does emit a vague warning):</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x4ECA;&#x5929;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x58F0;&#x660E;&#xFF0C;&#x7136;&#x540E;&#x610F;&#x5916;&#x5730;&#x5C06; coin &#x653E;&#x5165; stamp &#x96C6;&#x5408;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E00;&#x9519;&#x8BEF;&#x7684;&#x63D2;&#x5165;&#x4F9D;&#x7136;&#x80FD;&#x591F;&#x7F16;&#x8BD1;&#x5E76;&#x6CA1;&#x6709;&#x9519;&#x8BEF;&#x5730;&#x8FD0;&#x884C;&#xFF08;&#x5C3D;&#x7BA1;&#x7F16;&#x8BD1;&#x5668;&#x786E;&#x5B9E;&#x53D1;&#x51FA;&#x4E86;&#x6A21;&#x7CCA;&#x7684;&#x8B66;&#x544A;&#xFF09;&#xFF1A;</p>
+<pre><code>// Erroneous insertion of coin into stamp collection
+stamps.add(new Coin( ... )); // Emits &quot;unchecked call&quot; warning
+</code></pre><p>You don&#x2019;t get an error until you try to retrieve the coin from the stamp collection:</p>
+<p>&#x76F4;&#x5230;&#x4ECE; stamp &#x96C6;&#x5408;&#x4E2D;&#x83B7;&#x53D6; coin &#x65F6;&#x624D;&#x4F1A;&#x6536;&#x5230;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#xFF1A;</p>
+<pre><code>// Raw iterator type - don&apos;t do this!
+for (Iterator i = stamps.iterator(); i.hasNext(); )
+    Stamp stamp = (Stamp) i.next(); // Throws ClassCastException
+stamp.cancel();
+</code></pre><p>As mentioned throughout this book, it pays to discover errors as soon as possible after they are made, ideally at compile time. In this case, you don&#x2019;t discover the error until runtime, long after it has happened, and in code that may be distant from the code containing the error. Once you see the ClassCastException, you have to search through the codebase looking for the method invocation that put the coin into the stamp collection. The compiler can&#x2019;t help you, because it can&#x2019;t understand the comment that says, &#x201C;Contains only Stamp instances.&#x201D;</p>
+<p>&#x6B63;&#x5982;&#x5728;&#x672C;&#x4E66;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#xFF0C;&#x5728;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x4E4B;&#x540E;&#x5C3D;&#x5FEB;&#x53D1;&#x73B0;&#x9519;&#x8BEF;&#x662F;&#x6709;&#x4EF7;&#x503C;&#x7684;&#xFF0C;&#x6700;&#x597D;&#x662F;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x3002;&#x5728;&#x672C;&#x4F8B;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x76F4;&#x5230;&#x8FD0;&#x884C;&#x65F6;&#xFF08;&#x5728;&#x9519;&#x8BEF;&#x53D1;&#x751F;&#x5F88;&#x4E45;&#x4E4B;&#x540E;&#xFF09;&#x624D;&#x53D1;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x800C;&#x4E14;&#x62A5;&#x9519;&#x4EE3;&#x7801;&#x53EF;&#x80FD;&#x4E0E;&#x5305;&#x542B;&#x9519;&#x8BEF;&#x7684;&#x4EE3;&#x7801;&#x76F8;&#x8DDD;&#x5F88;&#x8FDC;&#x3002;&#x4E00;&#x65E6;&#x770B;&#x5230; ClassCastException&#xFF0C;&#x5C31;&#x5FC5;&#x987B;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x641C;&#x7D22;&#x5C06; coin &#x653E;&#x8FDB; stamp &#x96C6;&#x5408;&#x7684;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x3002;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x80FD;&#x5E2E;&#x52A9;&#x4F60;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4E0D;&#x80FD;&#x7406;&#x89E3;&#x6CE8;&#x91CA;&#x300C;Contains only Stamp instances.&#x300D;</p>
+<p>With generics, the type declaration contains the information, not the comment:</p>
+<p>&#x5BF9;&#x4E8E;&#x6CDB;&#x578B;&#xFF0C;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#x5E94;&#x8BE5;&#x5305;&#x542B;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6CE8;&#x91CA;&#xFF1A;</p>
+<pre><code>// Parameterized collection type - typesafe
+private final Collection&lt;Stamp&gt; stamps = ... ;
+</code></pre><p>From this declaration, the compiler knows that stamps should contain only Stamp instances and guarantees it to be true, assuming your entire codebase compiles without emitting (or suppressing; see Item 27) any warnings. When stamps is declared with a parameterized type declaration, the erroneous insertion generates a compile-time error message that tells you exactly what is wrong:</p>
+<p>&#x4ECE;&#x8FD9;&#x4E2A;&#x58F0;&#x660E;&#x770B;&#x51FA;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x5E94;&#x8BE5;&#x77E5;&#x9053; stamps &#x5E94;&#x8BE5;&#x53EA;&#x5305;&#x542B; Stamp &#x5B9E;&#x4F8B;&#xFF0C;&#x4E3A;&#x4FDD;&#x8BC1;&#x5B83;&#x786E;&#x5B9E;&#x5982;&#x6B64;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x7684;&#x6574;&#x4E2A;&#x4EE3;&#x7801;&#x5E93;&#x7F16;&#x8BD1;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#xFF08;&#x6216;&#x6291;&#x5236;&#xFF1B;&#x8BE6;&#x89C1; <a href="Chapter-5-Item-27-Eliminate-unchecked-warnings.html">Item-27</a>&#xFF09;&#x4EFB;&#x4F55;&#x8B66;&#x544A;&#x3002;&#x5F53; stamps &#x5229;&#x7528;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#x65F6;&#xFF0C;&#x9519;&#x8BEF;&#x7684;&#x63D2;&#x5165;&#x5C06;&#x751F;&#x6210;&#x7F16;&#x8BD1;&#x65F6;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#xFF0C;&#x8BE5;&#x6D88;&#x606F;&#x5C06;&#x786E;&#x5207;&#x5730;&#x544A;&#x8BC9;&#x4F60;&#x54EA;&#x91CC;&#x51FA;&#x4E86;&#x95EE;&#x9898;&#xFF1A;</p>
+<pre><code>Test.java:9: error: incompatible types: Coin cannot be converted
+to Stamp
+c.add(new Coin());
+^
+</code></pre><p>The compiler inserts invisible casts for you when retrieving elements from collections and guarantees that they won&#x2019;t fail (assuming, again, that all of your code did not generate or suppress any compiler warnings). While the prospect of accidentally inserting a coin into a stamp collection may appear far-fetched, the problem is real. For example, it is easy to imagine putting a BigInteger into a collection that is supposed to contain only BigDecimal instances.</p>
+<p>&#x5F53;&#x4ECE;&#x96C6;&#x5408;&#x4E2D;&#x68C0;&#x7D22;&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x4E3A;&#x4F60;&#x6267;&#x884C;&#x4E0D;&#x53EF;&#x89C1;&#x7684;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#xFF0C;&#x5E76;&#x786E;&#x4FDD;&#x5B83;&#x4EEC;&#x4E0D;&#x4F1A;&#x5931;&#x8D25;&#xFF08;&#x518D;&#x6B21;&#x5047;&#x8BBE;&#x4F60;&#x7684;&#x6240;&#x6709;&#x4EE3;&#x7801;&#x6CA1;&#x6709;&#x4EA7;&#x751F;&#x6216;&#x6291;&#x5236;&#x4EFB;&#x4F55;&#x7F16;&#x8BD1;&#x5668;&#x8B66;&#x544A;&#xFF09;&#x3002;&#x867D;&#x7136;&#x4E0D;&#x5C0F;&#x5FC3;&#x5C06; coin &#x63D2;&#x5165; stamps &#x96C6;&#x5408;&#x770B;&#x8D77;&#x6765;&#x6709;&#x4E9B;&#x7275;&#x5F3A;&#xFF0C;&#x4F46;&#x8FD9;&#x7C7B;&#x95EE;&#x9898;&#x662F;&#x771F;&#x5B9E;&#x5B58;&#x5728;&#x7684;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5F88;&#x5BB9;&#x6613;&#x60F3;&#x8C61;&#x5C06;&#x4E00;&#x4E2A; BigInteger &#x653E;&#x5165;&#x4E00;&#x4E2A;&#x53EA;&#x5305;&#x542B; BigDecimal &#x5B9E;&#x4F8B;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#x3002;</p>
+<p>As noted earlier, it is legal to use raw types (generic types without their type parameters), but you should never do it. <strong>If you use raw types, you lose all the safety and expressiveness benefits of generics.</strong> Given that you shouldn&#x2019;t use them, why did the language designers permit raw types in the first place? For compatibility. Java was about to enter its second decade when generics were added, and there was an enormous amount of code in existence that did not use generics. It was deemed critical that all of this code remain legal and interoperate with newer code that does use generics. It had to be legal to pass instances of parameterized types to methods that were designed for use with raw types, and vice versa. This requirement, known as migration compatibility, drove the decisions to support raw types and to implement generics using erasure (Item 28).</p>
+<p>&#x5982;&#x524D;&#x6240;&#x8FF0;&#xFF0C;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF08;&#x6CA1;&#x6709;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x6CDB;&#x578B;&#xFF09;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x6C38;&#x8FDC;&#x4E0D;&#x5E94;&#x8BE5;&#x8FD9;&#x6837;&#x505A;&#x3002;<strong>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF0C;&#x5C31;&#x4F1A;&#x5931;&#x53BB;&#x6CDB;&#x578B;&#x7684;&#x5B89;&#x5168;&#x6027;&#x548C;&#x8868;&#x73B0;&#x529B;&#x3002;</strong> &#x65E2;&#x7136;&#x4F60;&#x4E0D;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#xFF0C;&#x90A3;&#x4E48;&#x4E3A;&#x4EC0;&#x4E48;&#x8BED;&#x8A00;&#x8BBE;&#x8BA1;&#x8005;&#x4E00;&#x5F00;&#x59CB;&#x5C31;&#x5141;&#x8BB8;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x5462;&#xFF1F;&#x7B54;&#x6848;&#x662F;&#xFF1A;&#x4E3A;&#x4E86;&#x517C;&#x5BB9;&#x6027;&#x3002;Java &#x5373;&#x5C06;&#x8FDB;&#x5165;&#x7B2C;&#x4E8C;&#x4E2A;&#x5341;&#x5E74;&#xFF0C;&#x6CDB;&#x578B;&#x88AB;&#x6DFB;&#x52A0;&#x8FDB;&#x6765;&#x65F6;&#xFF0C;&#x8FD8;&#x5B58;&#x5728;&#x5927;&#x91CF;&#x4E0D;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x4FDD;&#x6301;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x5408;&#x6CD5;&#x5E76;&#x4E0E;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7684;&#x65B0;&#x4EE3;&#x7801;&#x517C;&#x5BB9;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x5173;&#x952E;&#x7684;&#x3002;&#x5C06;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x7684;&#x5B9E;&#x4F8B;&#x4F20;&#x9012;&#x7ED9;&#x8BBE;&#x8BA1;&#x7528;&#x4E8E;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x53CD;&#x4E4B;&#x4EA6;&#x7136;&#x3002;&#x8FD9;&#x88AB;&#x79F0;&#x4E3A;&#x8FC1;&#x79FB;&#x517C;&#x5BB9;&#x6027;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x5B83;&#x4FC3;&#x4F7F;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x5F97;&#x5230;&#x652F;&#x6301;&#x5E76;&#x4F7F;&#x7528;&#x64E6;&#x9664;&#x5B9E;&#x73B0;&#x6CDB;&#x578B; &#xFF08;<a href="Chapter-5-Item-28-Prefer-lists-to-arrays.html">Item-28</a>&#xFF09;&#x3002;</p>
+<p>While you shouldn&#x2019;t use raw types such as List, it is fine to use types that are parameterized to allow insertion of arbitrary objects, such as <code>List&lt;Object&gt;</code>. Just what is the difference between the raw type List and the parameterized type <code>List&lt;Object&gt;</code>? Loosely speaking, the former has opted out of the generic type system, while the latter has explicitly told the compiler that it is capable of holding objects of any type. While you can pass a <code>List&lt;String&gt;</code> to a parameter of type List, you can&#x2019;t pass it to a parameter of type <code>List&lt;Object&gt;</code>. There are sub-typing rules for generics, and <code>List&lt;String&gt;</code> is a subtype of the raw type List, but not of the parameterized type <code>List&lt;Object&gt;</code> (Item 28). As a consequence, <strong>you lose type safety if you use a raw type such as List, but not if you use a parameterized type such as List&lt;Object&gt;.</strong></p>
+<p>&#x867D;&#x7136;&#x4F60;&#x4E0D;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF08;&#x5982; List&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#x6765;&#x5141;&#x8BB8;&#x63D2;&#x5165;&#x4EFB;&#x610F;&#x5BF9;&#x8C61;&#xFF0C;&#x5982; <code>List&lt;Object&gt;</code>&#x3002;&#x539F;&#x59CB;&#x7C7B;&#x578B; List &#x548C;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B; <code>List&lt;Object&gt;</code> &#x4E4B;&#x95F4;&#x7684;&#x533A;&#x522B;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x7C97;&#x7565;&#x5730;&#x8BF4;&#xFF0C;&#x524D;&#x8005;&#x9009;&#x62E9;&#x4E86;&#x4E0D;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7CFB;&#x7EDF;&#xFF0C;&#x800C;&#x540E;&#x8005;&#x660E;&#x786E;&#x5730;&#x544A;&#x8BC9;&#x7F16;&#x8BD1;&#x5668;&#x5B83;&#x80FD;&#x591F;&#x4FDD;&#x5B58;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x867D;&#x7136;&#x53EF;&#x4EE5;&#x5C06; <code>List&lt;String&gt;</code> &#x4F20;&#x9012;&#x7ED9; List &#x7C7B;&#x578B;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x5C06;&#x5176;&#x4F20;&#x9012;&#x7ED9;&#x7C7B;&#x578B; <code>List&lt;Object&gt;</code> &#x7684;&#x53C2;&#x6570;&#x3002;&#x6CDB;&#x578B;&#x6709;&#x5B50;&#x7C7B;&#x578B;&#x89C4;&#x5219;&#xFF0C;<code>List&lt;String&gt;</code> &#x662F;&#x539F;&#x59CB;&#x7C7B;&#x578B; List &#x7684;&#x5B50;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B; <code>List&lt;Object&gt;</code> &#x7684;&#x5B50;&#x7C7B;&#x578B;&#xFF08;<a href="Chapter-5-Item-28-Prefer-lists-to-arrays.html">Item-28</a>&#xFF09;&#x3002;&#x56E0;&#x6B64;&#xFF0C;<strong>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF08;&#x5982; List&#xFF09;&#xFF0C;&#x5C31;&#x4F1A;&#x5931;&#x53BB;&#x7C7B;&#x578B;&#x5B89;&#x5168;&#x6027;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF08;&#x5982; <code>List&lt;Object&gt;</code>&#xFF09;&#x5219;&#x4E0D;&#x4F1A;&#x3002;</strong></p>
+<p>To make this concrete, consider the following program:</p>
+<p>&#x4E3A;&#x4E86;&#x4F7F;&#x8FD9;&#x4E00;&#x70B9;&#x5177;&#x4F53;&#x4E9B;&#xFF0C;&#x8003;&#x8651;&#x4E0B;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#xFF1A;</p>
+<pre><code>// Fails at runtime - unsafeAdd method uses a raw type (List)!
+
+public static void main(String[] args) {
+    List&lt;String&gt; strings = new ArrayList&lt;&gt;();
+    unsafeAdd(strings, Integer.valueOf(42));
+    String s = strings.get(0); // Has compiler-generated cast
+}
+
+private static void unsafeAdd(List list, Object o) {
+    list.add(o);
+}
+</code></pre><p>This program compiles, but because it uses the raw type List, you get a warning:</p>
+<p>&#x8BE5;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x7F16;&#x8BD1;&#xFF0C;&#x4F46;&#x56E0;&#x4E3A;&#x5B83;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B; List&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x8B66;&#x544A;&#xFF1A;</p>
+<pre><code>Test.java:10: warning: [unchecked] unchecked call to add(E) as a
+member of the raw type List
+list.add(o);
+^
+</code></pre><p>And indeed, if you run the program, you get a ClassCastException when the program tries to cast the result of the invocation strings.get(0), which is an Integer, to a String. This is a compiler-generated cast, so it&#x2019;s normally guaranteed to succeed, but in this case we ignored a compiler warning and paid the price.</p>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x5F53;&#x7A0B;&#x5E8F;&#x8BD5;&#x56FE;&#x5C06;&#x8C03;&#x7528; <code>strings.get(0)</code> &#x7684;&#x7ED3;&#x679C;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#xFF0C;&#x4F60;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A; ClassCastException&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x7531;&#x7F16;&#x8BD1;&#x5668;&#x751F;&#x6210;&#x7684;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#xFF0C;&#x5B83;&#x901A;&#x5E38;&#x90FD;&#x80FD;&#x6210;&#x529F;&#xFF0C;&#x4F46;&#x5728;&#x672C;&#x4F8B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5FFD;&#x7565;&#x4E86;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x8B66;&#x544A;&#xFF0C;&#x5E76;&#x4E3A;&#x6B64;&#x4ED8;&#x51FA;&#x4E86;&#x4EE3;&#x4EF7;&#x3002;</p>
+<p>If you replace the raw type List with the parameterized type <code>List&lt;Object&gt;</code> in the unsafeAdd declaration and try to recompile the program, you&#x2019;ll find that it no longer compiles but emits the error message:</p>
+<p>&#x5982;&#x679C;&#x5C06; unsafeAdd &#x58F0;&#x660E;&#x4E2D;&#x7684;&#x539F;&#x59CB;&#x7C7B;&#x578B; List &#x66FF;&#x6362;&#x4E3A;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B; <code>List&lt;Object&gt;</code>&#xFF0C;&#x5E76;&#x5C1D;&#x8BD5;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x7A0B;&#x5E8F;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x4E0D;&#x518D;&#x7F16;&#x8BD1;&#xFF0C;&#x800C;&#x662F;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#xFF1A;</p>
+<pre><code>Test.java:5: error: incompatible types: List&lt;String&gt; cannot be
+converted to List&lt;Object&gt;
+unsafeAdd(strings, Integer.valueOf(42));
+^
+</code></pre><p>You might be tempted to use a raw type for a collection whose element type is unknown and doesn&#x2019;t matter. For example, suppose you want to write a method that takes two sets and returns the number of elements they have in common. Here&#x2019;s how you might write such a method if you were new to generics:</p>
+<p>&#x5BF9;&#x4E8E;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x672A;&#x77E5;&#x4E14;&#x65E0;&#x5173;&#x7D27;&#x8981;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x5E0C;&#x671B;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x63A5;&#x53D7;&#x4E24;&#x4E2A;&#x96C6;&#x5408;&#x5E76;&#x8FD4;&#x56DE;&#x5B83;&#x4EEC;&#x5171;&#x6709;&#x7684;&#x5143;&#x7D20;&#x6570;&#x91CF;&#x3002;&#x5982;&#x679C;&#x4F60;&#x662F;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7684;&#x65B0;&#x624B;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code>// Use of raw type for unknown element type - don&apos;t do this!
+static int numElementsInCommon(Set s1, Set s2) {
+    int result = 0;
+    for (Object o1 : s1)
+        if (s2.contains(o1))
+    result++;
+    return result;
+}
+</code></pre><p>This method works but it uses raw types, which are dangerous. The safe alternative is to use unbounded wildcard types. If you want to use a generic type but you don&#x2019;t know or care what the actual type parameter is, you can use a question mark instead. For example, the unbounded wildcard type for the generic type <code>Set&lt;E&gt;</code> is <code>Set&lt;?&gt;</code> (read &#x201C;set of some type&#x201D;). It is the most general parameterized Set type, capable of holding any set. Here is how the numElementsInCommon declaration looks with unbounded wildcard types:</p>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x662F;&#x53EF;&#x884C;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x662F;&#x5F88;&#x5371;&#x9669;&#x7684;&#x3002;&#x5B89;&#x5168;&#x7684;&#x66FF;&#x4EE3;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528;&#x65E0;&#x754C;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#xFF0C;&#x4F46;&#x4E0D;&#x77E5;&#x9053;&#x6216;&#x4E0D;&#x5173;&#x5FC3;&#x5B9E;&#x9645;&#x7684;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x95EE;&#x53F7;&#x4EE3;&#x66FF;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x6CDB;&#x578B;&#x96C6; <code>Set&lt;E&gt;</code> &#x7684;&#x65E0;&#x754C;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#x662F; <code>Set&lt;?&gt;</code>&#xFF08;&#x8BFB;&#x4F5C;&#x300C;set of some type&#x300D;&#xFF09;&#x3002;&#x5B83;&#x662F;&#x6700;&#x901A;&#x7528;&#x7684;&#x53C2;&#x6570;&#x5316;&#x96C6;&#x5408;&#x7C7B;&#x578B;&#xFF0C;&#x80FD;&#x591F;&#x5BB9;&#x7EB3;&#x4EFB;&#x4F55;&#x96C6;&#x5408;&#xFF1A;</p>
+<pre><code>// Uses unbounded wildcard type - typesafe and flexible
+static int numElementsInCommon(Set&lt;?&gt; s1, Set&lt;?&gt; s2) { ... }
+</code></pre><p>What is the difference between the unbounded wildcard type <code>Set&lt;?&gt;</code> and the raw type Set? Does the question mark really buy you anything? Not to belabor the point, but the wildcard type is safe and the raw type isn&#x2019;t. You can put any element into a collection with a raw type, easily corrupting the collection&#x2019;s type invariant (as demonstrated by the unsafeAdd method on page 119); you can&#x2019;t put any element (other than null) into a <code>Collection&lt;?&gt;</code>. Attempting to do so will generate a compile-time error message like this:</p>
+<p>&#x65E0;&#x754C;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B; <code>Set&lt;?&gt;</code> &#x548C;&#x539F;&#x59CB;&#x7C7B;&#x578B; Set &#x4E4B;&#x95F4;&#x7684;&#x533A;&#x522B;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x95EE;&#x53F7;&#x771F;&#x7684;&#x80FD;&#x8D77;&#x4F5C;&#x7528;&#x5417;&#xFF1F;&#x6211;&#x5E76;&#x4E0D;&#x662F;&#x5728;&#x5F3A;&#x8C03;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x4F46;&#x662F;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#x662F;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x800C;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x5219;&#x4E0D;&#x662F;&#x3002;&#x5C06;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#x653E;&#x5165;&#x5177;&#x6709;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#xFF0C;&#x5F88;&#x5BB9;&#x6613;&#x7834;&#x574F;&#x96C6;&#x5408;&#x7684;&#x7C7B;&#x578B;&#x4E00;&#x81F4;&#x6027;&#xFF08;&#x5982;&#x4E0A;&#x8FF0;&#x7684; unsafeAdd &#x65B9;&#x6CD5;&#x6240;&#x793A;&#xFF09;&#xFF1B;&#x4F60;&#x4E0D;&#x80FD;&#x5C06;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#xFF08;&#x9664;&#x4E86; null&#xFF09;&#x653E;&#x5165; <code>Collection&lt;?&gt;</code>&#x3002;&#x5C1D;&#x8BD5;&#x8FD9;&#x6837;&#x505A;&#x5C06;&#x751F;&#x6210;&#x8FD9;&#x6837;&#x7684;&#x7F16;&#x8BD1;&#x65F6;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#xFF1A;</p>
+<pre><code>WildCard.java:13: error: incompatible types: String cannot be converted to CAP#1
+c.add(&quot;verboten&quot;);
+^ where CAP#1
+is a fresh type-variable:
+CAP#1 extends Object from capture of ?
+</code></pre><p>Admittedly this error message leaves something to be desired, but the compiler has done its job, preventing you from corrupting the collection&#x2019;s type invariant, whatever its element type may be. Not only can&#x2019;t you put any element (other than null) into a <code>Collection&lt;?&gt;</code>, but you can&#x2019;t assume anything about the type of the objects that you get out. If these restrictions are unacceptable, you can use generic methods (Item 30) or bounded wildcard types (Item 31).</p>
+<p>&#x65E0;&#x53EF;&#x5426;&#x8BA4;&#xFF0C;&#x8FD9;&#x4E2A;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#x8BA9;&#x4EBA;&#x4E0D;&#x6EE1;&#x610F;&#xFF0C;&#x4F46;&#x662F;&#x7F16;&#x8BD1;&#x5668;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x5B83;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x9632;&#x6B62;&#x4F60;&#x65E0;&#x89C6;&#x5B83;&#x7684;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x800C;&#x7834;&#x574F;&#x96C6;&#x5408;&#x7684;&#x7C7B;&#x578B;&#x4E00;&#x81F4;&#x6027;&#x3002;&#x4F60;&#x4E0D;&#x4EC5;&#x4E0D;&#x80FD;&#x5C06;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#xFF08;&#x9664; null &#x4E4B;&#x5916;&#xFF09;&#x653E;&#x5165; <code>Collection&lt;?&gt;</code>&#xFF0C;&#x800C;&#x4E14;&#x4E0D;&#x80FD;&#x81C6;&#x60F3;&#x4F60;&#x5F97;&#x5230;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x5982;&#x679C;&#x8FD9;&#x4E9B;&#x9650;&#x5236;&#x662F;&#x4E0D;&#x53EF;&#x63A5;&#x53D7;&#x7684;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#xFF08;<a href="Chapter-5-Item-30-Favor-generic-methods.html">Item-30</a>&#xFF09;&#x6216;&#x6709;&#x754C;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#xFF08;<a href="Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">Item-31</a>&#xFF09;&#x3002;</p>
+<p>There are a few minor exceptions to the rule that you should not use raw types. <strong>You must use raw types in class literals.</strong> The specification does not permit the use of parameterized types (though it does permit array types and primitive types) [JLS, 15.8.2]. In other words, List.class, String[].class, and int.class are all legal, but <code>List&lt;String&gt;.class</code> and <code>List&lt;?&gt;.class</code> are not.</p>
+<p>&#x5BF9;&#x4E8E;&#x4E0D;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x6709;&#x4E00;&#x4E9B;&#x5C0F;&#x7684;&#x4F8B;&#x5916;&#x3002;<strong>&#x5FC5;&#x987B;&#x5728;&#x7C7B;&#x5B57;&#x9762;&#x91CF;&#x4E2D;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x3002;</strong> &#x8BE5;&#x89C4;&#x8303;&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF08;&#x5C3D;&#x7BA1;&#x5B83;&#x5141;&#x8BB8;&#x6570;&#x7EC4;&#x7C7B;&#x578B;&#x548C;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#xFF09;[JLS, 15.8.2]&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;<code>List.class</code>&#xFF0C;<code>String[].class</code> &#x548C; <code>int.class</code> &#x90FD;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x4F46;&#x662F; <code>List&lt;String&gt;.class</code> &#x548C; <code>List&lt;?&gt;.class</code> &#x4E0D;&#x662F;&#x3002;</p>
+<p>A second exception to the rule concerns the instanceof operator. Because generic type information is erased at runtime, it is illegal to use the instanceof operator on parameterized types other than unbounded wildcard types. The use of unbounded wildcard types in place of raw types does not affect the behavior of the instanceof operator in any way. In this case, the angle brackets and question marks are just noise. <strong>This is the preferred way to use the instanceof operator with generic types:</strong></p>
+<p>&#x89C4;&#x5219;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x4F8B;&#x5916;&#x662F; instanceof &#x8FD0;&#x7B97;&#x7B26;&#x3002;&#x7531;&#x4E8E;&#x6CDB;&#x578B;&#x4FE1;&#x606F;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x4E0D;&#x662F;&#x65E0;&#x754C;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#x4E4B;&#x5916;&#x7684;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x4E0A;&#x4F7F;&#x7528; instanceof &#x64CD;&#x4F5C;&#x7B26;&#x662F;&#x975E;&#x6CD5;&#x7684;&#x3002;&#x4F7F;&#x7528;&#x65E0;&#x754C;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#x4EE3;&#x66FF;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x4E0D;&#x4F1A;&#x4EE5;&#x4EFB;&#x4F55;&#x65B9;&#x5F0F;&#x5F71;&#x54CD; instanceof &#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x884C;&#x4E3A;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5C16;&#x62EC;&#x53F7;&#x548C;&#x95EE;&#x53F7;&#x53EA;&#x662F;&#x591A;&#x4F59;&#x7684;&#x3002;<strong>&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x662F;&#x4F7F;&#x7528;&#x901A;&#x7528;&#x7C7B;&#x578B; instanceof &#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x9996;&#x9009;&#x65B9;&#x6CD5;&#xFF1A;</strong></p>
+<pre><code>// Legitimate use of raw type - instanceof operator
+if (o instanceof Set) { // Raw type
+    Set&lt;?&gt; s = (Set&lt;?&gt;) o; // Wildcard type
+    ...
+}
+</code></pre><p>Note that once you&#x2019;ve determined that o is a Set, you must cast it to the wildcard type <code>Set&lt;?&gt;</code>, not the raw type Set. This is a checked cast, so it will not cause a compiler warning.</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x4E00;&#x65E6;&#x786E;&#x5B9A; o &#x662F;&#x4E00;&#x4E2A; Set&#xFF0C;&#x5C31;&#x5FC5;&#x987B;&#x5C06;&#x5176;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x4E3A;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B; <code>Set&lt;?&gt;</code>&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x539F;&#x59CB;&#x7C7B;&#x578B; Set&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x7ECF;&#x8FC7;&#x68C0;&#x67E5;&#x7684;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x5F15;&#x53D1;&#x7F16;&#x8BD1;&#x5668;&#x8B66;&#x544A;&#x3002;</p>
+<p>In summary, using raw types can lead to exceptions at runtime, so don&#x2019;t use them. They are provided only for compatibility and interoperability with legacy code that predates the introduction of generics. As a quick review, <code>Set&lt;Object&gt;</code> is a parameterized type representing a set that can contain objects of any type, <code>Set&lt;?&gt;</code> is a wildcard type representing a set that can contain only objects of some unknown type, and Set is a raw type, which opts out of the generic type system. The first two are safe, and the last is not.</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x53EF;&#x80FD;&#x4F1A;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x5BFC;&#x81F4;&#x5F02;&#x5E38;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x8981;&#x8F7B;&#x6613;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;&#x5B83;&#x4EEC;&#x4EC5;&#x7528;&#x4E8E;&#x4E0E;&#x5F15;&#x5165;&#x6CDB;&#x578B;&#x4E4B;&#x524D;&#x7684;&#x9057;&#x7559;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x517C;&#x5BB9;&#x548C;&#x4E92;&#x64CD;&#x4F5C;&#x3002;&#x5FEB;&#x901F;&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#xFF0C;<code>Set&lt;Object&gt;</code> &#x662F;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF0C;&#x8868;&#x793A;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x96C6;&#x5408;&#xFF0C;<code>Set&lt;?&gt;</code> &#x662F;&#x4E00;&#x4E2A;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#xFF0C;&#x8868;&#x793A;&#x53EA;&#x80FD;&#x5305;&#x542B;&#x67D0;&#x79CD;&#x672A;&#x77E5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x96C6;&#x5408;&#xFF0C;Set &#x662F;&#x4E00;&#x4E2A;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF0C;&#x5B83;&#x9009;&#x62E9;&#x4E86;&#x6CDB;&#x578B;&#x7CFB;&#x7EDF;&#x3002;&#x524D;&#x4E24;&#x4E2A;&#x662F;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x540E;&#x4E00;&#x4E2A;&#x5C31;&#x4E0D;&#x5B89;&#x5168;&#x4E86;&#x3002;</p>
+<p>For quick reference, the terms introduced in this item (and a few introduced later in this chapter) are summarized in the following table:</p>
+<p>&#x4E3A;&#x4FBF;&#x4E8E;&#x53C2;&#x8003;&#xFF0C;&#x672C;&#x6761;&#x76EE;&#x4E2D;&#x4ECB;&#x7ECD;&#x7684;&#x672F;&#x8BED;&#xFF08;&#x4EE5;&#x53CA;&#x540E;&#x9762;&#x5C06;&#x8981;&#x4ECB;&#x7ECD;&#x7684;&#x4E00;&#x4E9B;&#x672F;&#x8BED;&#xFF09;&#x603B;&#x7ED3;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Term</th>
+<th style="text-align:center">Example</th>
+<th style="text-align:center">Item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Parameterized type</td>
+<td style="text-align:center"><code>List&lt;String&gt;</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Actual type parameter</td>
+<td style="text-align:center"><code>String</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Generic type</td>
+<td style="text-align:center"><code>List&lt;E&gt;</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a>, <a href="Chapter-5-Item-29-Favor-generic-types.html">Item-29</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Formal type parameter</td>
+<td style="text-align:center"><code>E</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Unbounded wildcard type</td>
+<td style="text-align:center"><code>List&lt;?&gt;</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Raw type</td>
+<td style="text-align:center"><code>List</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Bounded type parameter</td>
+<td style="text-align:center"><code>&lt;E extends Number&gt;</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-29-Favor-generic-types.html">Item-29</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Recursive type bound</td>
+<td style="text-align:center"><code>&lt;T extends Comparable&lt;T&gt;&gt;</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-30-Favor-generic-methods.html">Item-30</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Bounded wildcard type</td>
+<td style="text-align:center"><code>List&lt;? extends Number&gt;</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">Item-31</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Generic method</td>
+<td style="text-align:center"><code>static &lt;E&gt; List&lt;E&gt; asList(E[] a)</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-30-Favor-generic-methods.html">Item-30</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Type token</td>
+<td style="text-align:center"><code>String.class</code></td>
+<td style="text-align:center"><a href="Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">Item-33</a></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong><a href="Chapter-5-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-5-Item-27-Eliminate-unchecked-warnings.html">Item 27: Eliminate unchecked warnings&#xFF08;&#x6D88;&#x9664; unchecked &#x8B66;&#x544A;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-5-Introduction.html" class="navigation navigation-prev " aria-label="Previous page: Chapter 5 Introduction（章节介绍）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-5-Item-27-Eliminate-unchecked-warnings.html" class="navigation navigation-next " aria-label="Next page: Item 27: Eliminate unchecked warnings（消除 unchecked 警告）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 26: Do not use raw types（不要使用原始类型）","level":"1.5.2","depth":2,"next":{"title":"Item 27: Eliminate unchecked warnings（消除 unchecked 警告）","level":"1.5.3","depth":2,"path":"Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.md","ref":"Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.md","articles":[]},"previous":{"title":"Chapter 5 Introduction（章节介绍）","level":"1.5.1","depth":2,"path":"Chapter-5/Chapter-5-Introduction.md","ref":"Chapter-5/Chapter-5-Introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.md","mtime":"2021-12-19T09:10:38.049Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

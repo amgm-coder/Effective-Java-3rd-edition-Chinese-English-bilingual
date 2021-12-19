@@ -1,0 +1,1842 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html" />
+    
+    
+    <link rel="prev" href="Chapter-7-Introduction.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Chapter-7-Introduction.html">
+            
+                <a href="Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Chapter-7-Introduction.html">
+            
+                <a href="Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2" data-path="Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-7-lambdas-and-streams&#xFF08;&#x3BB;-&#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x6D41;&#xFF09;">Chapter 7. Lambdas and Streams&#xFF08;&#x3BB; &#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x6D41;&#xFF09;</h2>
+<h3 id="item-42-prefer-lambdas-to-anonymous-classes&#xFF08;&#x3BB;-&#x8868;&#x8FBE;&#x5F0F;&#x4F18;&#x4E8E;&#x533F;&#x540D;&#x7C7B;&#xFF09;">Item 42: Prefer lambdas to anonymous classes&#xFF08;&#x3BB; &#x8868;&#x8FBE;&#x5F0F;&#x4F18;&#x4E8E;&#x533F;&#x540D;&#x7C7B;&#xFF09;</h3>
+<p>Historically, interfaces (or, rarely, abstract classes) with a single abstract method were used as function types. Their instances, known as function objects, represent functions or actions. Since JDK 1.1 was released in 1997, the primary means of creating a function object was the anonymous class (Item 24). Here&#x2019;s a code snippet to sort a list of strings in order of length, using an anonymous class to create the sort&#x2019;s comparison function (which imposes the sort order):</p>
+<p>&#x5728;&#x5386;&#x53F2;&#x4E0A;&#xFF0C;&#x5E26;&#x6709;&#x5355;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#xFF08;&#x6216;&#x8005;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x4F46;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5F88;&#x5C11;&#xFF09;&#x88AB;&#x7528;&#x4F5C;&#x51FD;&#x6570;&#x7C7B;&#x578B;&#x3002;&#x5B83;&#x4EEC;&#x7684;&#x5B9E;&#x4F8B;&#xFF08;&#x79F0;&#x4E3A;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF09;&#x8868;&#x793A;&#x51FD;&#x6570;&#x6216;&#x64CD;&#x4F5C;&#x3002;&#x81EA;&#x4ECE; JDK 1.1 &#x5728; 1997 &#x5E74;&#x53D1;&#x5E03;&#x4EE5;&#x6765;&#xFF0C;&#x521B;&#x5EFA;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;&#x4E3B;&#x8981;&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x533F;&#x540D;&#x7C7B;&#xFF08;<a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">Item-24</a>&#xFF09;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x6309;&#x957F;&#x5EA6;&#x5BF9;&#x5B57;&#x7B26;&#x4E32;&#x5217;&#x8868;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#xFF0C;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x533F;&#x540D;&#x7C7B;&#x6765;&#x521B;&#x5EFA;&#x6392;&#x5E8F;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#xFF08;&#x5B83;&#x5F3A;&#x5236;&#x6267;&#x884C;&#x6392;&#x5E8F;&#x987A;&#x5E8F;&#xFF09;&#xFF1A;</p>
+<pre><code>// Anonymous class instance as a function object - obsolete!
+Collections.sort(words, new Comparator&lt;String&gt;() {
+    public int compare(String s1, String s2) {
+        return Integer.compare(s1.length(), s2.length());
+    }
+});
+</code></pre><p>Anonymous classes were adequate for the classic objected-oriented design patterns requiring function objects, notably the Strategy pattern [Gamma95]. The Comparator interface represents an abstract strategy for sorting; the anonymous class above is a concrete strategy for sorting strings. The verbosity of anonymous classes, however, made functional programming in Java an unappealing prospect.</p>
+<p>&#x533F;&#x540D;&#x7C7B;&#x5BF9;&#x4E8E;&#x9700;&#x8981;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;&#x5178;&#x578B;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x6765;&#x8BF4;&#x5DF2;&#x7ECF;&#x8DB3;&#x591F;&#x4E86;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x7B56;&#x7565;&#x6A21;&#x5F0F; [Gamma95]&#x3002;Comparator &#x63A5;&#x53E3;&#x8868;&#x793A;&#x6392;&#x5E8F;&#x7684;&#x62BD;&#x8C61;&#x7B56;&#x7565;&#xFF1B;&#x4E0A;&#x8FF0;&#x533F;&#x540D;&#x7C7B;&#x662F;&#x5BF9;&#x5B57;&#x7B26;&#x4E32;&#x6392;&#x5E8F;&#x7684;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7B56;&#x7565;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x533F;&#x540D;&#x7C7B;&#x7684;&#x5197;&#x957F;&#x4F7F;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x5728; Java &#x4E2D;&#x53D8;&#x5F97;&#x6BEB;&#x65E0;&#x5438;&#x5F15;&#x529B;&#x3002;</p>
+<p>In Java 8, the language formalized the notion that interfaces with a single abstract method are special and deserve special treatment. These interfaces are now known as functional interfaces, and the language allows you to create instances of these interfaces using lambda expressions, or lambdas for short. Lambdas are similar in function to anonymous classes, but far more concise. Here&#x2019;s how the code snippet above looks with the anonymous class replaced by a lambda. The boilerplate is gone, and the behavior is clearly evident:</p>
+<p>&#x5728; Java 8 &#x4E2D;&#x5B98;&#x65B9;&#x5316;&#x4E86;&#x4E00;&#x4E2A;&#x6982;&#x5FF5;&#xFF0C;&#x5373;&#x5177;&#x6709;&#x5355;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#x662F;&#x7279;&#x6B8A;&#x7684;&#xFF0C;&#x5E94;&#x8BE5;&#x5F97;&#x5230;&#x7279;&#x6B8A;&#x5904;&#x7406;&#x3002;&#x8FD9;&#x4E9B;&#x63A5;&#x53E3;&#x73B0;&#x5728;&#x88AB;&#x79F0;&#x4E3A;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#xFF0C;&#x5141;&#x8BB8;&#x4F7F;&#x7528; lambda &#x8868;&#x8FBE;&#x5F0F;&#x521B;&#x5EFA;&#x8FD9;&#x4E9B;&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x4F8B;&#x3002;Lambda &#x8868;&#x8FBE;&#x5F0F;&#x5728;&#x529F;&#x80FD;&#x4E0A;&#x7C7B;&#x4F3C;&#x4E8E;&#x533F;&#x540D;&#x7C7B;&#xFF0C;&#x4F46;&#x662F;&#x66F4;&#x52A0;&#x7B80;&#x6D01;&#x3002;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#xFF0C;&#x533F;&#x540D;&#x7C7B;&#x88AB; lambda &#x8868;&#x8FBE;&#x5F0F;&#x66FF;&#x6362;&#x3002;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4E86;&#x539F;&#x6709;&#x523B;&#x677F;&#x7684;&#x6837;&#x5B50;&#xFF0C;&#x610F;&#x56FE;&#x975E;&#x5E38;&#x660E;&#x663E;&#xFF1A;</p>
+<pre><code>// Lambda expression as function object (replaces anonymous class)
+Collections.sort(words,(s1, s2) -&gt; Integer.compare(s1.length(), s2.length()));
+</code></pre><p>Note that the types of the lambda (<code>Comparator&lt;String&gt;</code>), of its parameters (s1 and s2, both String), and of its return value (int) are not present in the code. The compiler deduces these types from context, using a process known as type inference. In some cases, the compiler won&#x2019;t be able to determine the types, and you&#x2019;ll have to specify them. The rules for type inference are complex: they take up an entire chapter in the JLS [JLS, 18]. Few programmers understand these rules in detail, but that&#x2019;s OK. <strong>Omit the types of all lambda parameters unless their presence makes your program clearer.</strong> If the compiler generates an error telling you it can&#x2019;t infer the type of a lambda parameter, then specify it. Sometimes you may have to cast the return value or the entire lambda expression, but this is rare.</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;lambda &#x8868;&#x8FBE;&#x5F0F;&#xFF08;<code>Comparator&lt;String&gt;</code>&#xFF09;&#x3001;&#x5B83;&#x7684;&#x53C2;&#x6570;&#xFF08;s1 &#x548C; s2&#xFF0C;&#x90FD;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#x53CA;&#x5176;&#x8FD4;&#x56DE;&#x503C;&#xFF08;int&#xFF09;&#x7684;&#x7C7B;&#x578B;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x3002;&#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x79F0;&#x4E3A;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x7684;&#x8FC7;&#x7A0B;&#x4ECE;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x63A8;&#x65AD;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x65E0;&#x6CD5;&#x786E;&#x5B9A;&#x7C7B;&#x578B;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x663E;&#x5F0F;&#x6307;&#x5B9A;&#x5B83;&#x4EEC;&#x3002;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x7684;&#x89C4;&#x5219;&#x5F88;&#x590D;&#x6742;&#xFF1A;&#x5B83;&#x4EEC;&#x5728; JLS &#x4E2D;&#x5360;&#x4E86;&#x6574;&#x6574;&#x4E00;&#x7AE0; [JLS, 18]&#x3002;&#x5F88;&#x5C11;&#x6709;&#x7A0B;&#x5E8F;&#x5458;&#x80FD;&#x8BE6;&#x7EC6;&#x7406;&#x89E3;&#x8FD9;&#x4E9B;&#x89C4;&#x5219;&#xFF0C;&#x4F46;&#x8FD9;&#x6CA1;&#x6709;&#x5173;&#x7CFB;&#x3002;<strong>&#x7701;&#x7565;&#x6240;&#x6709; lambda &#x8868;&#x8FBE;&#x5F0F;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x9664;&#x975E;&#x5B83;&#x4EEC;&#x7684;&#x5B58;&#x5728;&#x4F7F;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x66F4;&#x6E05;&#x6670;&#x3002;</strong> &#x5982;&#x679C;&#x7F16;&#x8BD1;&#x5668;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#xFF0C;&#x544A;&#x8BC9;&#x4F60;&#x5B83;&#x4E0D;&#x80FD;&#x63A8;&#x65AD; lambda &#x8868;&#x8FBE;&#x5F0F;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x663E;&#x5F0F;&#x6307;&#x5B9A;&#x5B83;&#x3002;&#x6709;&#x65F6;&#x4F60;&#x53EF;&#x80FD;&#x5FC5;&#x987B;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x8FD4;&#x56DE;&#x503C;&#x6216;&#x6574;&#x4E2A; lambda &#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x4F46;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5F88;&#x5C11;&#x89C1;&#x3002;</p>
+<p>One caveat should be added concerning type inference. Item 26 tells you not to use raw types, Item 29 tells you to favor generic types, and Item 30 tells you to favor generic methods. This advice is doubly important when you&#x2019;re using lambdas, because the compiler obtains most of the type information that allows it to perform type inference from generics. If you don&#x2019;t provide this information, the compiler will be unable to do type inference, and you&#x2019;ll have to specify types manually in your lambdas, which will greatly increase their verbosity. By way of example, the code snippet above won&#x2019;t compile if the variable words is declared to be of the raw type List instead of the parameterized type <code>List&lt;String&gt;</code>.</p>
+<p>&#x5173;&#x4E8E;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x6709;&#x4E9B;&#x8B66;&#x544A;&#x5E94;&#x8BE5;&#x88AB;&#x63D0;&#x53CA;&#x3002;<a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">Item-26</a> &#x544A;&#x8BC9;&#x4F60;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#xFF0C;<a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">Item-29</a> &#x544A;&#x8BC9;&#x4F60;&#x8981;&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#xFF0C;<a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">Item-30</a> &#x544A;&#x8BC9;&#x4F60;&#x8981;&#x4F18;&#x5148;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x3002;&#x5728;&#x4F7F;&#x7528; lambda &#x8868;&#x8FBE;&#x5F0F;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;&#x5EFA;&#x8BAE;&#x5C24;&#x5176;&#x91CD;&#x8981;&#xFF0C;&#x56E0;&#x4E3A;&#x7F16;&#x8BD1;&#x5668;&#x83B7;&#x5F97;&#x4E86;&#x5141;&#x8BB8;&#x5B83;&#x4ECE;&#x6CDB;&#x578B;&#x4E2D;&#x6267;&#x884C;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x7684;&#x5927;&#x90E8;&#x5206;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x63D0;&#x4F9B;&#x6B64;&#x4FE1;&#x606F;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x5C06;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x5E76;&#x4E14;&#x5FC5;&#x987B;&#x5728; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x624B;&#x52A8;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x5C06;&#x5927;&#x5927;&#x589E;&#x52A0;&#x5B83;&#x4EEC;&#x7684;&#x5197;&#x957F;&#x3002;&#x4E3E;&#x4F8B;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x4E3A;&#x539F;&#x59CB;&#x7C7B;&#x578B; List &#x800C;&#x4E0D;&#x662F;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B; <code>List&lt;String&gt;</code>&#xFF0C;&#x90A3;&#x4E48;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x5C06;&#x65E0;&#x6CD5;&#x7F16;&#x8BD1;&#x3002;</p>
+<p>Incidentally, the comparator in the snippet can be made even more succinct if a comparator construction method is used in place of a lambda (Items 14. 43):</p>
+<p>&#x987A;&#x4FBF;&#x8BF4;&#x4E00;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528; comparator &#x6784;&#x9020;&#x65B9;&#x6CD5;&#x4EE3;&#x66FF; lambda &#x8868;&#x8FBE;&#x5F0F;&#xFF08;<a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">Item-14</a>&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x53EF;&#x4EE5;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x7B80;&#x6D01;&#xFF1A;</p>
+<pre><code>Collections.sort(words, comparingInt(String::length));
+</code></pre><p>In fact, the snippet can be made still shorter by taking advantage of the sort method that was added to the List interface in Java 8:</p>
+<p>&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x901A;&#x8FC7; Java 8 &#x4E2D;&#x6DFB;&#x52A0;&#x5230; List &#x63A5;&#x53E3;&#x7684; sort &#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x53D8;&#x5F97;&#x66F4;&#x77ED;&#xFF1A;</p>
+<pre><code>words.sort(comparingInt(String::length));
+</code></pre><p>The addition of lambdas to the language makes it practical to use function objects where it would not previously have made sense. For example, consider the Operation enum type in Item 34. Because each enum required different behavior for its apply method, we used constant-specific class bodies and overrode the apply method in each enum constant. To refresh your memory, here is the code:</p>
+<p>&#x5728;&#x8BED;&#x8A00;&#x4E2D;&#x6DFB;&#x52A0; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4F7F;&#x5F97;&#x5728;&#x4EE5;&#x524D;&#x6CA1;&#x6709;&#x610F;&#x4E49;&#x7684;&#x5730;&#x65B9;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x53D8;&#x5F97;&#x5B9E;&#x9645;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8003;&#x8651; <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">Item-34</a> &#x4E2D;&#x7684;&#x64CD;&#x4F5C;&#x679A;&#x4E3E;&#x7C7B;&#x578B;&#x3002;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A;&#x679A;&#x4E3E;&#x7684; apply &#x65B9;&#x6CD5;&#x9700;&#x8981;&#x4E0D;&#x540C;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7279;&#x5B9A;&#x4E8E;&#x5E38;&#x91CF;&#x7684;&#x7C7B;&#x4F53;&#x5E76;&#x8986;&#x76D6;&#x6BCF;&#x4E2A;&#x679A;&#x4E3E;&#x5E38;&#x91CF;&#x4E2D;&#x7684; apply &#x65B9;&#x6CD5;&#x3002;&#x4E3A;&#x4E86;&#x5524;&#x9192;&#x4F60;&#x7684;&#x8BB0;&#x5FC6;&#xFF0C;&#x4EE5;&#x4E0B;&#x662F;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>// Enum type with constant-specific class bodies &amp; data (Item 34)
+public enum Operation {
+    PLUS(&quot;+&quot;) {
+        public double apply(double x, double y) { return x + y; }
+    },
+    MINUS(&quot;-&quot;) {
+        public double apply(double x, double y) { return x - y; }
+    },
+    TIMES(&quot;*&quot;) {
+        public double apply(double x, double y) { return x * y; }
+    },
+    DIVIDE(&quot;/&quot;) {
+        public double apply(double x, double y) { return x / y; }
+    };
+
+    private final String symbol;
+
+    Operation(String symbol) { this.symbol = symbol; }
+
+    @Override
+    public String toString() { return symbol; }
+
+    public abstract double apply(double x, double y);
+}
+</code></pre><p>Item 34 says that enum instance fields are preferable to constant-specific class bodies. Lambdas make it easy to implement constant-specific behavior using the former instead of the latter. Merely pass a lambda implementing each enum constant&#x2019;s behavior to its constructor. The constructor stores the lambda in an instance field, and the apply method forwards invocations to the lambda. The resulting code is simpler and clearer than the original version:</p>
+<p><a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">Item-34</a> &#x6307;&#x51FA;&#xFF0C;&#x679A;&#x4E3E;&#x5B9E;&#x4F8B;&#x5B57;&#x6BB5;&#x6BD4;&#x7279;&#x5B9A;&#x4E8E;&#x5E38;&#x91CF;&#x7684;&#x7C7B;&#x4F53;&#x66F4;&#x53EF;&#x53D6;&#x3002;Lambda &#x8868;&#x8FBE;&#x5F0F;&#x4F7F;&#x5F97;&#x4F7F;&#x7528;&#x524D;&#x8005;&#x53D6;&#x4EE3;&#x540E;&#x8005;&#x6765;&#x5B9E;&#x73B0;&#x7279;&#x5B9A;&#x4E8E;&#x5E38;&#x91CF;&#x7684;&#x884C;&#x4E3A;&#x53D8;&#x5F97;&#x5BB9;&#x6613;&#x3002;&#x53EA;&#x9700;&#x5C06;&#x5B9E;&#x73B0;&#x6BCF;&#x4E2A;&#x679A;&#x4E3E;&#x5E38;&#x91CF;&#x7684;&#x884C;&#x4E3A;&#x7684; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4F20;&#x9012;&#x7ED9;&#x5B83;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5C06; lambda &#x8868;&#x8FBE;&#x5F0F;&#x5B58;&#x50A8;&#x5728;&#x5B9E;&#x4F8B;&#x5B57;&#x6BB5;&#x4E2D;&#xFF0C;apply &#x65B9;&#x6CD5;&#x5C06;&#x8C03;&#x7528;&#x8F6C;&#x53D1;&#x7ED9; lambda &#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#x6BD4;&#x539F;&#x59CB;&#x7248;&#x672C;&#x66F4;&#x7B80;&#x5355;&#x3001;&#x66F4;&#x6E05;&#x6670;&#xFF1A;</p>
+<pre><code>// Enum with function object fields &amp; constant-specific behavior
+public enum Operation {
+    PLUS (&quot;+&quot;, (x, y) -&gt; x + y),
+    MINUS (&quot;-&quot;, (x, y) -&gt; x - y),
+    TIMES (&quot;*&quot;, (x, y) -&gt; x * y),
+    DIVIDE(&quot;/&quot;, (x, y) -&gt; x / y);
+
+    private final String symbol;
+
+    private final DoubleBinaryOperator op;
+
+    Operation(String symbol, DoubleBinaryOperator op) {
+        this.symbol = symbol;
+        this.op = op;
+    }
+
+    @Override public String toString() { return symbol; }
+
+    public double apply(double x, double y) {
+        return op.applyAsDouble(x, y);
+    }
+}
+</code></pre><p>Note that we&#x2019;re using the DoubleBinaryOperator interface for the lambdas that represent the enum constant&#x2019;s behavior. This is one of the many predefined functional interfaces in java.util.function (Item 44). It represents a function that takes two double arguments and returns a double result.</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;&#x8868;&#x793A;&#x679A;&#x4E3E;&#x5E38;&#x91CF;&#x884C;&#x4E3A;&#x7684; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4F7F;&#x7528;&#x4E86; DoubleBinaryOperator &#x63A5;&#x53E3;&#x3002;&#x8FD9;&#x662F; <code>java.util.function</code> &#xFF08;<a href="Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">Item-44</a>&#xFF09;&#x4E2D;&#x8BB8;&#x591A;&#x9884;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x4E4B;&#x4E00;&#x3002;&#x5B83;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x4E24;&#x4E2A; double &#x7C7B;&#x578B;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x503C;&#x4E5F;&#x4E3A; double &#x7C7B;&#x578B;&#x3002;</p>
+<p>Looking at the lambda-based Operation enum, you might think constantspecific method bodies have outlived their usefulness, but this is not the case. Unlike methods and classes, <strong>lambdas lack names and documentation; if a computation isn&#x2019;t self-explanatory, or exceeds a few lines, don&#x2019;t put it in a lambda.</strong> One line is ideal for a lambda, and three lines is a reasonable maximum. If you violate this rule, it can cause serious harm to the readability of your programs. If a lambda is long or difficult to read, either find a way to simplify it or refactor your program to eliminate it. Also, the arguments passed to enum constructors are evaluated in a static context. Thus, lambdas in enum constructors can&#x2019;t access instance members of the enum. Constant-specific class bodies are still the way to go if an enum type has constant-specific behavior that is difficult to understand, that can&#x2019;t be implemented in a few lines, or that requires access to instance fields or methods.</p>
+<p>&#x67E5;&#x770B;&#x57FA;&#x4E8E; lambda &#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x64CD;&#x4F5C; enum&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x8BA4;&#x4E3A;&#x7279;&#x5B9A;&#x4E8E;&#x5E38;&#x91CF;&#x7684;&#x65B9;&#x6CD5;&#x4F53;&#x5DF2;&#x7ECF;&#x8FC7;&#x65F6;&#x4E86;&#xFF0C;&#x4F46;&#x4E8B;&#x5B9E;&#x5E76;&#x975E;&#x5982;&#x6B64;&#x3002;&#x4E0E;&#x65B9;&#x6CD5;&#x548C;&#x7C7B;&#x4E0D;&#x540C;&#xFF0C;<strong>lambda &#x8868;&#x8FBE;&#x5F0F;&#x7F3A;&#x5C11;&#x540D;&#x79F0;&#x548C;&#x6587;&#x6863;&#xFF1B;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7B97;&#x6CD5;&#x5E76;&#x975E;&#x4E0D;&#x8A00;&#x81EA;&#x660E;&#xFF0C;&#x6216;&#x8005;&#x6709;&#x5F88;&#x591A;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x4E0D;&#x8981;&#x628A;&#x5B83;&#x653E;&#x5728; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x3002;</strong> &#x4E00;&#x884C;&#x662F;&#x7406;&#x60F3;&#x7684;&#xFF0C;&#x4E09;&#x884C;&#x662F;&#x5408;&#x7406;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8FDD;&#x53CD;&#x4E86;&#x8FD9;&#x4E00;&#x89C4;&#x5219;&#xFF0C;&#x5C31;&#x4F1A;&#x4E25;&#x91CD;&#x635F;&#x5BB3;&#x7A0B;&#x5E8F;&#x7684;&#x53EF;&#x8BFB;&#x6027;&#x3002;&#x5982;&#x679C; lambda &#x8868;&#x8FBE;&#x5F0F;&#x5F88;&#x957F;&#x6216;&#x8005;&#x5F88;&#x96BE;&#x8BFB;&#xFF0C;&#x8981;&#x4E48;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x7B80;&#x5316;&#x5B83;&#xFF0C;&#x8981;&#x4E48;&#x91CD;&#x6784;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x4F20;&#x9012;&#x7ED9; enum &#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x5728;&#x9759;&#x6001;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x8BA1;&#x7B97;&#x3002;&#x56E0;&#x6B64;&#xFF0C;enum &#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x7684; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x80FD;&#x8BBF;&#x95EE;&#x679A;&#x4E3E;&#x7684;&#x5B9E;&#x4F8B;&#x6210;&#x5458;&#x3002;&#x5982;&#x679C;&#x679A;&#x4E3E;&#x7C7B;&#x578B;&#x5177;&#x6709;&#x96BE;&#x4EE5;&#x7406;&#x89E3;&#x7684;&#x7279;&#x5B9A;&#x4E8E;&#x5E38;&#x91CF;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x65E0;&#x6CD5;&#x5728;&#x51E0;&#x884C;&#x4EE3;&#x7801;&#x4E2D;&#x5B9E;&#x73B0;&#xFF0C;&#x6216;&#x8005;&#x9700;&#x8981;&#x8BBF;&#x95EE;&#x5B9E;&#x4F8B;&#x5B57;&#x6BB5;&#x6216;&#x65B9;&#x6CD5;&#xFF0C;&#x5219;&#x4ECD;&#x7136;&#x9700;&#x8981;&#x7279;&#x5B9A;&#x4E8E;&#x5E38;&#x91CF;&#x7684;&#x7C7B;&#x3002;</p>
+<p>Likewise, you might think that anonymous classes are obsolete in the era of lambdas. This is closer to the truth, but there are a few things you can do with anonymous classes that you can&#x2019;t do with lambdas. Lambdas are limited to functional interfaces. If you want to create an instance of an abstract class, you can do it with an anonymous class, but not a lambda. Similarly, you can use anonymous classes to create instances of interfaces with multiple abstract methods. Finally, a lambda cannot obtain a reference to itself. In a lambda, the this keyword refers to the enclosing instance, which is typically what you want. In an anonymous class, the this keyword refers to the anonymous class instance. If you need access to the function object from within its body, then you must use an anonymous class.</p>
+<p>&#x540C;&#x6837;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x8BA4;&#x4E3A;&#x533F;&#x540D;&#x7C7B;&#x5728; lambda &#x8868;&#x8FBE;&#x5F0F;&#x65F6;&#x4EE3;&#x5DF2;&#x7ECF;&#x8FC7;&#x65F6;&#x4E86;&#x3002;&#x8FD9;&#x66F4;&#x63A5;&#x8FD1;&#x4E8B;&#x5B9E;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x4E00;&#x4E9B;&#x533F;&#x540D;&#x7C7B;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x662F; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x80FD;&#x505A;&#x7684;&#x3002;Lambda &#x8868;&#x8FBE;&#x5F0F;&#x4EC5;&#x9650;&#x4E8E;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x3002;&#x5982;&#x679C;&#x60F3;&#x521B;&#x5EFA;&#x62BD;&#x8C61;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x533F;&#x540D;&#x7C7B;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x4F7F;&#x7528; lambda &#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x7C7B;&#x4F3C;&#x5730;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x533F;&#x540D;&#x7C7B;&#x6765;&#x521B;&#x5EFA;&#x5177;&#x6709;&#x591A;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#x5B9E;&#x4F8B;&#x3002;&#x6700;&#x540E;&#xFF0C;lambda &#x8868;&#x8FBE;&#x5F0F;&#x65E0;&#x6CD5;&#x83B7;&#x5F97;&#x5BF9;&#x81EA;&#x8EAB;&#x7684;&#x5F15;&#x7528;&#x3002;&#x5728; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#xFF0C;this &#x5173;&#x952E;&#x5B57;&#x6307;&#x7684;&#x662F;&#x5C01;&#x95ED;&#x5B9E;&#x4F8B;&#xFF0C;&#x8FD9;&#x901A;&#x5E38;&#x662F;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x3002;&#x5728;&#x533F;&#x540D;&#x7C7B;&#x4E2D;&#xFF0C;this &#x5173;&#x952E;&#x5B57;&#x5F15;&#x7528;&#x533F;&#x540D;&#x7C7B;&#x5B9E;&#x4F8B;&#x3002;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x4ECE;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x90E8;&#x8BBF;&#x95EE;&#x5B83;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x533F;&#x540D;&#x7C7B;&#x3002;</p>
+<p>Lambdas share with anonymous classes the property that you can&#x2019;t reliably serialize and deserialize them across implementations. Therefore, <strong>you should rarely, if ever, serialize a lambda</strong> (or an anonymous class instance). If you have a function object that you want to make serializable, such as a Comparator, use an instance of a private static nested class (Item 24).</p>
+<p>Lambda &#x8868;&#x8FBE;&#x5F0F;&#x4E0E;&#x533F;&#x540D;&#x7C7B;&#x5171;&#x4EAB;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x5B9E;&#x73B0;&#x53EF;&#x9760;&#x5730;&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x5B83;&#x4EEC;&#x7684;&#x5C5E;&#x6027;&#x3002;&#x56E0;&#x6B64;&#xFF0C;<strong>&#x5F88;&#x5C11;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x5E8F;&#x5217;&#x5316; lambda</strong>&#xFF08;&#x6216;&#x533F;&#x540D;&#x7C7B;&#x5B9E;&#x4F8B;&#xFF09;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6709;&#x4E00;&#x4E2A;&#x60F3;&#x8981;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x6BD4;&#x5982;&#x6BD4;&#x8F83;&#x5668;&#xFF0C;&#x90A3;&#x4E48;&#x4F7F;&#x7528;&#x79C1;&#x6709;&#x9759;&#x6001;&#x5D4C;&#x5957;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF08;<a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">Item-24</a>&#xFF09;&#x3002;</p>
+<p>In summary, as of Java 8, lambdas are by far the best way to represent small function objects. <strong>Don&#x2019;t use anonymous classes for function objects unless you have to create instances of types that aren&#x2019;t functional interfaces.</strong> Also, remember that lambdas make it so easy to represent small function objects that it opens the door to functional programming techniques that were not previously practical in Java.</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;&#x5728; Java 8 &#x4E2D;&#xFF0C;lambda &#x8868;&#x8FBE;&#x5F0F;&#x662F;&#x8FC4;&#x4ECA;&#x4E3A;&#x6B62;&#x8868;&#x793A;&#x5C0F;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;&#x6700;&#x4F73;&#x65B9;&#x5F0F;&#x3002;<strong>&#x4E0D;&#x8981;&#x5BF9;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#x533F;&#x540D;&#x7C7B;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x5FC5;&#x987B;&#x521B;&#x5EFA;&#x975E;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7C7B;&#x578B;&#x7684;&#x5B9E;&#x4F8B;&#x3002;</strong> &#x53E6;&#x5916;&#xFF0C;&#x8BF7;&#x8BB0;&#x4F4F;&#xFF0C;lambda &#x8868;&#x8FBE;&#x5F0F;&#x4F7F;&#x8868;&#x793A;&#x5C0F;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x53D8;&#x5F97;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#xFF0C;&#x4ECE;&#x800C;&#x4E3A; Java &#x4EE5;&#x524D;&#x4E0D;&#x5B9E;&#x7528;&#x7684;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x6280;&#x672F;&#x6253;&#x5F00;&#x4E86;&#x5927;&#x95E8;&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-7-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">Item 43: Prefer method references to lambdas&#xFF08;&#x65B9;&#x6CD5;&#x5F15;&#x7528;&#x4F18;&#x4E8E; &#x3BB; &#x8868;&#x8FBE;&#x5F0F;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-7-Introduction.html" class="navigation navigation-prev " aria-label="Previous page: Chapter 7 Introduction（章节介绍）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html" class="navigation navigation-next " aria-label="Next page: Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）","level":"1.7.2","depth":2,"next":{"title":"Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）","level":"1.7.3","depth":2,"path":"Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.md","ref":"Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.md","articles":[]},"previous":{"title":"Chapter 7 Introduction（章节介绍）","level":"1.7.1","depth":2,"path":"Chapter-7/Chapter-7-Introduction.md","ref":"Chapter-7/Chapter-7-Introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.md","mtime":"2021-12-19T09:10:38.062Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

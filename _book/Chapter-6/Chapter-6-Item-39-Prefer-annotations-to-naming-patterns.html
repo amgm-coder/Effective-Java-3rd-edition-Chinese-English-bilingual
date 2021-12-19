@@ -1,0 +1,2088 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 39: Prefer annotations to naming patterns（注解优于命名模式） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html" />
+    
+    
+    <link rel="prev" href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Chapter-6-Introduction.html">
+            
+                <a href="Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="Chapter-6-Introduction.html">
+            
+                <a href="Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.7" data-path="Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 39: Prefer annotations to naming patterns（注解优于命名模式）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-6-enums-and-annotations&#xFF08;&#x679A;&#x4E3E;&#x548C;&#x6CE8;&#x89E3;&#xFF09;">Chapter 6. Enums and Annotations&#xFF08;&#x679A;&#x4E3E;&#x548C;&#x6CE8;&#x89E3;&#xFF09;</h2>
+<h3 id="item-39-prefer-annotations-to-naming-patterns&#xFF08;&#x6CE8;&#x89E3;&#x4F18;&#x4E8E;&#x547D;&#x540D;&#x6A21;&#x5F0F;&#xFF09;">Item 39: Prefer annotations to naming patterns&#xFF08;&#x6CE8;&#x89E3;&#x4F18;&#x4E8E;&#x547D;&#x540D;&#x6A21;&#x5F0F;&#xFF09;</h3>
+<p>Historically, it was common to use naming patterns to indicate that some program elements demanded special treatment by a tool or framework. For example, prior to release 4, the JUnit testing framework required its users to designate test methods by beginning their names with the characters test [Beck04]. This technique works, but it has several big disadvantages. First, typographical errors result in silent failures. For example, suppose you accidentally named a test method tsetSafetyOverride instead of testSafetyOverride. JUnit 3 wouldn&#x2019;t complain, but it wouldn&#x2019;t execute the test either, leading to a false sense of security.</p>
+<p>&#x4ECE;&#x5386;&#x53F2;&#x4E0A;&#x770B;&#xFF0C;&#x4F7F;&#x7528;&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x6765;&#x6807;&#x660E;&#x67D0;&#x4E9B;&#x7A0B;&#x5E8F;&#x5143;&#x7D20;&#x9700;&#x8981;&#x5DE5;&#x5177;&#x6216;&#x6846;&#x67B6;&#x7279;&#x6B8A;&#x5904;&#x7406;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x5F88;&#x5E38;&#x89C1;&#x7684;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x7248;&#x672C; 4 &#x4E4B;&#x524D;&#xFF0C;JUnit &#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#x8981;&#x6C42;&#x5176;&#x7528;&#x6237;&#x901A;&#x8FC7;&#x4EE5;&#x5B57;&#x7B26; test [Beck04] &#x5F00;&#x5934;&#x7684;&#x540D;&#x79F0;&#x6765;&#x6307;&#x5B9A;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;&#x3002;&#x8FD9;&#x79CD;&#x6280;&#x672F;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x6709;&#x51E0;&#x4E2A;&#x5F88;&#x5927;&#x7684;&#x7F3A;&#x70B9;&#x3002;&#x9996;&#x5148;&#xFF0C;&#x6392;&#x7248;&#x9519;&#x8BEF;&#x4F1A;&#x5BFC;&#x81F4;&#x6CA1;&#x6709;&#x63D0;&#x793A;&#x7684;&#x5931;&#x8D25;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x610F;&#x5916;&#x5730;&#x5C06;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;&#x547D;&#x540D;&#x4E3A; tsetSafetyOverride&#xFF0C;&#x800C;&#x4E0D;&#x662F; testSafetyOverride&#x3002;JUnit 3 &#x4E0D;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x4F46;&#x5B83;&#x4E5F;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x8FD9;&#x5BFC;&#x81F4;&#x4E00;&#x79CD;&#x6B63;&#x786E;&#x6267;&#x884C;&#x4E86;&#x6D4B;&#x8BD5;&#x7684;&#x5047;&#x8C61;&#x3002;</p>
+<p>A second disadvantage of naming patterns is that there is no way to ensure that they are used only on appropriate program elements. For example, suppose you called a class TestSafetyMechanisms in hopes that JUnit 3 would automatically test all of its methods, regardless of their names. Again, JUnit 3 wouldn&#x2019;t complain, but it wouldn&#x2019;t execute the tests either.</p>
+<p>&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x7F3A;&#x70B9;&#x662F;&#xFF0C;&#x65E0;&#x6CD5;&#x786E;&#x4FDD;&#x53EA;&#x5728;&#x76F8;&#x5E94;&#x7684;&#x7A0B;&#x5E8F;&#x5143;&#x7D20;&#x4E0A;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x8C03;&#x7528;&#x4E86;&#x4E00;&#x4E2A;&#x7C7B; TestSafetyMechanisms&#xFF0C;&#x5E0C;&#x671B; JUnit 3 &#x80FD;&#x591F;&#x81EA;&#x52A8;&#x6D4B;&#x8BD5;&#x5B83;&#x7684;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4E0D;&#x7BA1;&#x5B83;&#x4EEC;&#x7684;&#x540D;&#x79F0;&#x662F;&#x4EC0;&#x4E48;&#x3002;&#x540C;&#x6837;&#xFF0C;JUnit 3 &#x4E0D;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x4F46;&#x5B83;&#x4E5F;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x6D4B;&#x8BD5;&#x3002;</p>
+<p>A third disadvantage of naming patterns is that they provide no good way to associate parameter values with program elements. For example, suppose you want to support a category of test that succeeds only if it throws a particular exception. The exception type is essentially a parameter of the test. You could encode the exception type name into the test method name using some elaborate naming pattern, but this would be ugly and fragile (Item 62). The compiler would have no way of knowing to check that the string that was supposed to name an exception actually did. If the named class didn&#x2019;t exist or wasn&#x2019;t an exception, you wouldn&#x2019;t find out until you tried to run the test.</p>
+<p>&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x7684;&#x7B2C;&#x4E09;&#x4E2A;&#x7F3A;&#x70B9;&#x662F;&#xFF0C;&#x5B83;&#x4EEC;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x5C06;&#x53C2;&#x6570;&#x503C;&#x4E0E;&#x7A0B;&#x5E8F;&#x5143;&#x7D20;&#x5173;&#x8054;&#x7684;&#x597D;&#x65B9;&#x6CD5;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x5E0C;&#x671B;&#x652F;&#x6301;&#x53EA;&#x6709;&#x5728;&#x629B;&#x51FA;&#x7279;&#x5B9A;&#x5F02;&#x5E38;&#x65F6;&#x624D;&#x6210;&#x529F;&#x7684;&#x6D4B;&#x8BD5;&#x7C7B;&#x522B;&#x3002;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x6D4B;&#x8BD5;&#x7684;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x7CBE;&#x5FC3;&#x8BBE;&#x8BA1;&#x7684;&#x547D;&#x540D;&#x6A21;&#x5F0F;&#xFF0C;&#x5C06;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x540D;&#x79F0;&#x7F16;&#x7801;&#x5230;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;&#x540D;&#x79F0;&#x4E2D;&#xFF0C;&#x4F46;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x5C06;&#x4E0D;&#x597D;&#x770B;&#x4E14;&#x8106;&#x5F31;&#xFF08;<a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">Item-62</a>&#xFF09;&#x3002;&#x7F16;&#x8BD1;&#x5668;&#x5C06;&#x65E0;&#x6CD5;&#x68C0;&#x67E5;&#x8FD9;&#x4E9B;&#x7528;&#x4E8E;&#x547D;&#x540D;&#x5F02;&#x5E38;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x662F;&#x5426;&#x786E;&#x5B9E;&#x6267;&#x884C;&#x4E86;&#x3002;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x7684;&#x7C7B;&#x4E0D;&#x5B58;&#x5728;&#x6216;&#x4E0D;&#x662F;&#x5F02;&#x5E38;&#xFF0C;&#x5219;&#x5728;&#x8FD0;&#x884C;&#x6D4B;&#x8BD5;&#x4E4B;&#x524D;&#x4E0D;&#x4F1A;&#x88AB;&#x53D1;&#x73B0;&#x3002;</p>
+<p>Annotations [JLS, 9.7] solve all of these problems nicely, and JUnit adopted them starting with release 4. In this item, we&#x2019;ll write our own toy testing framework to show how annotations work. Suppose you want to define an annotation type to designate simple tests that are run automatically and fail if they throw an exception. Here&#x2019;s how such an annotation type, named Test, might look:</p>
+<p>&#x6CE8;&#x89E3; [JLS, 9.7] &#x5F88;&#x597D;&#x5730;&#x89E3;&#x51B3;&#x4E86;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;JUnit &#x4ECE;&#x7248;&#x672C; 4 &#x5F00;&#x59CB;&#x5C31;&#x91C7;&#x7528;&#x4E86;&#x5B83;&#x4EEC;&#x3002;&#x5728;&#x672C;&#x6761;&#x76EE;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x7F16;&#x5199;&#x81EA;&#x5DF1;&#x7684;&#x793A;&#x4F8B;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#x6765;&#x5C55;&#x793A;&#x6CE8;&#x89E3;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;&#x5047;&#x8BBE;&#x4F60;&#x5E0C;&#x671B;&#x5B9A;&#x4E49;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#xFF0C;&#x4EE5;&#x6307;&#x5B9A;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x7B80;&#x5355;&#x6D4B;&#x8BD5;&#xFF0C;&#x5E76;&#x5728;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x65F6;&#x5931;&#x8D25;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x8FD9;&#x79CD;&#x540D;&#x4E3A; Test &#x7684;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x6982;&#x8C8C;&#xFF1A;</p>
+<pre><code>// Marker annotation type declaration
+import java.lang.annotation.*;
+
+/**
+* Indicates that the annotated method is a test method.
+* Use only on parameterless static methods.
+*/
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Test {
+
+}
+</code></pre><p>The declaration for the Test annotation type is itself annotated with Retention and Target annotations. Such annotations on annotation type declarations are known as meta-annotations. The @Retention(RetentionPolicy.RUNTIME) meta-annotation indicates that Test annotations should be retained at runtime. Without it, Test annotations would be invisible to the test tool. The @Target.get(ElementType.METHOD) meta-annotation indicates that the Test annotation is legal only on method declarations: it cannot be applied to class declarations, field declarations, or other program elements.</p>
+<p>Test &#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x58F0;&#x660E;&#x672C;&#x8EAB;&#x5E26;&#x6709; Retention &#x6CE8;&#x89E3;&#x548C; Target &#x6CE8;&#x89E3;&#x3002;&#x8FD9;&#x79CD;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#x4E0A;&#x7684;&#x6CE8;&#x89E3;&#x79F0;&#x4E3A;&#x5143;&#x6CE8;&#x89E3;&#x3002;<code>@Retention(RetentionPolicy.RUNTIME)</code> &#x5143;&#x6CE8;&#x89E3;&#x8868;&#x660E;&#x6D4B;&#x8BD5;&#x6CE8;&#x89E3;&#x5E94;&#x8BE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x4FDD;&#x7559;&#x3002;&#x6CA1;&#x6709;&#x5B83;&#xFF0C;&#x6D4B;&#x8BD5;&#x5DE5;&#x5177;&#x5C06;&#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x6D4B;&#x8BD5;&#x6CE8;&#x89E3;&#x3002;<code>@Target.get(ElementType.METHOD)</code> &#x5143;&#x6CE8;&#x89E3;&#x8868;&#x660E;&#x6D4B;&#x8BD5;&#x6CE8;&#x89E3;&#x4EC5;&#x5BF9;&#x65B9;&#x6CD5;&#x58F0;&#x660E;&#x5408;&#x6CD5;&#xFF1A;&#x5B83;&#x4E0D;&#x80FD;&#x5E94;&#x7528;&#x4E8E;&#x7C7B;&#x58F0;&#x660E;&#x3001;&#x5B57;&#x6BB5;&#x58F0;&#x660E;&#x6216;&#x5176;&#x4ED6;&#x7A0B;&#x5E8F;&#x5143;&#x7D20;&#x3002;</p>
+<p><strong>&#x8BD1;&#x6CE8; 1&#xFF1A;&#x6CE8;&#x89E3;&#x7684;&#x4FDD;&#x7559;&#x7B56;&#x7565;</strong></p>
+<p>&#x4FDD;&#x7559;&#x7B56;&#x7565;&#x51B3;&#x5B9A;&#x4E86;&#x5728;&#x4EC0;&#x4E48;&#x4F4D;&#x7F6E;&#x4E22;&#x5F03;&#x6CE8;&#x89E3;&#x3002;Java &#x5B9A;&#x4E49;&#x4E86; 3 &#x79CD;&#x7B56;&#x7565;&#xFF0C;&#x5B83;&#x4EEC;&#x88AB;&#x5C01;&#x88C5;&#x5230; <code>java.lang.annotation.RetentionPolicy</code> &#x679A;&#x4E3E;&#x4E2D;&#x3002;&#x8FD9; 3 &#x79CD;&#x7B56;&#x7565;&#x5206;&#x522B;&#x662F; SOURCE&#x3001;CLASS &#x548C; RUNTIME&#x3002;</p>
+<ul>
+<li>&#x4F7F;&#x7528; SOURCE &#x4FDD;&#x7559;&#x7B56;&#x7565;&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x53EA;&#x5728;&#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x4FDD;&#x7559;&#xFF0C;&#x5728;&#x7F16;&#x8BD1;&#x671F;&#x95F4;&#x4F1A;&#x88AB;&#x629B;&#x5F03;&#x3002;</li>
+<li>&#x4F7F;&#x7528; CLASS &#x4FDD;&#x7559;&#x7B56;&#x7565;&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x88AB;&#x5B58;&#x50A8;&#x5230; <code>.class</code> &#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x4E0D;&#x80FD;&#x901A;&#x8FC7; JVM &#x5F97;&#x5230;&#x8FD9;&#x4E9B;&#x6CE8;&#x89E3;&#x3002;</li>
+<li>&#x4F7F;&#x7528; RUNTIME &#x4FDD;&#x7559;&#x7B56;&#x7565;&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x88AB;&#x5B58;&#x50A8;&#x5230; <code>.class</code> &#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; JVM &#x83B7;&#x53D6;&#x8FD9;&#x4E9B;&#x6CE8;&#x89E3;&#x3002;&#x56E0;&#x6B64;&#xFF0C;RUNTIME &#x4FDD;&#x7559;&#x7B56;&#x7565;&#x63D0;&#x4F9B;&#x4E86;&#x6700;&#x6C38;&#x4E45;&#x7684;&#x6CE8;&#x89E3;&#x3002;</li>
+</ul>
+<p><strong>&#x8BD1;&#x6CE8; 2&#xFF1A;ElementType &#x5404;&#x5E38;&#x91CF;&#x5B9A;&#x4E49;&#x7684;&#x8303;&#x56F4;</strong></p>
+<ul>
+<li>ElementType.TYPE<ul>
+<li>Class, interface (including annotation type), or enum declaration&#xFF08;&#x7C7B;&#x3001;&#x63A5;&#x53E3;&#x3001;&#x6CE8;&#x89E3;&#x3001;&#x679A;&#x4E3E;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.FIELD<ul>
+<li>Field declaration (includes enum constants)&#xFF08;&#x5B57;&#x6BB5;&#x3001;&#x679A;&#x4E3E;&#x5E38;&#x91CF;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.METHOD<ul>
+<li>Method declaration&#xFF08;&#x65B9;&#x6CD5;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.PARAMETER<ul>
+<li>Formal parameter declaration&#xFF08;&#x65B9;&#x6CD5;&#x53C2;&#x6570;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.CONSTRUCTOR<ul>
+<li>Constructor declaration&#xFF08;&#x6784;&#x9020;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.LOCAL_VARIABLE<ul>
+<li>Local variable declaration&#xFF08;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.ANNOTATION_TYPE<ul>
+<li>Annotation type declaration&#xFF08;&#x6CE8;&#x89E3;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.PACKAGE<ul>
+<li>Package declaration&#xFF08;&#x5305;&#xFF09;</li>
+</ul>
+</li>
+<li>ElementType.TYPE_PARAMETER<ul>
+<li>Type parameter declaration&#xFF08;&#x6CDB;&#x578B;&#x53C2;&#x6570;&#xFF09;</li>
+<li>Since: 1.8</li>
+</ul>
+</li>
+<li>ElementType.TYPE_USE<ul>
+<li>Use of a type&#xFF08;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#xFF0C;&#x83B7;&#x53D6; class &#x5BF9;&#x8C61;&#x548C; import &#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x9664;&#x5916;&#xFF09;</li>
+<li>Since: 1.8</li>
+</ul>
+</li>
+<li>ElementType.MODULE<ul>
+<li>Module declaration&#xFF08;<a href="https://docs.oracle.com/javase/9/whatsnew/toc.htm#JSNEW-GUID-C23AFD78-C777-460B-8ACE-58BE5EA681F6" target="_blank">&#x6A21;&#x5757;</a>&#xFF09;</li>
+<li>Since: 9</li>
+</ul>
+</li>
+</ul>
+<p>The comment before the Test annotation declaration says, &#x201C;Use only on parameterless static methods.&#x201D; It would be nice if the compiler could enforce this, but it can&#x2019;t, unless you write an annotation processor to do so. For more on this topic, see the documentation for javax.annotation.processing. In the absence of such an annotation processor, if you put a Test annotation on the declaration of an instance method or on a method with one or more parameters, the test program will still compile, leaving it to the testing tool to deal with the problem at runtime.</p>
+<p>Test &#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x4E4B;&#x524D;&#x7684;&#x4EE3;&#x7801;&#x6CE8;&#x91CA;&#x662F;&#x8FD9;&#x4E48;&#x63CF;&#x8FF0;&#x7684;:&#x300C;Use only on parameterless static methods.&#xFF08;&#x53EA;&#x5BF9;&#x65E0;&#x53C2;&#x6570;&#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#xFF09;&#x300D;&#x5982;&#x679C;&#x7F16;&#x8BD1;&#x5668;&#x80FD;&#x591F;&#x5F3A;&#x5236;&#x6267;&#x884C;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x90A3;&#x5C31;&#x592A;&#x597D;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4E0D;&#x80FD;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x7F16;&#x5199;&#x4EE3;&#x7801;&#x6CE8;&#x91CA;&#x5904;&#x7406;&#x5668;&#x6765;&#x6267;&#x884C;&#x3002;&#x6709;&#x5173;&#x6B64;&#x4E3B;&#x9898;&#x7684;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x53C2;&#x9605; <code>javax.annotation.processing</code> &#x7684;&#x6587;&#x6863;&#x3002;&#x5728;&#x6CA1;&#x6709;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x6CE8;&#x91CA;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5C06; Test &#x6CE8;&#x89E3;&#x653E;&#x5728;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x7684;&#x58F0;&#x660E;&#x4E0A;&#xFF0C;&#x6216;&#x8005;&#x653E;&#x5728;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#x4E0A;&#xFF0C;&#x6D4B;&#x8BD5;&#x7A0B;&#x5E8F;&#x4ECD;&#x7136;&#x4F1A;&#x7F16;&#x8BD1;&#xFF0C;&#x8BA9;&#x6D4B;&#x8BD5;&#x5DE5;&#x5177;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x5904;&#x7406;&#x3002;</p>
+<p>Here is how the Test annotation looks in practice. It is called a marker annotation because it has no parameters but simply &#x201C;marks&#x201D; the annotated element. If the programmer were to misspell Test or to apply the Test annotation to a program element other than a method declaration, the program wouldn&#x2019;t compile:</p>
+<p>&#x4E0B;&#x9762;&#x662F; Test &#x6CE8;&#x89E3;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x65F6;&#x7684;&#x6837;&#x5B50;&#x3002;&#x5B83;&#x88AB;&#x79F0;&#x4E3A;&#x6807;&#x8BB0;&#x6CE8;&#x89E3;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x6CA1;&#x6709;&#x53C2;&#x6570;&#xFF0C;&#x53EA;&#x662F;&#x5BF9;&#x5E26;&#x6CE8;&#x89E3;&#x7684;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x300C;&#x6807;&#x8BB0;&#x300D;&#x3002;&#x5982;&#x679C;&#x7A0B;&#x5E8F;&#x5458;&#x62FC;&#x9519; Test &#x6216;&#x5C06; Test &#x6CE8;&#x89E3;&#x5E94;&#x7528;&#x4E8E;&#x9664;&#x65B9;&#x6CD5;&#x58F0;&#x660E;&#x4E4B;&#x5916;&#x7684;&#x7A0B;&#x5E8F;&#x5143;&#x7D20;&#xFF0C;&#x7A0B;&#x5E8F;&#x5C06;&#x65E0;&#x6CD5;&#x7F16;&#x8BD1;&#xFF1A;</p>
+<pre><code>// Program containing marker annotations
+public class Sample {
+    @Test
+    public static void m1() { } // Test should pass
+
+    public static void m2() { }
+
+    @Test
+    public static void m3() { // Test should fail
+        throw new RuntimeException(&quot;Boom&quot;);
+    }
+
+    public static void m4() { }
+
+    @Test
+    public void m5() { } // INVALID USE: nonstatic method
+
+    public static void m6() { }
+
+    @Test
+    public static void m7() { // Test should fail
+        throw new RuntimeException(&quot;Crash&quot;);
+    }
+
+    public static void m8() { }
+}
+</code></pre><p>The Sample class has seven static methods, four of which are annotated as tests. Two of these, m3 and m7, throw exceptions, and two, m1 and m5, do not. But one of the annotated methods that does not throw an exception, m5, is an instance method, so it is not a valid use of the annotation. In sum, Sample contains four tests: one will pass, two will fail, and one is invalid. The four methods that are not annotated with the Test annotation will be ignored by the testing tool.</p>
+<p>Sample &#x7C7B;&#x6709; 7 &#x4E2A;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x4E2D; 4 &#x4E2A;&#x88AB;&#x6CE8;&#x89E3;&#x4E3A; Test&#x3002;&#x5176;&#x4E2D;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5; m3 &#x548C; m7 &#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x53E6;&#x5916;&#x4E24;&#x4E2A; m1 &#x548C; m5 &#x6CA1;&#x6709;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x4E0D;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x7684;&#x5E26;&#x6CE8;&#x89E3;&#x7684;&#x65B9;&#x6CD5; m5 &#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x6B64;&#x5B83;&#x4E0D;&#x662F;&#x6CE8;&#x89E3;&#x7684;&#x6709;&#x6548;&#x4F7F;&#x7528;&#x3002;&#x603B;&#x4E4B;&#xFF0C;Sample &#x5305;&#x542B;&#x56DB;&#x4E2A;&#x6D4B;&#x8BD5;&#xFF1A;&#x4E00;&#x4E2A;&#x901A;&#x8FC7;&#xFF0C;&#x4E24;&#x4E2A;&#x5931;&#x8D25;&#xFF0C;&#x4E00;&#x4E2A;&#x65E0;&#x6548;&#x3002;&#x6CA1;&#x6709;&#x4F7F;&#x7528; Test &#x6CE8;&#x91CA;&#x7684;&#x56DB;&#x4E2A;&#x65B9;&#x6CD5;&#x5C06;&#x88AB;&#x6D4B;&#x8BD5;&#x5DE5;&#x5177;&#x5FFD;&#x7565;&#x3002;</p>
+<p>The Test annotations have no direct effect on the semantics of the Sample class. They serve only to provide information for use by interested programs. More generally, annotations don&#x2019;t change the semantics of the annotated code but enable it for special treatment by tools such as this simple test runner:</p>
+<p>Test &#x6CE8;&#x89E3;&#x5BF9; Sample &#x7C7B;&#x7684;&#x8BED;&#x4E49;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x5F71;&#x54CD;&#x3002;&#x5B83;&#x4EEC;&#x4EC5;&#x7528;&#x4E8E;&#x5411;&#x76F8;&#x5173;&#x7A0B;&#x5E8F;&#x63D0;&#x4F9B;&#x4FE1;&#x606F;&#x3002;&#x66F4;&#x666E;&#x904D;&#x7684;&#x662F;&#xFF0C;&#x6CE8;&#x89E3;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;&#x88AB;&#x6CE8;&#x89E3;&#x4EE3;&#x7801;&#x7684;&#x8BED;&#x4E49;&#xFF0C;&#x800C;&#x662F;&#x901A;&#x8FC7;&#x5DE5;&#x5177;&#xFF08;&#x5C31;&#x50CF;&#x5982;&#x4E0B;&#x8FD9;&#x4E2A;&#x7B80;&#x5355;&#x7684; RunTests &#x7C7B;&#xFF09;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x7279;&#x6B8A;&#x5904;&#x7406;&#xFF1A;</p>
+<pre><code>// Program to process marker annotations
+import java.lang.reflect.*;
+
+public class RunTests {
+    public static void main(String[] args) throws Exception {
+        int tests = 0;
+        int passed = 0;
+        Class&lt;?&gt; testClass = Class.forName(args[0]);
+        for (Method m : testClass.getDeclaredMethods()) {
+            if (m.isAnnotationPresent(Test.class)) {
+                tests++;
+                try {
+                    m.invoke(null);
+                    passed++;
+                } catch (InvocationTargetException wrappedExc) {
+                    Throwable exc = wrappedExc.getCause();
+                    System.out.println(m + &quot; failed: &quot; + exc);
+                } catch (Exception exc) {
+                    System.out.println(&quot;Invalid @Test: &quot; + m);
+                }
+        }
+    }
+    System.out.printf(&quot;Passed: %d, Failed: %d%n&quot;,passed, tests - passed);
+    }
+}
+</code></pre><p>The test runner tool takes a fully qualified class name on the command line and runs all of the class&#x2019;s Test-annotated methods reflectively, by calling Method.invoke. The isAnnotationPresent method tells the tool which methods to run. If a test method throws an exception, the reflection facility wraps it in an InvocationTargetException. The tool catches this exception and prints a failure report containing the original exception thrown by the test method, which is extracted from the InvocationTargetException with the getCause method.</p>
+<p>test runner &#x5DE5;&#x5177;&#x4EE5;&#x547D;&#x4EE4;&#x884C;&#x65B9;&#x5F0F;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x5B8C;&#x5168;&#x9650;&#x5B9A;&#x7684;&#x7C7B;&#x540D;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x8C03;&#x7528; <code>Method.invoke</code> &#x4EE5;&#x53CD;&#x5C04;&#x65B9;&#x5F0F;&#x8FD0;&#x884C;&#x7C7B;&#x7684;&#x6240;&#x6709;&#x5E26;&#x6D4B;&#x8BD5;&#x6CE8;&#x89E3;&#x7684;&#x65B9;&#x6CD5;&#x3002;isAnnotationPresent &#x65B9;&#x6CD5;&#x544A;&#x8BC9;&#x5DE5;&#x5177;&#x8981;&#x8FD0;&#x884C;&#x54EA;&#x4E9B;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x53CD;&#x5C04;&#x5DE5;&#x5177;&#x5C06;&#x5176;&#x5C01;&#x88C5;&#x5728; InvocationTargetException &#x4E2D;&#x3002;&#x8BE5;&#x5DE5;&#x5177;&#x6355;&#x83B7;&#x8FD9;&#x4E2A;&#x5F02;&#x5E38;&#x5E76;&#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5931;&#x8D25;&#x62A5;&#x544A;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;&#x629B;&#x51FA;&#x7684;&#x539F;&#x59CB;&#x5F02;&#x5E38;&#xFF0C;&#x8BE5;&#x5F02;&#x5E38;&#x662F;&#x7528; getCause &#x65B9;&#x6CD5;&#x4ECE; InvocationTargetException &#x63D0;&#x53D6;&#x7684;&#x3002;</p>
+<p>If an attempt to invoke a test method by reflection throws any exception other than InvocationTargetException, it indicates an invalid use of the Test annotation that was not caught at compile time. Such uses include annotation of an instance method, of a method with one or more parameters, or of an inaccessible method. The second catch block in the test runner catches these Test usage errors and prints an appropriate error message. Here is the output that is printed if RunTests is run on Sample:</p>
+<p>&#x5982;&#x679C;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x8C03;&#x7528;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;&#x65F6;&#x629B;&#x51FA;&#x9664; InvocationTargetException &#x4E4B;&#x5916;&#x7684;&#x4EFB;&#x4F55;&#x5F02;&#x5E38;&#xFF0C;&#x5219;&#x8868;&#x660E;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x5B58;&#x5728;&#x672A;&#x6355;&#x83B7;&#x7684; Test &#x6CE8;&#x89E3;&#x7684;&#x65E0;&#x6548;&#x7528;&#x6CD5;&#x3002;&#x8FD9;&#x4E9B;&#x7528;&#x9014;&#x5305;&#x62EC;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x7684;&#x6CE8;&#x89E3;&#x3001;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x6CE8;&#x89E3;&#x6216;&#x4E0D;&#x53EF;&#x8BBF;&#x95EE;&#x65B9;&#x6CD5;&#x7684;&#x6CE8;&#x89E3;&#x3002;&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A; catch &#x5757;&#x6355;&#x83B7;&#x8FD9;&#x4E9B; Test &#x4F7F;&#x7528;&#x9519;&#x8BEF;&#x5E76;&#x6253;&#x5370;&#x5BF9;&#x5E94;&#x7684;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#x3002;&#x5982;&#x679C;&#x5728; Sample &#x4E0A;&#x8FD0;&#x884C; RunTests&#xFF0C;&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>public static void Sample.m3() failed: RuntimeException: Boom
+Invalid @Test: public void Sample.m5()
+public static void Sample.m7() failed: RuntimeException: Crash
+Passed: 1, Failed: 3
+</code></pre><p>Now let&#x2019;s add support for tests that succeed only if they throw a particular exception. We&#x2019;ll need a new annotation type for this:</p>
+<p>&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x53EA;&#x5728;&#x629B;&#x51FA;&#x7279;&#x5B9A;&#x5F02;&#x5E38;&#x65F6;&#x624D;&#x6210;&#x529F;&#x7684;&#x6D4B;&#x8BD5;&#x652F;&#x6301;&#x3002;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#xFF1A;</p>
+<pre><code>// Annotation type with a parameter
+import java.lang.annotation.*;
+
+/**
+* Indicates that the annotated method is a test method that
+* must throw the designated exception to succeed.
+*/
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTest {
+    Class&lt;? extends Throwable&gt; value();
+}
+</code></pre><p>The type of the parameter for this annotation is <code>Class&lt;? extends Throwable&gt;</code>. This wildcard type is, admittedly, a mouthful. In English, it means &#x201C;the Class object for some class that extends Throwable,&#x201D; and it allows the user of the annotation to specify any exception (or error) type. This usage is an example of a bounded type token (Item 33). Here&#x2019;s how the annotation looks in practice. Note that class literals are used as the values for the annotation parameter:</p>
+<p>&#x8FD9;&#x4E2A;&#x6CE8;&#x89E3;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x662F; <code>Class&lt;? extends Throwable&gt;</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x901A;&#x914D;&#x7B26;&#x7C7B;&#x578B;&#x786E;&#x5B9E;&#x5F88;&#x590D;&#x6742;&#x3002;&#x5728;&#x82F1;&#x8BED;&#x4E2D;&#xFF0C;&#x5B83;&#x7684;&#x610F;&#x601D;&#x662F;&#x300C;&#x67D0;&#x4E2A;&#x6269;&#x5C55;&#x81EA; Throwable &#x7684;&#x7C7B;&#x7684; Class &#x5BF9;&#x8C61;&#x300D;&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x6CE8;&#x89E3;&#x7684;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x4EFB;&#x4F55;&#x5F02;&#x5E38;&#xFF08;&#x6216;&#x9519;&#x8BEF;&#xFF09;&#x7C7B;&#x578B;&#x3002;&#x8FD9;&#x79CD;&#x7528;&#x6CD5;&#x662F;&#x6709;&#x754C;&#x7C7B;&#x578B;&#x4EE4;&#x724C;&#xFF08;<a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">Item-33</a>&#xFF09;&#x7684;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x8FD9;&#x4E2A;&#x6CE8;&#x89E3;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x65F6;&#x7684;&#x6837;&#x5B50;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x7C7B;&#x7684;&#x5B57;&#x9762;&#x91CF;&#x88AB;&#x7528;&#x4F5C;&#x6CE8;&#x89E3;&#x53C2;&#x6570;&#x7684;&#x503C;&#xFF1A;</p>
+<pre><code>// Program containing annotations with a parameter
+public class Sample2 {
+    @ExceptionTest(ArithmeticException.class)
+    public static void m1() { // Test should pass
+        int i = 0;
+        i = i / i;
+    }
+
+    @ExceptionTest(ArithmeticException.class)
+    public static void m2() { // Should fail (wrong exception)
+        int[] a = new int[0];
+        int i = a[1];
+    }
+
+    @ExceptionTest(ArithmeticException.class)
+    public static void m3() { } // Should fail (no exception)
+}
+</code></pre><p>Now let&#x2019;s modify the test runner tool to process the new annotation. Doing so consists of adding the following code to the main method:</p>
+<p>&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x4FEE;&#x6539; test runner &#x5DE5;&#x5177;&#x6765;&#x5904;&#x7406;&#x65B0;&#x7684;&#x6CE8;&#x89E3;&#x3002;&#x5411; main &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>if (m.isAnnotationPresent(ExceptionTest.class)) {
+    tests++;
+    try {
+        m.invoke(null);
+        System.out.printf(&quot;Test %s failed: no exception%n&quot;, m);
+    } catch (InvocationTargetException wrappedEx) {
+        Throwable exc = wrappedEx.getCause();
+        Class&lt;? extends Throwable&gt; excType =m.getAnnotation(ExceptionTest.class).value();
+        if (excType.isInstance(exc)) {
+            passed++;
+        } else {
+            System.out.printf(&quot;Test %s failed: expected %s, got %s%n&quot;,m, excType.getName(), exc);
+        }
+    }
+    catch (Exception exc) {
+        System.out.println(&quot;Invalid @Test: &quot; + m);
+    }
+}
+</code></pre><p>This code is similar to the code we used to process Test annotations, with one exception: this code extracts the value of the annotation parameter and uses it to check if the exception thrown by the test is of the right type. There are no explicit casts, and hence no danger of a ClassCastException. The fact that the test program compiled guarantees that its annotation parameters represent valid exception types, with one caveat: if the annotation parameters were valid at compile time but the class file representing a specified exception type is no longer present at runtime, the test runner will throw TypeNotPresentException.</p>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4E0E;&#x6211;&#x4EEC;&#x7528;&#x6765;&#x5904;&#x7406; Test &#x6CE8;&#x89E3;&#x7684;&#x4EE3;&#x7801;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x4E0D;&#x540C;&#xFF1A;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x63D0;&#x53D6;&#x6CE8;&#x89E3;&#x53C2;&#x6570;&#x7684;&#x503C;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x5B83;&#x6765;&#x68C0;&#x67E5;&#x6D4B;&#x8BD5;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x662F;&#x5426;&#x662F;&#x6B63;&#x786E;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x8FD9;&#x91CC;&#x6CA1;&#x6709;&#x663E;&#x5F0F;&#x7684;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#xFF0C;&#x56E0;&#x6B64;&#x6CA1;&#x6709; ClassCastException &#x7684;&#x5371;&#x9669;&#x3002;&#x7F16;&#x8BD1;&#x7684;&#x6D4B;&#x8BD5;&#x7A0B;&#x5E8F;&#x4FDD;&#x8BC1;&#x5176;&#x6CE8;&#x89E3;&#x53C2;&#x6570;&#x8868;&#x793A;&#x6709;&#x6548;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#xFF0C;&#x4F46;&#x6709;&#x4E00;&#x70B9;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C;&#x6CE8;&#x89E3;&#x53C2;&#x6570;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x6709;&#x6548;&#xFF0C;&#x4F46;&#x8868;&#x793A;&#x6307;&#x5B9A;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x6587;&#x4EF6;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x4E0D;&#x518D;&#x5B58;&#x5728;&#xFF0C;&#x90A3;&#x4E48;&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x5C06;&#x629B;&#x51FA; TypeNotPresentException&#x3002;</p>
+<p>Taking our exception testing example one step further, it is possible to envision a test that passes if it throws any one of several specified exceptions. The annotation mechanism has a facility that makes it easy to support this usage. Suppose we change the parameter type of the ExceptionTest annotation to be an array of Class objects:</p>
+<p>&#x8FDB;&#x4E00;&#x6B65;&#x4FEE;&#x6539;&#x6211;&#x4EEC;&#x7684;&#x5F02;&#x5E38;&#x6D4B;&#x8BD5;&#x793A;&#x4F8B;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x629B;&#x51FA;&#x51E0;&#x4E2A;&#x6307;&#x5B9A;&#x5F02;&#x5E38;&#x4E2D;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x6D4B;&#x8BD5;&#x901A;&#x8FC7;&#x4E86;&#x3002;&#x6CE8;&#x89E3;&#x673A;&#x5236;&#x5177;&#x6709;&#x4E00;&#x79CD;&#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5730;&#x652F;&#x6301;&#x8FD9;&#x79CD;&#x7528;&#x6CD5;&#x3002;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x5C06; ExceptionTest &#x6CE8;&#x89E3;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x66F4;&#x6539;&#x4E3A;&#x4E00;&#x4E2A; Class &#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF1A;</p>
+<pre><code>// Annotation type with an array parameter
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTest {
+    Class&lt;? extends Exception&gt;[] value();
+}
+</code></pre><p>The syntax for array parameters in annotations is flexible. It is optimized for single-element arrays. All of the previous ExceptionTest annotations are still valid with the new array-parameter version of ExceptionTest and result in single-element arrays. To specify a multiple-element array, surround the elements with curly braces and separate them with commas:</p>
+<p>&#x6CE8;&#x89E3;&#x4E2D;&#x6570;&#x7EC4;&#x53C2;&#x6570;&#x7684;&#x8BED;&#x6CD5;&#x662F;&#x7075;&#x6D3B;&#x7684;&#x3002;&#x5B83;&#x9488;&#x5BF9;&#x5355;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#x3002;&#x524D;&#x9762;&#x7684; ExceptionTest &#x6CE8;&#x89E3;&#x5BF9;&#x4E8E; ExceptionTest &#x7684;&#x65B0;&#x6570;&#x7EC4;&#x53C2;&#x6570;&#x7248;&#x672C;&#x4ECD;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x751F;&#x6210;&#x5355;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#x3002;&#x8981;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x591A;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#xFF0C;&#x7528;&#x82B1;&#x62EC;&#x53F7;&#x5305;&#x56F4;&#x5143;&#x7D20;&#xFF0C;&#x5E76;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#x5B83;&#x4EEC;&#xFF1A;</p>
+<pre><code>// Code containing an annotation with an array parameter
+@ExceptionTest({ IndexOutOfBoundsException.class,NullPointerException.class })
+public static void doublyBad() {
+    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+    // The spec permits this method to throw either
+    // IndexOutOfBoundsException or NullPointerException
+    list.addAll(5, null);
+}
+</code></pre><p>It is reasonably straightforward to modify the test runner tool to process the new version of ExceptionTest. This code replaces the original version:</p>
+<p>&#x4FEE;&#x6539;&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#x5668;&#x5DE5;&#x5177;&#x6765;&#x5904;&#x7406; ExceptionTest &#x7684;&#x65B0;&#x7248;&#x672C;&#x662F;&#x76F8;&#x5F53;&#x7B80;&#x5355;&#x7684;&#x3002;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x66FF;&#x6362;&#x4E86;&#x539F;&#x6765;&#x7684;&#x7248;&#x672C;&#xFF1A;</p>
+<pre><code>if (m.isAnnotationPresent(ExceptionTest.class)) {
+    tests++;
+    try {
+        m.invoke(null);
+        System.out.printf(&quot;Test %s failed: no exception%n&quot;, m);
+    } catch (Throwable wrappedExc) {
+        Throwable exc = wrappedExc.getCause();
+        int oldPassed = passed;
+        Class&lt;? extends Exception&gt;[] excTypes =m.getAnnotation(ExceptionTest.class).value();
+        for (Class&lt;? extends Exception&gt; excType : excTypes) {
+            if (excType.isInstance(exc)) {
+                passed++;
+                break;
+            }
+        }
+        if (passed == oldPassed)
+            System.out.printf(&quot;Test %s failed: %s %n&quot;, m, exc);
+    }
+}
+</code></pre><p>As of Java 8, there is another way to do multivalued annotations. Instead of declaring an annotation type with an array parameter, you can annotate the declaration of an annotation with the @Repeatable meta-annotation, to indicate that the annotation may be applied repeatedly to a single element. This meta-annotation takes a single parameter, which is the class object of a containing annotation type, whose sole parameter is an array of the annotation type [JLS, 9.6.3]. Here&#x2019;s how the annotation declarations look if we take this approach with our ExceptionTest annotation. Note that the containing annotation type must be annotated with an appropriate retention policy and target, or the declarations won&#x2019;t compile:</p>
+<p>&#x5728; Java 8 &#x4E2D;&#xFF0C;&#x8FD8;&#x6709;&#x53E6;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x591A;&#x503C;&#x6CE8;&#x89E3;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x4E0A;&#x4F7F;&#x7528; <code>@Repeatable</code> &#x5143;&#x6CE8;&#x89E3;&#xFF0C;&#x4EE5;&#x8868;&#x660E;&#x6CE8;&#x89E3;&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x5730;&#x5E94;&#x7528;&#x4E8E;&#x5355;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x53C2;&#x6570;&#x6765;&#x58F0;&#x660E;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x3002;&#x8FD9;&#x4E2A;&#x5143;&#x6CE8;&#x89E3;&#x53EA;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x5305;&#x542B;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x7684;&#x552F;&#x4E00;&#x53C2;&#x6570;&#x662F;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x7EC4; [JLS, 9.6.3]&#x3002;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5BF9; ExceptionTest &#x6CE8;&#x89E3;&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x662F;&#x8FD9;&#x6837;&#x7684;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x5305;&#x542B;&#x7684;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x9002;&#x5F53;&#x7684; Retention &#x6CE8;&#x89E3;&#x548C; Target &#x6CE8;&#x89E3;&#xFF0C;&#x5426;&#x5219;&#x58F0;&#x660E;&#x5C06;&#x65E0;&#x6CD5;&#x7F16;&#x8BD1;&#xFF1A;</p>
+<pre><code>// Repeatable annotation type
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Repeatable(ExceptionTestContainer.class)
+public @interface ExceptionTest {
+    Class&lt;? extends Exception&gt; value();
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTestContainer {
+    ExceptionTest[] value();
+}
+</code></pre><p>Here&#x2019;s how our doublyBad test looks with a repeated annotation in place of an array-valued annotation:</p>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4F7F;&#x7528;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x4EE3;&#x66FF;&#x6570;&#x7EC4;&#x503C;&#x6CE8;&#x89E3;&#x7684; doublyBad &#x6D4B;&#x8BD5;&#xFF1A;</p>
+<pre><code>// Code containing a repeated annotation
+@ExceptionTest(IndexOutOfBoundsException.class)
+@ExceptionTest(NullPointerException.class)
+public static void doublyBad() { ... }
+</code></pre><p>Processing repeatable annotations requires care. A repeated annotation generates a synthetic annotation of the containing annotation type. The getAnnotationsByType method glosses over this fact, and can be used to access both repeated and non-repeated annotations of a repeatable annotation type. But isAnnotationPresent makes it explicit that repeated annotations are not of the annotation type, but of the containing annotation type. If an element has a repeated annotation of some type and you use the isAnnotationPresent method to check if the element has an annotation of that type, you&#x2019;ll find that it does not. Using this method to check for the presence of an annotation type will therefore cause your program to silently ignore repeated annotations. Similarly, using this method to check for the containing annotation type will cause the program to silently ignore non-repeated annotations. To detect repeated and non-repeated annotations with isAnnotationPresent, you much check for both the annotation type and its containing annotation type. Here&#x2019;s how the relevant part of our RunTests program looks when modified to use the repeatable version of the ExceptionTest annotation:</p>
+<p>&#x5904;&#x7406;&#x53EF;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x9700;&#x8981;&#x5C0F;&#x5FC3;&#x3002;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x4F1A;&#x751F;&#x6210;&#x540D;&#x4E3A;&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#x7684;&#x5408;&#x6210;&#x6CE8;&#x89E3;&#x3002;getAnnotationsByType &#x65B9;&#x6CD5;&#x53EF;&#x5FFD;&#x7565;&#x8FD9;&#x4E00;&#x533A;&#x522B;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x8BBF;&#x95EE;&#x53EF;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x548C;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x3002;&#x4F46;&#x662F; isAnnotationPresent &#x660E;&#x786E;&#x6307;&#x51FA;&#xFF0C;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x7684;&#x60C5;&#x51B5;&#x4E0D;&#x5C5E;&#x4E8E;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x662F;&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x662F;&#x67D0;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x6CE8;&#x89E3;&#xFF0C;&#x5E76;&#x4E14;&#x4F60;&#x4F7F;&#x7528; isAnnotationPresent &#x65B9;&#x6CD5;&#x68C0;&#x67E5;&#x8BE5;&#x5143;&#x7D20;&#x662F;&#x5426;&#x5177;&#x6709;&#x8BE5;&#x7C7B;&#x578B;&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x4F60;&#x5C06;&#x53D1;&#x73B0;&#x5B83;&#x63D0;&#x793A;&#x4E0D;&#x5B58;&#x5728;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4F7F;&#x7528;&#x6B64;&#x65B9;&#x6CD5;&#x68C0;&#x67E5;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x5B58;&#x5728;&#x4E0E;&#x5426;&#xFF0C;&#x5C06;&#x5BFC;&#x81F4;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x5FFD;&#x7565;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x3002;&#x7C7B;&#x4F3C;&#x5730;&#xFF0C;&#x4F7F;&#x7528;&#x6B64;&#x65B9;&#x6CD5;&#x68C0;&#x67E5;&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#x5C06;&#x5BFC;&#x81F4;&#x7A0B;&#x5E8F;&#x5FFD;&#x7565;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x3002;&#x8981;&#x4F7F;&#x7528; isAnnotationPresent &#x68C0;&#x6D4B;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x548C;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF0C;&#x9700;&#x8981;&#x540C;&#x65F6;&#x68C0;&#x67E5;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x53CA;&#x5176;&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x6211;&#x4EEC;&#x7684; RunTests &#x7A0B;&#x5E8F;&#x7684;&#x76F8;&#x5173;&#x90E8;&#x5206;&#x4FEE;&#x6539;&#x4E3A;&#x4F7F;&#x7528; ExceptionTest &#x6CE8;&#x89E3;&#x7684;&#x53EF;&#x91CD;&#x590D;&#x7248;&#x672C;&#x65F6;&#x7684;&#x6837;&#x5B50;&#xFF1A;</p>
+<pre><code>// Processing repeatable annotations
+if (m.isAnnotationPresent(ExceptionTest.class)|| m.isAnnotationPresent(ExceptionTestContainer.class)) {
+    tests++;
+    try {
+        m.invoke(null);
+        System.out.printf(&quot;Test %s failed: no exception%n&quot;, m);
+    } catch (Throwable wrappedExc) {
+        Throwable exc = wrappedExc.getCause();
+        int oldPassed = passed;
+        ExceptionTest[] excTests =m.getAnnotationsByType(ExceptionTest.class);
+        for (ExceptionTest excTest : excTests) {
+            if (excTest.value().isInstance(exc)) {
+                passed++;
+                break;
+            }
+        }
+        if (passed == oldPassed)
+            System.out.printf(&quot;Test %s failed: %s %n&quot;, m, exc);
+    }
+}
+</code></pre><p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x6BD4;&#x8F83;&#x539F;&#x6587;&#x4E2D;&#x63D0;&#x53CA;&#x7684; getAnnotationsByType &#x4E0E; isAnnotationPresent &#x5728;&#x53EF;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x7684;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x548C;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#x4E0B;&#x7684;&#x4F7F;&#x7528;&#x5DEE;&#x522B;&#xFF1A;</strong></p>
+<p><strong>&#x539F; doublyBad &#x65B9;&#x6CD5;&#x4E0D;&#x53D8;&#xFF0C;&#x5C5E;&#x4E8E;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF08;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x4E24;&#x4E2A;&#x7684;&#xFF0C;&#x90FD;&#x5C5E;&#x4E8E;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF09;&#xFF1B;&#x65B0;&#x589E;&#x4E00;&#x4E2A; doublyBad2 &#x65B9;&#x6CD5;&#xFF0C;&#x4EC5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#xFF0C;&#x5C5E;&#x4E8E;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;</strong></p>
+<pre><code>class Simple4 {
+    // Code containing a repeated annotation
+    @ExceptionTest(IndexOutOfBoundsException.class)
+    @ExceptionTest(NullPointerException.class)
+    public static void doublyBad() {
+    }
+
+    @ExceptionTest(ArithmeticException.class)
+    public static void doublyBad2() {
+    }
+}
+</code></pre><p><strong>&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;</strong></p>
+<pre><code>public static void main(String[] args) throws NoSuchMethodException {
+    Class&lt;?&gt; testClass = Simple4.class;
+    for (int count = 1; count &lt;= 2; count++) {
+        Method m = testClass.getMethod(count == 1 ? &quot;doublyBad&quot; : &quot;doublyBad&quot; + count);
+        System.out.println(m.getName() + &quot;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;&quot; + m.isAnnotationPresent(ExceptionTest.class));
+        System.out.println(m.getName() + &quot;&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#xFF1A;&quot; + m.isAnnotationPresent(ExceptionTestContainer.class));
+        System.out.println(m.getName() + &quot;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;&quot; + m.isAnnotationPresent(ExceptionTest.class));
+        System.out.println(m.getName() + &quot;&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;&quot; + m.getAnnotationsByType(ExceptionTest.class));
+        System.out.println(m.getName() + &quot;&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#xFF1A;&quot; + m.getAnnotationsByType(ExceptionTestContainer.class));
+        System.out.println(m.getName() + &quot;&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;&quot; + m.getAnnotationsByType(ExceptionTest.class));
+    }
+}
+</code></pre><p><strong>&#x7ED3;&#x679C;</strong></p>
+<pre><code>doublyBad&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;false
+doublyBad&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#xFF1A;true
+doublyBad&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;false
+doublyBad&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;[LItem_39.ExceptionTest;@1593948d
+doublyBad&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#xFF1A;[LItem_39.ExceptionTestContainer;@1b604f19
+doublyBad&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;[LItem_39.ExceptionTest;@7823a2f9
+
+doublyBad2&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;true
+doublyBad2&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#xFF1A;false
+doublyBad2&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;true
+doublyBad2&#x300C;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;[LItem_39.ExceptionTest;@cb5822
+doublyBad2&#x300C;&#x5BB9;&#x5668;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x300D;&#xFF1A;[LItem_39.ExceptionTestContainer;@4b9e13df
+doublyBad2&#x300C;&#x975E;&#x91CD;&#x590D;&#x72B6;&#x6001;&#x300D;&#xFF1A;[LItem_39.ExceptionTest;@2b98378d
+</code></pre><p>Repeatable annotations were added to improve the readability of source code that logically applies multiple instances of the same annotation type to a given program element. If you feel they enhance the readability of your source code, use them, but remember that there is more boilerplate in declaring and processing repeatable annotations, and that processing repeatable annotations is error-prone.</p>
+<p>&#x6DFB;&#x52A0;&#x53EF;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x662F;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x6E90;&#x4EE3;&#x7801;&#x7684;&#x53EF;&#x8BFB;&#x6027;&#xFF0C;&#x6E90;&#x4EE3;&#x7801;&#x5728;&#x903B;&#x8F91;&#x4E0A;&#x5C06;&#x540C;&#x4E00;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x7684;&#x591A;&#x4E2A;&#x5B9E;&#x4F8B;&#x5E94;&#x7528;&#x4E8E;&#x7ED9;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x5143;&#x7D20;&#x3002;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x5B83;&#x4EEC;&#x589E;&#x5F3A;&#x4E86;&#x6E90;&#x4EE3;&#x7801;&#x7684;&#x53EF;&#x8BFB;&#x6027;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#xFF0C;&#x4F46;&#x662F;&#x8BF7;&#x8BB0;&#x4F4F;&#xFF0C;&#x5728;&#x58F0;&#x660E;&#x548C;&#x5904;&#x7406;&#x53EF;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x65B9;&#x9762;&#x6709;&#x66F4;&#x591A;&#x7684;&#x6837;&#x677F;&#xFF0C;&#x5E76;&#x4E14;&#x5904;&#x7406;&#x53EF;&#x91CD;&#x590D;&#x6CE8;&#x89E3;&#x5F88;&#x5BB9;&#x6613;&#x51FA;&#x9519;&#x3002;</p>
+<p>The testing framework in this item is just a toy, but it clearly demonstrates the superiority of annotations over naming patterns, and it only scratches the surface of what you can do with them. If you write a tool that requires programmers to add information to source code, define appropriate annotation types. <strong>There is simply no reason to use naming patterns when you can use annotations instead.</strong></p>
+<p>&#x672C;&#x6761;&#x76EE;&#x4E2D;&#x7684;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x6E05;&#x695A;&#x5730;&#x5C55;&#x793A;&#x4E86;&#x6CE8;&#x89E3;&#x76F8;&#x5BF9;&#x4E8E;&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x7684;&#x4F18;&#x52BF;&#xFF0C;&#x5E76;&#x4E14;&#x5B83;&#x53EA;&#x6D89;&#x53CA;&#x5230;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x505A;&#x4EC0;&#x4E48;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7F16;&#x5199;&#x7684;&#x5DE5;&#x5177;&#x8981;&#x6C42;&#x7A0B;&#x5E8F;&#x5458;&#x5411;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x6DFB;&#x52A0;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x5B9A;&#x4E49;&#x9002;&#x5F53;&#x7684;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x3002;<strong>&#x5982;&#x679C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x6CA1;&#x6709;&#x7406;&#x7531;&#x4F7F;&#x7528;&#x547D;&#x540D;&#x6A21;&#x5F0F;&#x3002;</strong></p>
+<p>That said, with the exception of toolsmiths, most programmers will have no need to define annotation types. But <strong>all programmers should use the predefined annotation types that Java provides</strong> (Items 40, 27). Also, consider using the annotations provided by your IDE or static analysis tools. Such annotations can improve the quality of the diagnostic information provided by these tools. Note, however, that these annotations have yet to be standardized, so you may have some work to do if you switch tools or if a standard emerges.</p>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x9664;&#x4E86; toolsmiths &#x4E4B;&#x5916;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x7A0B;&#x5E8F;&#x5458;&#x4E0D;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#x3002;&#x4F46;&#x662F;&#x6240;&#x6709;&#x7A0B;&#x5E8F;&#x5458;&#x90FD;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; Java &#x63D0;&#x4F9B;&#x7684;&#x9884;&#x5B9A;&#x4E49;&#x6CE8;&#x89E3;&#x7C7B;&#x578B;&#xFF08;<a href="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">Item-40</a> &#x548C; <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">Item-27</a>&#xFF09;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x8003;&#x8651;&#x4F7F;&#x7528; IDE &#x6216;&#x9759;&#x6001;&#x5206;&#x6790;&#x5DE5;&#x5177;&#x63D0;&#x4F9B;&#x7684;&#x6CE8;&#x89E3;&#x3002;&#x8FD9;&#x4E9B;&#x6CE8;&#x89E3;&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x8FD9;&#x4E9B;&#x5DE5;&#x5177;&#x63D0;&#x4F9B;&#x7684;&#x8BCA;&#x65AD;&#x4FE1;&#x606F;&#x7684;&#x8D28;&#x91CF;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x4E9B;&#x6CE8;&#x89E3;&#x8FD8;&#x6CA1;&#x6709;&#x6807;&#x51C6;&#x5316;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5207;&#x6362;&#x4E86;&#x5DE5;&#x5177;&#x6216;&#x51FA;&#x73B0;&#x4E86;&#x6807;&#x51C6;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E9B;&#x5DE5;&#x4F5C;&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-6-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Previous Item&#xFF08;&#x4E0A;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">Item 38: Emulate extensible enums with interfaces&#xFF08;&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x6A21;&#x62DF;&#x53EF;&#x6269;&#x5C55;&#x679A;&#x4E3E;&#xFF09;</a></strong></li>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">Item 40: Consistently use the Override annotation&#xFF08;&#x575A;&#x6301;&#x4F7F;&#x7528; @Override &#x6CE8;&#x89E3;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html" class="navigation navigation-prev " aria-label="Previous page: Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html" class="navigation navigation-next " aria-label="Next page: Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 39: Prefer annotations to naming patterns（注解优于命名模式）","level":"1.6.7","depth":2,"next":{"title":"Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）","level":"1.6.8","depth":2,"path":"Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.md","ref":"Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.md","articles":[]},"previous":{"title":"Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）","level":"1.6.6","depth":2,"path":"Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.md","ref":"Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.md","mtime":"2021-12-19T09:10:38.060Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1929 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html" />
+    
+    
+    <link rel="prev" href="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Chapter-6-Introduction.html">
+            
+                <a href="Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="Chapter-6-Introduction.html">
+            
+                <a href="Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.5" data-path="Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-6-enums-and-annotations&#xFF08;&#x679A;&#x4E3E;&#x548C;&#x6CE8;&#x89E3;&#xFF09;">Chapter 6. Enums and Annotations&#xFF08;&#x679A;&#x4E3E;&#x548C;&#x6CE8;&#x89E3;&#xFF09;</h2>
+<h3 id="item-37-use-enummap-instead-of-ordinal-indexing&#xFF08;&#x4F7F;&#x7528;-enummap-&#x66FF;&#x6362;&#x5E8F;&#x6570;&#x7D22;&#x5F15;&#xFF09;">Item 37: Use EnumMap instead of ordinal indexing&#xFF08;&#x4F7F;&#x7528; EnumMap &#x66FF;&#x6362;&#x5E8F;&#x6570;&#x7D22;&#x5F15;&#xFF09;</h3>
+<p>Occasionally you may see code that uses the ordinal method (Item 35) to index into an array or list. For example, consider this simplistic class meant to represent a plant:</p>
+<p>&#x5076;&#x5C14;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x770B;&#x5230;&#x4F7F;&#x7528; <code>ordinal()</code> &#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF08;<a href="Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">Item-35</a>&#xFF09;&#x4F5C;&#x4E3A;&#x6570;&#x7EC4;&#x6216; list &#x7D22;&#x5F15;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8003;&#x8651;&#x8FD9;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x7C7B;&#xFF0C;&#x5B83;&#x8868;&#x793A;&#x4E00;&#x79CD;&#x690D;&#x7269;&#xFF1A;</p>
+<pre><code>class Plant {
+    enum LifeCycle { ANNUAL, PERENNIAL, BIENNIAL }
+    final String name;
+    final LifeCycle lifeCycle;
+
+    Plant(String name, LifeCycle lifeCycle) {
+        this.name = name;
+        this.lifeCycle = lifeCycle;
+    }
+
+    @Override public String toString() {
+        return name;
+    }
+}
+</code></pre><p>Now suppose you have an array of plants representing a garden, and you want to list these plants organized by life cycle (annual, perennial, or biennial). To do this, you construct three sets, one for each life cycle, and iterate through the garden, placing each plant in the appropriate set. Some programmers would do this by putting the sets into an array indexed by the life cycle&#x2019;s ordinal:</p>
+<p>&#x73B0;&#x5728;&#x5047;&#x8BBE;&#x4F60;&#x6709;&#x4E00;&#x4E2A;&#x4EE3;&#x8868;&#x82B1;&#x56ED;&#x5168;&#x90E8;&#x690D;&#x7269;&#x7684; Plant &#x6570;&#x7EC4;&#xFF0C;&#x4F60;&#x60F3;&#x8981;&#x5217;&#x51FA;&#x6309;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF08;&#x4E00;&#x5E74;&#x751F;&#x3001;&#x591A;&#x5E74;&#x751F;&#x6216;&#x4E24;&#x5E74;&#x751F;&#xFF09;&#x6392;&#x5217;&#x7684;&#x690D;&#x7269;&#x3002;&#x8981;&#x505A;&#x5230;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x6784;&#x9020;&#x4E09;&#x4E2A;&#x96C6;&#x5408;&#xFF0C;&#x6BCF;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E00;&#x4E2A;&#xFF0C;&#x7136;&#x540E;&#x904D;&#x5386;&#x6574;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x690D;&#x7269;&#x653E;&#x5165;&#x9002;&#x5F53;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#xFF1A;</p>
+<pre><code>// Using ordinal() to index into an array - DON&apos;T DO THIS!
+Set&lt;Plant&gt;[] plantsByLifeCycle =(Set&lt;Plant&gt;[]) new Set[Plant.LifeCycle.values().length];
+
+for (int i = 0; i &lt; plantsByLifeCycle.length; i++)
+    plantsByLifeCycle[i] = new HashSet&lt;&gt;();
+
+for (Plant p : garden)
+    plantsByLifeCycle[p.lifeCycle.ordinal()].add(p);
+
+// Print the results
+for (int i = 0; i &lt; plantsByLifeCycle.length; i++) {
+    System.out.printf(&quot;%s: %s%n&quot;,
+    Plant.LifeCycle.values()[i], plantsByLifeCycle[i]);
+}
+</code></pre><p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x5047;&#x8BBE; Plant &#x6570;&#x7EC4;&#x5982;&#x4E0B;&#xFF1A;</strong></p>
+<pre><code>Plant[] garden = new Plant[]{
+        new Plant(&quot;A&quot;, LifeCycle.ANNUAL),
+        new Plant(&quot;B&quot;, LifeCycle.BIENNIAL),
+        new Plant(&quot;C&quot;, LifeCycle.PERENNIAL),
+        new Plant(&quot;D&quot;, LifeCycle.BIENNIAL),
+        new Plant(&quot;E&quot;, LifeCycle.PERENNIAL),
+};
+</code></pre><p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E3A;&#xFF1A;</p>
+<pre><code>ANNUAL: [A]
+PERENNIAL: [E, C]
+BIENNIAL: [B, D]
+</code></pre><p>This technique works, but it is fraught with problems. Because arrays are not compatible with generics (Item 28), the program requires an unchecked cast and will not compile cleanly. Because the array does not know what its index represents, you have to label the output manually. But the most serious problem with this technique is that when you access an array that is indexed by an enum&#x2019;s ordinal, it is your responsibility to use the correct int value; ints do not provide the type safety of enums. If you use the wrong value, the program will silently do the wrong thing or&#x2014;if you&#x2019;re lucky&#x2014;throw an ArrayIndexOutOfBoundsException.</p>
+<p>&#x8FD9;&#x79CD;&#x6280;&#x672F;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF0C;&#x4F46;&#x5B83;&#x5145;&#x6EE1;&#x4E86;&#x95EE;&#x9898;&#x3002;&#x56E0;&#x4E3A;&#x6570;&#x7EC4;&#x4E0E;&#x6CDB;&#x578B;&#x4E0D;&#x517C;&#x5BB9;&#xFF08;<a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">Item-28</a>&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x8BE5;&#x7A0B;&#x5E8F;&#x9700;&#x8981; unchecked &#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x80FD;&#x987A;&#x5229;&#x5730;&#x7F16;&#x8BD1;&#x3002;&#x56E0;&#x4E3A;&#x6570;&#x7EC4;&#x4E0D;&#x77E5;&#x9053;&#x5B83;&#x7684;&#x7D22;&#x5F15;&#x8868;&#x793A;&#x4EC0;&#x4E48;&#xFF0C;&#x6240;&#x4EE5;&#x5FC5;&#x987B;&#x624B;&#x52A8;&#x6807;&#x8BB0;&#x8F93;&#x51FA;&#x3002;&#x4F46;&#x662F;&#x8FD9;&#x79CD;&#x6280;&#x672F;&#x6700;&#x4E25;&#x91CD;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x5F53;&#x4F60;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x7531;&#x679A;&#x4E3E;&#x5E8F;&#x6570;&#x7D22;&#x5F15;&#x7684;&#x6570;&#x7EC4;&#x65F6;&#xFF0C;&#x4F60;&#x6709;&#x8D23;&#x4EFB;&#x4F7F;&#x7528;&#x6B63;&#x786E;&#x7684; int &#x503C;&#xFF1B;int &#x4E0D;&#x63D0;&#x4F9B;&#x679A;&#x4E3E;&#x7684;&#x7C7B;&#x578B;&#x5B89;&#x5168;&#x6027;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x4E86;&#x9519;&#x8BEF;&#x7684;&#x503C;&#xFF0C;&#x7A0B;&#x5E8F;&#x5C06;&#x9759;&#x9ED8;&#x6267;&#x884C;&#x9519;&#x8BEF;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x5E78;&#x8FD0;&#x7684;&#x8BDD;&#xFF0C;&#x624D;&#x4F1A;&#x629B;&#x51FA; ArrayIndexOutOfBoundsException&#x3002;</p>
+<p>There is a much better way to achieve the same effect. The array is effectively serving as a map from the enum to a value, so you might as well use a Map. More specifically, there is a very fast Map implementation designed for use with enum keys, known as java.util.EnumMap. Here is how the program looks when it is rewritten to use EnumMap:</p>
+<p>&#x6709;&#x4E00;&#x79CD;&#x66F4;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x540C;&#x6837;&#x7684;&#x6548;&#x679C;&#x3002;&#x8BE5;&#x6570;&#x7EC4;&#x6709;&#x6548;&#x5730;&#x5145;&#x5F53;&#x4ECE;&#x679A;&#x4E3E;&#x5230;&#x503C;&#x7684;&#x6620;&#x5C04;&#xFF0C;&#x56E0;&#x6B64;&#x4F60;&#x4E0D;&#x59A8;&#x4F7F;&#x7528; Map&#x3002;&#x66F4;&#x5177;&#x4F53;&#x5730;&#x8BF4;&#xFF0C;&#x6709;&#x4E00;&#x79CD;&#x975E;&#x5E38;&#x5FEB;&#x901F;&#x7684; Map &#x5B9E;&#x73B0;&#xFF0C;&#x7528;&#x4E8E;&#x679A;&#x4E3E;&#x952E;&#xFF0C;&#x79F0;&#x4E3A; <code>java.util.EnumMap</code>&#x3002;&#x4EE5;&#x4E0B;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x5728;&#x4F7F;&#x7528; EnumMap &#x65F6;&#x7684;&#x6837;&#x5B50;&#xFF1A;</p>
+<pre><code>// Using an EnumMap to associate data with an enum
+Map&lt;Plant.LifeCycle, Set&lt;Plant&gt;&gt; plantsByLifeCycle =new EnumMap&lt;&gt;(Plant.LifeCycle.class);
+
+for (Plant.LifeCycle lc : Plant.LifeCycle.values())
+    plantsByLifeCycle.put(lc, new HashSet&lt;&gt;());
+
+for (Plant p : garden)
+    plantsByLifeCycle.get(p.lifeCycle).add(p);
+
+System.out.println(plantsByLifeCycle);
+</code></pre><p>This program is shorter, clearer, safer, and comparable in speed to the original version. There is no unsafe cast; no need to label the output manually because the map keys are enums that know how to translate themselves to printable strings; and no possibility for error in computing array indices. The reason that EnumMap is comparable in speed to an ordinal-indexed array is that EnumMap uses such an array internally, but it hides this implementation detail from the programmer, combining the richness and type safety of a Map with the speed of an array. Note that the EnumMap constructor takes the Class object of the key type: this is a bounded type token, which provides runtime generic type information (Item 33).</p>
+<p>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x6BD4;&#x539F;&#x6765;&#x7684;&#x7248;&#x672C;&#x66F4;&#x77ED;&#xFF0C;&#x66F4;&#x6E05;&#x6670;&#xFF0C;&#x66F4;&#x5B89;&#x5168;&#xFF0C;&#x901F;&#x5EA6;&#x4E5F;&#x5DEE;&#x4E0D;&#x591A;&#x3002;&#x6CA1;&#x6709;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#x8F6C;&#x6362;&#xFF1B;&#x4E0D;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6807;&#x8BB0;&#x8F93;&#x51FA;&#xFF0C;&#x56E0;&#x4E3A; Map &#x7684;&#x952E;&#x662F;&#x80FD;&#x8F6C;&#x6362;&#x4E3A;&#x53EF;&#x6253;&#x5370;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x679A;&#x4E3E;&#xFF1B;&#x5728;&#x8BA1;&#x7B97;&#x6570;&#x7EC4;&#x7D22;&#x5F15;&#x65F6;&#x4E0D;&#x53EF;&#x80FD;&#x51FA;&#x9519;&#x3002;EnumMap &#x5728;&#x901F;&#x5EA6;&#x4E0A;&#x4E0E;&#x6709;&#x5E8F;&#x7D22;&#x5F15;&#x6570;&#x7EC4;&#x76F8;&#x5F53;&#x7684;&#x539F;&#x56E0;&#x662F;&#xFF0C;EnumMap &#x5728;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x8FD9;&#x6837;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x5411;&#x7A0B;&#x5E8F;&#x5458;&#x9690;&#x85CF;&#x4E86;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#xFF0C;&#x5C06; Map &#x7684;&#x4E30;&#x5BCC;&#x7684;&#x529F;&#x80FD;&#x548C;&#x7C7B;&#x578B;&#x5B89;&#x5168;&#x6027;&#x4E0E;&#x6570;&#x7EC4;&#x7684;&#x901F;&#x5EA6;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#x3002;&#x6CE8;&#x610F;&#xFF0C;EnumMap &#x6784;&#x9020;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x952E;&#x7C7B;&#x578B;&#x7684; Class &#x5BF9;&#x8C61;&#xFF1A;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x754C;&#x7C7B;&#x578B;&#x6807;&#x8BB0;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x8FD0;&#x884C;&#x65F6;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#xFF08;<a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">Item-33</a>&#xFF09;&#x3002;</p>
+<p>The previous program can be further shortened by using a stream (Item 45) to manage the map. Here is the simplest stream-based code that largely duplicates the behavior of the previous example:</p>
+<p>&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x6D41;&#xFF08;<a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">Item-45</a>&#xFF09;&#x6765;&#x7BA1;&#x7406;&#x6620;&#x5C04;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDB;&#x4E00;&#x6B65;&#x7F29;&#x77ED;&#x524D;&#x9762;&#x7684;&#x7A0B;&#x5E8F;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x57FA;&#x4E8E;&#x6D41;&#x7684;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5B83;&#x5728;&#x5F88;&#x5927;&#x7A0B;&#x5EA6;&#x4E0A;&#x590D;&#x5236;&#x4E86;&#x524D;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x7684;&#x884C;&#x4E3A;&#xFF1A;</p>
+<pre><code>// Naive stream-based approach - unlikely to produce an EnumMap!
+System.out.println(Arrays.stream(garden).collect(groupingBy(p -&gt; p.lifeCycle)));
+</code></pre><p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x9700;&#x8981;&#x5F15;&#x5165; <code>java.util.stream.Collectors.groupingBy</code>&#xFF0C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x5982;&#x4E0B;&#xFF1A;</strong></p>
+<pre><code>{BIENNIAL=[B, D], ANNUAL=[A], PERENNIAL=[C, E]}
+</code></pre><p>The problem with this code is that it chooses its own map implementation, and in practice it won&#x2019;t be an EnumMap, so it won&#x2019;t match the space and time performance of the version with the explicit EnumMap. To rectify this problem, use the three-parameter form of Collectors.groupingBy, which allows the caller to specify the map implementation using the mapFactory parameter:</p>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x7684;&#x95EE;&#x9898;&#x5728;&#x4E8E;&#x5B83;&#x9009;&#x62E9;&#x4E86;&#x81EA;&#x5DF1;&#x7684; Map &#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x5B83;&#x4E0D;&#x662F; EnumMap&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x7684;&#x7A7A;&#x95F4;&#x548C;&#x65F6;&#x95F4;&#x6027;&#x80FD;&#x4E0E;&#x663E;&#x5F0F; EnumMap &#x4E0D;&#x5339;&#x914D;&#x3002;&#x8981;&#x7EA0;&#x6B63;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>Collectors.groupingBy</code> &#x7684;&#x4E09;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x8C03;&#x7528;&#x8005;&#x4F7F;&#x7528; mapFactory &#x53C2;&#x6570;&#x6307;&#x5B9A; Map &#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code>// Using a stream and an EnumMap to associate data with an enum
+System.out.println(
+    Arrays.stream(garden).collect(groupingBy(p -&gt; p.lifeCycle,() -&gt; new EnumMap&lt;&gt;(LifeCycle.class), toSet()))
+);
+</code></pre><p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x9700;&#x8981;&#x5F15;&#x5165; <code>java.util.stream.Collectors.toSet</code></strong></p>
+<p>This optimization would not be worth doing in a toy program like this one but could be critical in a program that made heavy use of the map.</p>
+<p>&#x8FD9;&#x79CD;&#x4F18;&#x5316;&#x5728;&#x793A;&#x4F8B;&#x7A0B;&#x5E8F;&#x4E2D;&#x4E0D;&#x503C;&#x5F97;&#x53BB;&#x505A;&#xFF0C;&#x4F46;&#x5728;&#x5927;&#x91CF;&#x4F7F;&#x7528; Map &#x7684;&#x7A0B;&#x5E8F;&#x4E2D;&#x53EF;&#x80FD;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x3002;</p>
+<p>The behavior of the stream-based versions differs slightly from that of the EmumMap version. The EnumMap version always makes a nested map for each plant lifecycle, while the stream-based versions only make a nested map if the garden contains one or more plants with that lifecycle. So, for example, if the garden contains annuals and perennials but no biennials, the size of plantsByLifeCycle will be three in the EnumMap version and two in both of the stream-based versions.</p>
+<p>&#x57FA;&#x4E8E;&#x6D41;&#x7684;&#x7248;&#x672C;&#x7684;&#x884C;&#x4E3A;&#x4E0E; EmumMap &#x7248;&#x672C;&#x7565;&#x6709;&#x4E0D;&#x540C;&#x3002;EnumMap &#x7248;&#x672C;&#x603B;&#x662F;&#x4E3A;&#x6BCF;&#x4E2A;&#x690D;&#x7269;&#x751F;&#x547D;&#x5468;&#x671F;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x5D4C;&#x5957; Map&#xFF0C;&#x800C;&#x57FA;&#x4E8E;&#x6D41;&#x7684;&#x7248;&#x672C;&#x53EA;&#x5728;&#x82B1;&#x56ED;&#x5305;&#x542B;&#x5177;&#x6709;&#x8BE5;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x690D;&#x7269;&#x65F6;&#x624D;&#x751F;&#x6210;&#x5D4C;&#x5957; Map&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x82B1;&#x56ED;&#x5305;&#x542B;&#x4E00;&#x5E74;&#x751F;&#x548C;&#x591A;&#x5E74;&#x751F;&#x690D;&#x7269;&#xFF0C;&#x4F46;&#x6CA1;&#x6709;&#x4E24;&#x5E74;&#x751F;&#x690D;&#x7269;&#xFF0C;plantsByLifeCycle &#x7684;&#x5927;&#x5C0F;&#x5728; EnumMap &#x7248;&#x672C;&#x4E2D;&#x4E3A; 3&#xFF0C;&#x5728;&#x57FA;&#x4E8E;&#x6D41;&#x7684;&#x7248;&#x672C;&#x4E2D;&#x4E3A; 2&#x3002;</p>
+<p>You may see an array of arrays indexed (twice!) by ordinals used to represent a mapping from two enum values. For example, this program uses such an array to map two phases to a phase transition (liquid to solid is freezing, liquid to gas is boiling, and so forth):</p>
+<p>&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x770B;&#x5230;&#x88AB;&#x5E8F;&#x6570;&#x7D22;&#x5F15;&#xFF08;&#x4E24;&#x6B21;&#xFF01;&#xFF09;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5E8F;&#x6570;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x4E24;&#x4E2A;&#x679A;&#x4E3E;&#x503C;&#x7684;&#x6620;&#x5C04;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;&#x8FD9;&#x6837;&#x7684;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x6765;&#x6620;&#x5C04;&#x4E24;&#x4E2A;&#x72B6;&#x6001;&#x5230;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#xFF08;&#x6DB2;&#x4F53;&#x5230;&#x56FA;&#x4F53;&#x662F;&#x51BB;&#x7ED3;&#x7684;&#xFF0C;&#x6DB2;&#x4F53;&#x5230;&#x6C14;&#x4F53;&#x662F;&#x6CB8;&#x817E;&#x7684;&#xFF0C;&#x7B49;&#x7B49;&#xFF09;&#xFF1A;</p>
+<pre><code>// Using ordinal() to index array of arrays - DON&apos;T DO THIS!
+public enum Phase {
+    SOLID, LIQUID, GAS;
+
+    public enum Transition {
+        MELT, FREEZE, BOIL, CONDENSE, SUBLIME, DEPOSIT;
+
+        // Rows indexed by from-ordinal, cols by to-ordinal
+        private static final Transition[][] TRANSITIONS = {
+            { null, MELT, SUBLIME },
+            { FREEZE, null, BOIL },
+            { DEPOSIT, CONDENSE, null }
+        };
+
+        // Returns the phase transition from one phase to another
+        public static Transition from(Phase from, Phase to) {
+            return TRANSITIONS[from.ordinal()][to.ordinal()];
+        }
+    }
+}
+</code></pre><p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x56FA;&#x4F53;&#x3001;&#x6DB2;&#x4F53;&#x3001;&#x6C14;&#x4F53;&#x4E09;&#x6001;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;&#x4E09;&#x7EC4;&#x53D8;&#x5316;&#xFF1A;&#x878D;&#x5316; MELT&#xFF0C;&#x51BB;&#x7ED3; FREEZE&#xFF08;&#x56FA;&#x6001;&#x4E0E;&#x6DB2;&#x6001;&#xFF09;&#xFF1B;&#x6CB8;&#x817E; BOIL&#xFF0C;&#x51DD;&#x56FA; CONDENSE&#xFF08;&#x6DB2;&#x6001;&#x4E0E;&#x6C14;&#x6001;&#xFF09;&#xFF1B;&#x5347;&#x534E; SUBLIME&#xFF0C;&#x51DD;&#x534E; DEPOSIT&#xFF08;&#x56FA;&#x6001;&#x4E0E;&#x6C14;&#x6001;&#xFF09;&#x3002;</strong></p>
+<p>This program works and may even appear elegant, but appearances can be deceiving. Like the simpler garden example shown earlier, the compiler has no way of knowing the relationship between ordinals and array indices. If you make a mistake in the transition table or forget to update it when you modify the Phase or Phase.Transition enum type, your program will fail at runtime. The failure may be an ArrayIndexOutOfBoundsException, a NullPointerException, or (worse) silent erroneous behavior. And the size of the table is quadratic in the number of phases, even if the number of non-null entries is smaller.</p>
+<p>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x5DE5;&#x4F5C;&#xFF0C;&#x751A;&#x81F3;&#x53EF;&#x80FD;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x4F18;&#x96C5;&#xFF0C;&#x4F46;&#x5916;&#x8868;&#x53EF;&#x80FD;&#x5177;&#x6709;&#x6B3A;&#x9A97;&#x6027;&#x3002;&#x5C31;&#x50CF;&#x524D;&#x9762;&#x5C55;&#x793A;&#x7684;&#x66F4;&#x7B80;&#x5355;&#x7684; garden &#x793A;&#x4F8B;&#x4E00;&#x6837;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x65E0;&#x6CD5;&#x77E5;&#x9053;&#x5E8F;&#x6570;&#x548C;&#x6570;&#x7EC4;&#x7D22;&#x5F15;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;&#x8F6C;&#x6362;&#x8868;&#x4E2D;&#x51FA;&#x9519;&#xFF0C;&#x6216;&#x8005;&#x5728;&#x4FEE;&#x6539; Phase &#x6216; <code>Phase.Transition</code> &#x679A;&#x4E3E;&#x7C7B;&#x578B;&#x65F6;&#x5FD8;&#x8BB0;&#x66F4;&#x65B0;&#xFF0C;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x5C06;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x5931;&#x8D25;&#x3002;&#x5931;&#x8D25;&#x53EF;&#x80FD;&#x662F;&#x629B;&#x51FA; ArrayIndexOutOfBoundsException&#x3001;NullPointerException &#x6216;&#xFF08;&#x66F4;&#x7CDF;&#x7CD5;&#x7684;&#xFF09;&#x9759;&#x9ED8;&#x9519;&#x8BEF;&#x884C;&#x4E3A;&#x3002;&#x5E76;&#x4E14;&#x5373;&#x4F7F;&#x975E;&#x7A7A;&#x9879;&#x7684;&#x6570;&#x76EE;&#x66F4;&#x5C0F;&#xFF0C;&#x8BE5;&#x8868;&#x7684;&#x5927;&#x5C0F;&#x4E5F;&#x4E3A;&#x72B6;&#x6001;&#x6570;&#x91CF;&#x7684;&#x4E8C;&#x6B21;&#x65B9;&#x3002;</p>
+<p>Again, you can do much better with EnumMap. Because each phase transition is indexed by a pair of phase enums, you are best off representing the relationship as a map from one enum (the &#x201C;from&#x201D; phase) to a map from the second enum (the &#x201C;to&#x201D; phase) to the result (the phase transition). The two phases associated with a phase transition are best captured by associating them with the phase transition enum, which can then be used to initialize the nested EnumMap:</p>
+<p>&#x540C;&#x6837;&#xFF0C;&#x4F7F;&#x7528; EnumMap &#x53EF;&#x4EE5;&#x505A;&#x5F97;&#x66F4;&#x597D;&#x3002;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A;&#x9636;&#x6BB5;&#x8F6C;&#x6362;&#x90FD;&#x7531;&#x4E00;&#x5BF9;&#x9636;&#x6BB5;&#x679A;&#x4E3E;&#x7D22;&#x5F15;&#xFF0C;&#x6240;&#x4EE5;&#x6700;&#x597D;&#x5C06;&#x8FD9;&#x4E2A;&#x5173;&#x7CFB;&#x7528; Map &#x8868;&#x793A;&#xFF0C;&#x4ECE;&#x4E00;&#x4E2A;&#x679A;&#x4E3E;&#xFF08;&#x8D77;&#x59CB;&#x9636;&#x6BB5;&#xFF09;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A;&#x679A;&#x4E3E;&#xFF08;&#x7ED3;&#x675F;&#x9636;&#x6BB5;&#xFF09;&#x5230;&#x7ED3;&#x679C;&#xFF08;&#x8F6C;&#x6362;&#x9636;&#x6BB5;&#xFF09;&#x3002;&#x4E0E;&#x9636;&#x6BB5;&#x8F6C;&#x6362;&#x76F8;&#x5173;&#x8054;&#x7684;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#x6700;&#x5BB9;&#x6613;&#x6355;&#x6349;&#x5230;&#x7684;&#x662F;&#x5C06;&#x5B83;&#x4EEC;&#x4E0E;&#x9636;&#x6BB5;&#x8FC7;&#x6E21;&#x7684; enum &#x8054;&#x7CFB;&#x8D77;&#x6765;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x521D;&#x59CB;&#x5316;&#x5D4C;&#x5957;&#x7684; EnumMap&#xFF1A;</p>
+<pre><code>// Using a nested EnumMap to associate data with enum pairs
+public enum Phase {
+    SOLID, LIQUID, GAS;
+
+    public enum Transition {
+        MELT(SOLID, LIQUID), FREEZE(LIQUID, SOLID),
+        BOIL(LIQUID, GAS), CONDENSE(GAS, LIQUID),
+        SUBLIME(SOLID, GAS), DEPOSIT(GAS, SOLID);
+        private final Phase from;
+        private final Phase to;
+
+        Transition(Phase from, Phase to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        // Initialize the phase transition map
+        private static final Map&lt;Phase_new, Map&lt;Phase_new, Transition&gt;&gt; m = Stream.of(values())
+                .collect(groupingBy(
+                        t -&gt; t.from,
+                        () -&gt; new EnumMap&lt;&gt;(Phase_new.class),
+                        toMap(t -&gt; t.to, t -&gt; t, (x, y) -&gt; y, () -&gt; new EnumMap&lt;&gt;(Phase_new.class))
+                        )
+                );
+
+        public static Transition from(Phase from, Phase to) {
+            return m.get(from).get(to);
+        }
+    }
+}
+</code></pre><p>The code to initialize the phase transition map is a bit complicated. The type of the map is <code>Map&lt;Phase, Map&lt;Phase, Transition&gt;&gt;</code>, which means &#x201C;map from (source) phase to map from (destination) phase to transition.&#x201D; This map-of-maps is initialized using a cascaded sequence of two collectors. The first collector groups the transitions by source phase, and the second creates an EnumMap with mappings from destination phase to transition. The merge function in the second collector ((x, y) -&gt; y)) is unused; it is required only because we need to specify a map factory in order to get an EnumMap, and Collectors provides telescoping factories. The previous edition of this book used explicit iteration to initialize the phase transition map. The code was more verbose but arguably easier to understand.</p>
+<p>&#x521D;&#x59CB;&#x5316;&#x9636;&#x6BB5;&#x53D8;&#x5316; Map &#x7684;&#x4EE3;&#x7801;&#x6709;&#x70B9;&#x590D;&#x6742;&#x3002;Map &#x7684;&#x7C7B;&#x578B;&#x662F; <code>Map&lt;Phase, Map&lt;Phase, Transition&gt;&gt;</code>&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x300C;&#x4ECE;&#xFF08;&#x6E90;&#xFF09;&#x9636;&#x6BB5; Map &#x5230;&#xFF08;&#x76EE;&#x6807;&#xFF09;&#x9636;&#x6BB5; Map &#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#x300D;&#x3002;&#x8FD9;&#x4E2A; Map &#x5D4C;&#x5957;&#x662F;&#x4F7F;&#x7528;&#x4E24;&#x4E2A;&#x6536;&#x96C6;&#x5668;&#x7684;&#x7EA7;&#x8054;&#x5E8F;&#x5217;&#x521D;&#x59CB;&#x5316;&#x7684;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x6536;&#x96C6;&#x5668;&#x6309;&#x6E90;&#x9636;&#x6BB5;&#x5BF9;&#x8F6C;&#x6362;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x6536;&#x96C6;&#x5668;&#x4F7F;&#x7528;&#x4ECE;&#x76EE;&#x6807;&#x9636;&#x6BB5;&#x5230;&#x8F6C;&#x6362;&#x7684;&#x6620;&#x5C04;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; EnumMap&#x3002;&#x7B2C;&#x4E8C;&#x4E2A;&#x6536;&#x96C6;&#x5668; ((x, y) -&gt; y) &#x4E2D;&#x7684; merge &#x51FD;&#x6570;&#x672A;&#x4F7F;&#x7528;&#xFF1B;&#x4E4B;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5B83;&#xFF0C;&#x53EA;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x4E00;&#x4E2A; Map &#x5DE5;&#x5382;&#x6765;&#x83B7;&#x5F97; EnumMap&#xFF0C;&#x800C; Collector &#x63D0;&#x4F9B;&#x4E86;&#x4F38;&#x7F29;&#x5DE5;&#x5382;&#x3002;&#x672C;&#x4E66;&#x7684;&#x4E0A;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x4F7F;&#x7528;&#x663E;&#x5F0F;&#x8FED;&#x4EE3;&#x6765;&#x521D;&#x59CB;&#x5316;&#x9636;&#x6BB5;&#x8F6C;&#x6362;&#x6620;&#x5C04;&#x3002;&#x4EE3;&#x7801;&#x66F4;&#x5197;&#x957F;&#xFF0C;&#x4F46;&#x4E5F;&#x66F4;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#x3002;</p>
+<p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x7B2C;&#x4E8C;&#x7248;&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</strong></p>
+<pre><code>// Initialize the phase transition map
+private static final Map&lt;Phase, Map&lt;Phase,Transition&gt; m =
+    new EnumMap&lt;Phase, Map&lt;Phase ,Transition&gt;&gt;(Phase.class);
+
+    static{
+        for (Phase p : Phase. values())
+            m.put(p,new EnumMap&lt;Phase,Transition (Phase.class));
+        for (Transition trans : Transition.values() )
+            m.get(trans. src).put(trans.dst, trans) ;
+    }
+
+public static Transition from(Phase src, Phase dst) {
+    return m.get(src).get(dst);
+}
+</code></pre><p>Now suppose you want to add a new phase to the system: plasma, or ionized gas. There are only two transitions associated with this phase: ionization, which takes a gas to a plasma; and deionization, which takes a plasma to a gas. To update the array-based program, you would have to add one new constant to Phase and two to Phase.Transition, and replace the original nine-element array of arrays with a new sixteen-element version. If you add too many or too few elements to the array or place an element out of order, you are out of luck: the program will compile, but it will fail at runtime. To update the EnumMap-based version, all you have to do is add PLASMA to the list of phases, and IONIZE(GAS, PLASMA) and DEIONIZE(PLASMA, GAS) to the list of phase transitions:</p>
+<p>&#x73B0;&#x5728;&#x5047;&#x8BBE;&#x4F60;&#x60F3;&#x5411;&#x7CFB;&#x7EDF;&#x4E2D;&#x52A0;&#x5165;&#x4E00;&#x79CD;&#x65B0;&#x9636;&#x6BB5;&#xFF1A;&#x7B49;&#x79BB;&#x5B50;&#x4F53;&#xFF0C;&#x6216;&#x7535;&#x79BB;&#x6C14;&#x4F53;&#x3002;&#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#x53EA;&#x6709;&#x4E24;&#x4E2A;&#x53D8;&#x5316;&#xFF1A;&#x7535;&#x79BB;&#xFF0C;&#x5B83;&#x628A;&#x6C14;&#x4F53;&#x8F6C;&#x4E3A;&#x7B49;&#x79BB;&#x5B50;&#x4F53;&#xFF1B;&#x53BB;&#x79BB;&#x5B50;&#x4F5C;&#x7528;&#xFF0C;&#x628A;&#x7B49;&#x79BB;&#x5B50;&#x4F53;&#x53D8;&#x6210;&#x6C14;&#x4F53;&#x3002;&#x5047;&#x8BBE;&#x8981;&#x66F4;&#x65B0;&#x57FA;&#x4E8E;&#x6570;&#x7EC4;&#x7248;&#x672C;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x5FC5;&#x987B;&#x5411; Phase &#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x65B0;&#x5E38;&#x91CF;&#xFF0C;&#x5411; <code>Phase.Transition</code> &#x6DFB;&#x52A0;&#x4E24;&#x4E2A;&#x65B0;&#x5E38;&#x91CF;&#xFF0C;&#x5E76;&#x7528;&#x4E00;&#x4E2A;&#x65B0;&#x7684; 16 &#x4E2A;&#x5143;&#x7D20;&#x7248;&#x672C;&#x66FF;&#x6362;&#x539F;&#x6765;&#x7684;&#x6570;&#x7EC4;&#x4E2D;&#x7684; 9 &#x4E2A;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5411;&#x6570;&#x7EC4;&#x4E2D;&#x6DFB;&#x52A0;&#x4E86;&#x592A;&#x591A;&#x6216;&#x592A;&#x5C11;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x6216;&#x8005;&#x6253;&#x4E71;&#x4E86;&#x5143;&#x7D20;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x5C31;&#x9EBB;&#x70E6;&#x4E86;&#xFF1A;&#x7A0B;&#x5E8F;&#x5C06;&#x7F16;&#x8BD1;&#xFF0C;&#x4F46;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x5C06;&#x5931;&#x8D25;&#x3002;&#x76F8;&#x6BD4;&#x4E4B;&#x4E0B;&#xFF0C;&#x8981;&#x66F4;&#x65B0;&#x57FA;&#x4E8E; EnumMap &#x7684;&#x7248;&#x672C;&#xFF0C;&#x53EA;&#x9700;&#x5C06; PLASMA &#x6DFB;&#x52A0;&#x5230; Phase &#x5217;&#x8868;&#x4E2D;&#xFF0C;&#x5C06; <code>IONIZE(GAS, PLASMA)</code> &#x548C; <code>DEIONIZE(PLASMA, GAS)</code> &#x6DFB;&#x52A0;&#x5230; <code>Phase.Transition</code> &#x4E2D;&#xFF1A;</p>
+<pre><code>// Adding a new phase using the nested EnumMap implementation
+public enum Phase {
+    SOLID, LIQUID, GAS, PLASMA;
+    public enum Transition {
+        MELT(SOLID, LIQUID), FREEZE(LIQUID, SOLID),
+        BOIL(LIQUID, GAS), CONDENSE(GAS, LIQUID),
+        SUBLIME(SOLID, GAS), DEPOSIT(GAS, SOLID),
+        IONIZE(GAS, PLASMA), DEIONIZE(PLASMA, GAS);
+        ... // Remainder unchanged
+    }
+}
+</code></pre><p>The program takes care of everything else and leaves you virtually no opportunity for error. Internally, the map of maps is implemented with an array of arrays, so you pay little in space or time cost for the added clarity, safety, and ease of maintenance.</p>
+<p>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x4F1A;&#x5904;&#x7406;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x4E8B;&#x60C5;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x4E0D;&#x4F1A;&#x7ED9;&#x4F60;&#x7559;&#x4E0B;&#x4EFB;&#x4F55;&#x51FA;&#x9519;&#x7684;&#x673A;&#x4F1A;&#x3002;&#x5728;&#x5185;&#x90E8;&#xFF0C;Map &#x7684;&#x6620;&#x5C04;&#x662F;&#x7528;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x4F60;&#x53EA;&#x9700;&#x82B1;&#x8D39;&#x5F88;&#x5C11;&#x7684;&#x7A7A;&#x95F4;&#x6216;&#x65F6;&#x95F4;&#x6210;&#x672C;&#x5C31;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x66F4;&#x597D;&#x7684;&#x6E05;&#x6670;&#x5EA6;&#x3001;&#x5B89;&#x5168;&#x6027;&#x5E76;&#x6613;&#x4E8E;&#x7EF4;&#x62A4;&#x3002;</p>
+<p>In the interest of brevity, the above examples use null to indicate the absence of a state change (wherein to and from are identical). This is not good practice and is likely to result in a NullPointerException at runtime. Designing a clean, elegant solution to this problem is surprisingly tricky, and the resulting programs are sufficiently long that they would detract from the primary material in this item.</p>
+<p>&#x4E3A;&#x4E86;&#x7B80;&#x6D01;&#x8D77;&#x89C1;&#xFF0C;&#x6700;&#x521D;&#x7684;&#x793A;&#x4F8B;&#x4F7F;&#x7528; null &#x8868;&#x793A;&#x6CA1;&#x6709;&#x72B6;&#x6001;&#x66F4;&#x6539;&#xFF08;&#x5176;&#x4E2D; to &#x548C; from &#x662F;&#x76F8;&#x540C;&#x7684;&#xFF09;&#x3002;&#x8FD9;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x5BFC;&#x81F4; NullPointerException&#x3002;&#x9488;&#x5BF9;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x5E72;&#x51C0;&#x3001;&#x4F18;&#x96C5;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x975E;&#x5E38;&#x68D8;&#x624B;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x751F;&#x6210;&#x7684;&#x7A0B;&#x5E8F;&#x5197;&#x957F;&#xFF0C;&#x4EE5;&#x81F3;&#x4E8E;&#x5B83;&#x4EEC;&#x4F1A;&#x504F;&#x79BB;&#x6761;&#x76EE;&#x4E2D;&#x7684;&#x4E3B;&#x8981;&#x5185;&#x5BB9;&#x3002;</p>
+<p>In summary, <strong>it is rarely appropriate to use ordinals to index into arrays: use EnumMap instead.</strong> If the relationship you are representing is multidimensional, use <code>EnumMap&lt;..., EnumMap&lt;...&gt;&gt;</code>. This is a special case of the general principle that application programmers should rarely, if ever, use Enum.ordinal (Item 35).</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;<strong>&#x7528;&#x666E;&#x901A;&#x7684;&#x5E8F;&#x6570;&#x7D22;&#x5F15;&#x6570;&#x7EC4;&#x662F;&#x975E;&#x5E38;&#x4E0D;&#x5408;&#x9002;&#x7684;&#xFF1A;&#x5E94;&#x4F7F;&#x7528; EnumMap &#x4EE3;&#x66FF;&#x3002;</strong> &#x5982;&#x679C;&#x6240;&#x8868;&#x793A;&#x7684;&#x5173;&#x7CFB;&#x662F;&#x591A;&#x7EF4;&#x7684;&#xFF0C;&#x5219;&#x4F7F;&#x7528; <code>EnumMap&lt;..., EnumMap&lt;...&gt;&gt;</code>&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x57FA;&#x672C;&#x539F;&#x5219;&#xFF0C;&#x7A0B;&#x5E8F;&#x5458;&#x5F88;&#x5C11;&#xFF08;&#x5373;&#x4F7F;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x4F7F;&#x7528; <code>Enum.ordinal</code> &#xFF08;<a href="Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">Item-35</a>&#xFF09;&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-6-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Previous Item&#xFF08;&#x4E0A;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">Item 36: Use EnumSet instead of bit fields&#xFF08;&#x7528; EnumSet &#x66FF;&#x4EE3;&#x4F4D;&#x5B57;&#x6BB5;&#xFF09;</a></strong></li>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">Item 38: Emulate extensible enums with interfaces&#xFF08;&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x6A21;&#x62DF;&#x53EF;&#x6269;&#x5C55;&#x679A;&#x4E3E;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html" class="navigation navigation-prev " aria-label="Previous page: Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html" class="navigation navigation-next " aria-label="Next page: Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）","level":"1.6.5","depth":2,"next":{"title":"Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）","level":"1.6.6","depth":2,"path":"Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.md","ref":"Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.md","articles":[]},"previous":{"title":"Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）","level":"1.6.4","depth":2,"path":"Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.md","ref":"Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.md","mtime":"2021-12-19T09:10:38.058Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

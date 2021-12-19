@@ -1,0 +1,1847 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html" />
+    
+    
+    <link rel="prev" href="Chapter-2-Item-7-Eliminate-obsolete-object-references.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Chapter-2-Introduction.html">
+            
+                <a href="Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="Chapter-2-Introduction.html">
+            
+                <a href="Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.9" data-path="Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-2-creating-and-destroying-objects&#xFF08;&#x521B;&#x5EFA;&#x548C;&#x9500;&#x6BC1;&#x5BF9;&#x8C61;&#xFF09;">Chapter 2. Creating and Destroying Objects&#xFF08;&#x521B;&#x5EFA;&#x548C;&#x9500;&#x6BC1;&#x5BF9;&#x8C61;&#xFF09;</h2>
+<h3 id="item-8-avoid-finalizers-and-cleaners&#xFF08;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#x548C;&#x6E05;&#x9664;&#x5668;&#xFF09;">Item 8: Avoid finalizers and cleaners&#xFF08;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#x548C;&#x6E05;&#x9664;&#x5668;&#xFF09;</h3>
+<p><strong>Finalizers are unpredictable, often dangerous, and generally unnecessary.</strong> Their use can cause erratic behavior, poor performance, and portability problems. Finalizers have a few valid uses, which we&#x2019;ll cover later in this item, but as a rule, you should avoid them. As of Java 9, finalizers have been deprecated, but they are still being used by the Java libraries. The Java 9 replacement for finalizers is cleaners. <strong>Cleaners are less dangerous than finalizers, but still unpredictable, slow, and generally unnecessary.</strong></p>
+<p><strong>&#x7EC8;&#x7ED3;&#x5668;&#x662F;&#x4E0D;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#xFF0C;&#x901A;&#x5E38;&#x662F;&#x5371;&#x9669;&#x7684;&#xFF0C;&#x4E5F;&#x662F;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x3002;</strong> &#x5B83;&#x4EEC;&#x7684;&#x4F7F;&#x7528;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x4E0D;&#x7A33;&#x5B9A;&#x7684;&#x884C;&#x4E3A;&#x3001;&#x7CDF;&#x7CD5;&#x7684;&#x6027;&#x80FD;&#x548C;&#x53EF;&#x79FB;&#x690D;&#x6027;&#x95EE;&#x9898;&#x3002;&#x7EC8;&#x7ED3;&#x5668;&#x6709;&#x4E00;&#x4E9B;&#x6709;&#x6548;&#x7684;&#x7528;&#x9014;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x540E;&#x9762;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x4ECB;&#x7ECD;&#xFF0C;&#x4F46;&#x662F;&#x4F5C;&#x4E3A;&#x89C4;&#x5219;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;&#x5728; Java 9 &#x4E2D;&#xFF0C;&#x7EC8;&#x7ED3;&#x5668;&#x5DF2;&#x7ECF;&#x88AB;&#x5F03;&#x7528;&#xFF0C;&#x4F46;&#x662F; Java &#x5E93;&#x4ECD;&#x7136;&#x5728;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;Java 9 &#x66FF;&#x4EE3;&#x7EC8;&#x7ED3;&#x5668;&#x7684;&#x662F;&#x6E05;&#x9664;&#x5668;&#x3002;<strong>&#x6E05;&#x9664;&#x5668;&#x7684;&#x5371;&#x9669;&#x6BD4;&#x7EC8;&#x7ED3;&#x5668;&#x5C0F;&#xFF0C;&#x4F46;&#x4ECD;&#x7136;&#x4E0D;&#x53EF;&#x9884;&#x6D4B;&#x3001;&#x7F13;&#x6162;&#xFF0C;&#x800C;&#x4E14;&#x901A;&#x5E38;&#x662F;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x3002;</strong></p>
+<p>C++ programmers are cautioned not to think of finalizers or cleaners as Java&#x2019;s analogue of C++ destructors. In C++, destructors are the normal way to reclaim the resources associated with an object, a necessary counterpart to constructors.In Java, the garbage collector reclaims the storage associated with an object when it becomes unreachable, requiring no special effort on the part of the programmer. C++ destructors are also used to reclaim other nonmemory resources. In Java, a try-with-resources or try-finally block is used for this purpose (Item 9).</p>
+<p>c++ &#x7A0B;&#x5E8F;&#x5458;&#x88AB;&#x544A;&#x8BEB;&#x4E0D;&#x8981;&#x628A;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x5F53;&#x6210; Java &#x7684; c++ &#x6790;&#x6784;&#x51FD;&#x6570;&#x3002;&#x5728; c++ &#x4E2D;&#xFF0C;&#x6790;&#x6784;&#x51FD;&#x6570;&#x662F;&#x56DE;&#x6536;&#x4E0E;&#x5BF9;&#x8C61;&#x76F8;&#x5173;&#x8054;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#xFF0C;&#x5BF9;&#x8C61;&#x662F;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x5FC5;&#x8981;&#x5BF9;&#x7B49;&#x7269;&#x3002;&#x5728; Java &#x4E2D;&#xFF0C;&#x5F53;&#x5BF9;&#x8C61;&#x53D8;&#x5F97;&#x4E0D;&#x53EF;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x5C06;&#x56DE;&#x6536;&#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x7684;&#x5B58;&#x50A8;&#xFF0C;&#x65E0;&#x9700;&#x7A0B;&#x5E8F;&#x5458;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x7279;&#x6B8A;&#x5DE5;&#x4F5C;&#x3002;c++ &#x6790;&#x6784;&#x51FD;&#x6570;&#x8FD8;&#x7528;&#x4E8E;&#x56DE;&#x6536;&#x5176;&#x4ED6;&#x975E;&#x5185;&#x5B58;&#x8D44;&#x6E90;&#x3002;&#x5728; Java &#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x8D44;&#x6E90;&#x7684; try-with-resources &#x6216; try-finally &#x5757;&#x7528;&#x4E8E;&#x6B64;&#x76EE;&#x7684;&#xFF08;<a href="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">Item-9</a>&#xFF09;&#x3002;</p>
+<p>One shortcoming of finalizers and cleaners is that there is no guarantee they&#x2019;ll be executed promptly [JLS, 12.6]. It can take arbitrarily long between the time that an object becomes unreachable and the time its finalizer or cleaner runs.This means that you should never do anything time-critical in a finalizer or cleaner. For example, it is a grave error to depend on a finalizer or cleaner to close files because open file descriptors are a limited resource. If many files are left open as a result of the system&#x2019;s tardiness in running finalizers or cleaners, a program may fail because it can no longer open files.</p>
+<p>&#x7EC8;&#x7ED3;&#x5668;&#x548C;&#x6E05;&#x9664;&#x5668;&#x7684;&#x4E00;&#x4E2A;&#x7F3A;&#x70B9;&#x662F;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x5B83;&#x4EEC;&#x4F1A;&#x88AB;&#x7ACB;&#x5373;&#x6267;&#x884C; [JLS, 12.6]&#x3002;&#x5F53;&#x5BF9;&#x8C61;&#x53D8;&#x5F97;&#x4E0D;&#x53EF;&#x8BBF;&#x95EE;&#xFF0C;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x5BF9;&#x5B83;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6C38;&#x8FDC;&#x4E0D;&#x5E94;&#x8BE5;&#x5728;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x4E2D;&#x6267;&#x884C;&#x4EFB;&#x4F55;&#x5BF9;&#x65F6;&#x95F4;&#x8981;&#x6C42;&#x5F88;&#x4E25;&#x683C;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4F9D;&#x8D56;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x5173;&#x95ED;&#x6587;&#x4EF6;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x4E25;&#x91CD;&#x9519;&#x8BEF;&#xFF0C;&#x56E0;&#x4E3A;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x662F;&#x6709;&#x9650;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x5982;&#x679C;&#x7531;&#x4E8E;&#x7CFB;&#x7EDF;&#x5728;&#x8FD0;&#x884C;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x7684;&#x5EF6;&#x8FDF;&#x5BFC;&#x81F4;&#x8BB8;&#x591A;&#x6587;&#x4EF6;&#x5904;&#x4E8E;&#x6253;&#x5F00;&#x72B6;&#x6001;&#xFF0C;&#x7A0B;&#x5E8F;&#x53EF;&#x80FD;&#x4F1A;&#x8FD0;&#x884C;&#x5931;&#x8D25;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4E0D;&#x80FD;&#x518D;&#x6253;&#x5F00;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x3002;</p>
+<p>The promptness with which finalizers and cleaners are executed is primarily a function of the garbage collection algorithm, which varies widely across implementations. The behavior of a program that depends on the promptness of finalizer or cleaner execution may likewise vary. It is entirely possible that such a program will run perfectly on the JVM on which you test it and then fail miserably on the one favored by your most important customer.</p>
+<p>&#x7EC8;&#x7ED3;&#x5668;&#x548C;&#x6E05;&#x9664;&#x5668;&#x6267;&#x884C;&#x7684;&#x5FEB;&#x901F;&#x6027;&#x4E3B;&#x8981;&#x662F;&#x5783;&#x573E;&#x6536;&#x96C6;&#x7B97;&#x6CD5;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#x5B58;&#x5728;&#x5F88;&#x5927;&#x5DEE;&#x5F02;&#x3002;&#x4F9D;&#x8D56;&#x4E8E;&#x7EC8;&#x7ED3;&#x5668;&#x7684;&#x53CA;&#x65F6;&#x6027;&#x6216;&#x66F4;&#x6E05;&#x6670;&#x7684;&#x6267;&#x884C;&#x7684;&#x7A0B;&#x5E8F;&#x7684;&#x884C;&#x4E3A;&#x53EF;&#x80FD;&#x4E5F;&#x4F1A;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x7A0B;&#x5E8F;&#x5B8C;&#x5168;&#x6709;&#x53EF;&#x80FD;&#x5728;&#x6D4B;&#x8BD5;&#x5B83;&#x7684; JVM &#x4E0A;&#x5B8C;&#x7F8E;&#x5730;&#x8FD0;&#x884C;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x6700;&#x91CD;&#x8981;&#x7684;&#x5BA2;&#x6237;&#x559C;&#x6B22;&#x7684; JVM &#x4E0A;&#x60B2;&#x60E8;&#x5730;&#x5931;&#x8D25;&#x3002;</p>
+<p>Tardy finalization is not just a theoretical problem. Providing a finalizer for a class can arbitrarily delay reclamation of its instances. A colleague debugged a long-running GUI application that was mysteriously dying with an OutOfMemoryError. Analysis revealed that at the time of its death, the application had thousands of graphics objects on its finalizer queue just waiting to be finalized and reclaimed. Unfortunately, the finalizer thread was running at a lower priority than another application thread, so objects weren&#x2019;t getting finalized at the rate they became eligible for finalization. The language specification makes no guarantees as to which thread will execute finalizers, so there is no portable way to prevent this sort of problem other than to refrain from using finalizers. Cleaners are a bit better than finalizers in this regard because class authors have control over their own cleaner threads, but cleaners still run in the background, under the control of the garbage collector, so there can be no guarantee of prompt cleaning.</p>
+<p>&#x59D7;&#x59D7;&#x6765;&#x8FDF;&#x7684;&#x5B9A;&#x7A3F;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E2A;&#x7406;&#x8BBA;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4E3A;&#x7C7B;&#x63D0;&#x4F9B;&#x7EC8;&#x7ED3;&#x5668;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x5EF6;&#x8FDF;&#x5176;&#x5B9E;&#x4F8B;&#x7684;&#x56DE;&#x6536;&#x3002;&#x4E00;&#x4F4D;&#x540C;&#x4E8B;&#x8C03;&#x8BD5;&#x4E86;&#x4E00;&#x4E2A;&#x957F;&#x671F;&#x8FD0;&#x884C;&#x7684; GUI &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x8BE5;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x795E;&#x79D8;&#x5730;&#x7EC8;&#x7ED3;&#x4E8E; OutOfMemoryError &#x9519;&#x8BEF;&#x3002;&#x5206;&#x6790;&#x663E;&#x793A;&#xFF0C;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7EC8;&#x7ED3;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7EC8;&#x7ED3;&#x5668;&#x961F;&#x5217;&#x4E0A;&#x6709;&#x6570;&#x5343;&#x4E2A;&#x56FE;&#x5F62;&#x5BF9;&#x8C61;&#x7B49;&#x5F85;&#x6700;&#x7EC8;&#x5B8C;&#x6210;&#x548C;&#x56DE;&#x6536;&#x3002;&#x4E0D;&#x5E78;&#x7684;&#x662F;&#xFF0C;&#x7EC8;&#x7ED3;&#x5668;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x4F4E;&#x4E8E;&#x53E6;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7EBF;&#x7A0B;&#xFF0C;&#x56E0;&#x6B64;&#x5BF9;&#x8C61;&#x4E0D;&#x80FD;&#x4EE5;&#x9002;&#x5408;&#x7EC8;&#x7ED3;&#x5668;&#x7684;&#x901F;&#x5EA6;&#x5B8C;&#x6210;&#x3002;&#x8BED;&#x8A00;&#x89C4;&#x8303;&#x6CA1;&#x6709;&#x4FDD;&#x8BC1;&#x54EA;&#x4E2A;&#x7EBF;&#x7A0B;&#x5C06;&#x6267;&#x884C;&#x7EC8;&#x7ED3;&#x5668;&#xFF0C;&#x56E0;&#x6B64;&#x9664;&#x4E86;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#x4E4B;&#x5916;&#xFF0C;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x53EF;&#x79FB;&#x690D;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x9632;&#x6B62;&#x8FD9;&#x7C7B;&#x95EE;&#x9898;&#x3002;&#x5728;&#x8FD9;&#x65B9;&#x9762;&#xFF0C;&#x6E05;&#x6D01;&#x5668;&#x6BD4;&#x7EC8;&#x7ED3;&#x5668;&#x8981;&#x597D;&#x4E00;&#x4E9B;&#xFF0C;&#x56E0;&#x4E3A;&#x7C7B;&#x4F5C;&#x8005;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x63A7;&#x5236;&#x662F;&#x5426;&#x6E05;&#x7406;&#x7EBF;&#x7A0B;&#xFF0C;&#x4F46;&#x662F;&#x6E05;&#x6D01;&#x5668;&#x4ECD;&#x7136;&#x5728;&#x540E;&#x53F0;&#x8FD0;&#x884C;&#xFF0C;&#x5728;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x7684;&#x63A7;&#x5236;&#x4E0B;&#x8FD0;&#x884C;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x53CA;&#x65F6;&#x6E05;&#x7406;&#x3002;</p>
+<p>Not only does the specification provide no guarantee that finalizers or cleaners will run promptly; it provides no guarantee that they&#x2019;ll run at all. It is entirely possible, even likely, that a program terminates without running them on some objects that are no longer reachable. As a consequence, you should never depend on a finalizer or cleaner to update persistent state. For example,depending on a finalizer or cleaner to release a persistent lock on a shared resource such as a database is a good way to bring your entire distributed system to a grinding halt.</p>
+<p>&#x8BE5;&#x89C4;&#x8303;&#x4E0D;&#x4EC5;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x6D01;&#x5242;&#x80FD;&#x53CA;&#x65F6;&#x8FD0;&#x884C;&#xFF1B;&#x5B83;&#x5E76;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x5B83;&#x4EEC;&#x80FD;&#x8FD0;&#x884C;&#x3002;&#x5B8C;&#x5168;&#x6709;&#x53EF;&#x80FD;&#xFF0C;&#x751A;&#x81F3;&#x5F88;&#x6709;&#x53EF;&#x80FD;&#xFF0C;&#x7A0B;&#x5E8F;&#x5728;&#x67D0;&#x4E9B;&#x4E0D;&#x518D;&#x53EF;&#x8BBF;&#x95EE;&#x7684;&#x5BF9;&#x8C61;&#x4E0A;&#x8FD0;&#x884C;&#x800C;&#x7EC8;&#x6B62;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x6C38;&#x8FDC;&#x4E0D;&#x5E94;&#x8BE5;&#x4F9D;&#x8D56;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x6765;&#x66F4;&#x65B0;&#x6301;&#x4E45;&#x72B6;&#x6001;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4F9D;&#x8D56;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x6765;&#x91CA;&#x653E;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#xFF08;&#x5982;&#x6570;&#x636E;&#x5E93;&#xFF09;&#x4E0A;&#x7684;&#x6301;&#x4E45;&#x9501;&#xFF0C;&#x662F;&#x8BA9;&#x6574;&#x4E2A;&#x5206;&#x5E03;&#x5F0F;&#x7CFB;&#x7EDF;&#x505C;&#x6B62;&#x5DE5;&#x4F5C;&#x7684;&#x597D;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>Don&#x2019;t be seduced by the methods System.gc and System.runFinalization. They may increase the odds of finalizers or cleaners getting executed, but they don&#x2019;t guarantee it. Two methods once claimed to make this guarantee: System.runFinalizersOnExit and its evil twin, Runtime.runFinalizersOnExit. These methods are fatally flawed and have been deprecated for decades [ThreadStop].</p>
+<p>&#x4E0D;&#x8981;&#x88AB; System.gc &#x548C; System.runFinalization &#x7684;&#x65B9;&#x6CD5;&#x6240;&#x8BF1;&#x60D1;&#x3002;&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x4F1A;&#x589E;&#x52A0;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x88AB;&#x8FD0;&#x884C;&#x7684;&#x51E0;&#x7387;&#xFF0C;&#x4F46;&#x5B83;&#x4EEC;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x4E00;&#x5B9A;&#x8FD0;&#x884C;&#x3002;&#x66FE;&#x7ECF;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x58F0;&#x79F0;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x8FD9;&#x4E00;&#x70B9;&#xFF1A;System.runFinalizersOnExit &#x548C;&#x5B83;&#x7684;&#x5B6A;&#x751F;&#x5144;&#x5F1F; Runtime.runFinalizersOnExit&#x3002;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x5B58;&#x5728;&#x81F4;&#x547D;&#x7684;&#x7F3A;&#x9677;&#xFF0C;&#x5E76;&#x4E14;&#x5DF2;&#x7ECF;&#x88AB;&#x5E9F;&#x5F03;&#x4E86;&#x51E0;&#x5341;&#x5E74;[ThreadStop]&#x3002;</p>
+<p>Another problem with finalizers is that an uncaught exception thrown during finalization is ignored, and finalization of that object terminates [JLS, 12.6].Uncaught exceptions can leave other objects in a corrupt state. If another thread attempts to use such a corrupted object, arbitrary nondeterministic behavior may result. Normally, an uncaught exception will terminate the thread and print a stack trace, but not if it occurs in a finalizer&#x2014;it won&#x2019;t even print a warning.Cleaners do not have this problem because a library using a cleaner has control over its thread.</p>
+<p>&#x7EC8;&#x7ED3;&#x5668;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x5728;&#x7EC8;&#x7ED3;&#x671F;&#x95F4;&#x629B;&#x51FA;&#x7684;&#x672A;&#x6355;&#x83B7;&#x5F02;&#x5E38;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x7EC8;&#x7ED3;&#x7EC8;&#x6B62; [JLS, 12.6]&#x3002;&#x672A;&#x6355;&#x83B7;&#x7684;&#x5F02;&#x5E38;&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x5904;&#x4E8E;&#x635F;&#x574F;&#x72B6;&#x6001;&#x3002;&#x5982;&#x679C;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BD5;&#x56FE;&#x4F7F;&#x7528;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x635F;&#x574F;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x4EFB;&#x610F;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x884C;&#x4E3A;&#x3002;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x672A;&#x6355;&#x83B7;&#x7684;&#x5F02;&#x5E38;&#x5C06;&#x7EC8;&#x6B62;&#x7EBF;&#x7A0B;&#x5E76;&#x6253;&#x5370;&#x5806;&#x6808;&#x8DDF;&#x8E2A;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x5728;&#x7EC8;&#x7ED3;&#x5668;&#x4E2D;&#x51FA;&#x73B0;&#xFF0C;&#x5219;&#x4E0D;&#x4F1A;&#x6253;&#x5370;&#x8B66;&#x544A;&#x3002;&#x6E05;&#x9664;&#x5668;&#x6CA1;&#x6709;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;&#x4F7F;&#x7528;&#x6E05;&#x9664;&#x5668;&#x7684;&#x5E93;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x5B83;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
+<p>There is a severe performance penalty for using finalizers and cleaners.On my machine, the time to create a simple AutoCloseable object, to close it using try-with-resources, and to have the garbage collector reclaim it is about 12 ns. Using a finalizer instead increases the time to 550 ns. In other words, it is about 50 times slower to create and destroy objects with finalizers. This is primarily because finalizers inhibit efficient garbage collection. Cleaners are comparable in speed to finalizers if you use them to clean all instances of the class (about 500 ns per instance on my machine), but cleaners are much faster if you use them only as a safety net, as discussed below. Under these circumstances, creating, cleaning, and destroying an object takes about 66 ns on my machine, which means you pay a factor of five (not fifty) for the insurance of a safety net if you don&#x2019;t use it.</p>
+<p>&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#x548C;&#x6E05;&#x9664;&#x5668;&#x4F1A;&#x4E25;&#x91CD;&#x5F71;&#x54CD;&#x6027;&#x80FD;&#x3002;&#x5728;&#x6211;&#x7684;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; AutoCloseable &#x5BF9;&#x8C61;&#xFF0C;&#x4F7F;&#x7528; try-with-resources &#x5173;&#x95ED;&#x5B83;&#x4EE5;&#x53CA;&#x8BA9;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x56DE;&#x6536;&#x5B83;&#x7684;&#x65F6;&#x95F4;&#x5927;&#x7EA6;&#x662F; 12ns&#x3002;&#x76F8;&#x53CD;&#xFF0C;&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#x5C06;&#x65F6;&#x95F4;&#x589E;&#x52A0;&#x5230; 550ns&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#x521B;&#x5EFA;&#x548C;&#x9500;&#x6BC1;&#x5BF9;&#x8C61;&#x5927;&#x7EA6;&#x8981;&#x6162; 50 &#x500D;&#x3002;&#x8FD9;&#x4E3B;&#x8981;&#x662F;&#x56E0;&#x4E3A;&#x7EC8;&#x7ED3;&#x5668;&#x6291;&#x5236;&#x4E86;&#x6709;&#x6548;&#x7684;&#x5783;&#x573E;&#x6536;&#x96C6;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x6E05;&#x9664;&#x5668;&#x6E05;&#x9664;&#x7684;&#x6240;&#x6709;&#x5B9E;&#x4F8B;&#xFF08;&#x5728;&#x6211;&#x7684;&#x673A;&#x5668;&#x4E0A;&#x6BCF;&#x4E2A;&#x5B9E;&#x4F8B;&#x5927;&#x7EA6; 500ns&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#x6E05;&#x9664;&#x5668;&#x7684;&#x901F;&#x5EA6;&#x4E0E;&#x7EC8;&#x7ED3;&#x5668;&#x76F8;&#x5F53;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x53EA;&#x5C06;&#x5B83;&#x4EEC;&#x4F5C;&#x4E3A;&#x5B89;&#x5168;&#x7F51;&#x6765;&#x4F7F;&#x7528;&#xFF0C;&#x6E05;&#x9664;&#x5668;&#x7684;&#x901F;&#x5EA6;&#x8981;&#x5FEB;&#x5F97;&#x591A;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x8FF0;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5728;&#x6211;&#x7684;&#x673A;&#x5668;&#x4E0A;&#x521B;&#x5EFA;&#x3001;&#x6E05;&#x7406;&#x548C;&#x9500;&#x6BC1;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x9700;&#x8981;&#x82B1;&#x8D39; 66ns &#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x591A;&#x51FA;&#x4E94;&#x500D;&#xFF08;&#x800C;&#x4E0D;&#x662F;&#x4E94;&#x5341;&#x500D;&#xFF09;&#x7684;&#x4FDD;&#x969C;&#x6210;&#x672C;&#x3002;</p>
+<p>Finalizers have a serious security problem: they open your class up to finalizer attacks. The idea behind a finalizer attack is simple: If an exception is thrown from a constructor or its serialization equivalents&#x2014;the readObject and readResolve methods (Chapter 12)&#x2014;the finalizer of a malicious subclass can run on the partially constructed object that should have &#x201C;died on the vine.&#x201D; This finalizer can record a reference to the object in a static field,preventing it from being garbage collected. Once the malformed object has been recorded, it is a simple matter to invoke arbitrary methods on this object that should never have been allowed to exist in the first place. Throwing an exception from a constructor should be sufficient to prevent an object from coming into existence; in the presence of finalizers, it is not. Such attacks can have dire consequences. Final classes are immune to finalizer attacks because no one can write a malicious subclass of a final class. To protect nonfinal classes from finalizer attacks, write a final finalize method that does nothing.</p>
+<p>&#x7EC8;&#x7ED3;&#x5668;&#x6709;&#x4E00;&#x4E2A;&#x4E25;&#x91CD;&#x7684;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF1A;&#x5B83;&#x4EEC;&#x4F1A;&#x8BA9;&#x4F60;&#x7684;&#x7C7B;&#x53D7;&#x5230;&#x7EC8;&#x7ED3;&#x5668;&#x653B;&#x51FB;&#x3002;&#x7EC8;&#x7ED3;&#x5668;&#x653B;&#x51FB;&#x80CC;&#x540E;&#x7684;&#x601D;&#x60F3;&#x5F88;&#x7B80;&#x5355;&#xFF1A;&#x5982;&#x679C;&#x4ECE;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6216;&#x5B83;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x7B49;&#x4EF7;&#x7269;&#xFF08;readObject &#x548C; readResolve &#x65B9;&#x6CD5;&#xFF08;<a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">Item-12</a>&#xFF09;&#xFF09;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x6076;&#x610F;&#x5B50;&#x7C7B;&#x7684;&#x7EC8;&#x7ED3;&#x5668;&#x5C31;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x5728;&#x90E8;&#x5206;&#x6784;&#x9020;&#x7684;&#x5BF9;&#x8C61;&#x4E0A;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x672C;&#x6765;&#x5E94;&#x8BE5;&#x300C;&#x80CE;&#x6B7B;&#x8179;&#x4E2D;&#x300D;&#x3002;&#x8FD9;&#x4E2A;&#x7EC8;&#x7ED3;&#x5668;&#x53EF;&#x4EE5;&#x5728;&#x9759;&#x6001;&#x5B57;&#x6BB5;&#x4E2D;&#x8BB0;&#x5F55;&#x5BF9;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x9632;&#x6B62;&#x5B83;&#x88AB;&#x5783;&#x573E;&#x6536;&#x96C6;&#x3002;&#x4E00;&#x65E6;&#x8BB0;&#x5F55;&#x4E86;&#x7578;&#x5F62;&#x5BF9;&#x8C61;&#xFF0C;&#x5C31;&#x5F88;&#x5BB9;&#x6613;&#x5728;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x4E0A;&#x8C03;&#x7528;&#x672C;&#x6765;&#x5C31;&#x4E0D;&#x5E94;&#x8BE5;&#x5B58;&#x5728;&#x7684;&#x4EFB;&#x610F;&#x65B9;&#x6CD5;&#x3002;&#x4ECE;&#x6784;&#x9020;&#x51FD;&#x6570;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x5E94;&#x8BE5;&#x8DB3;&#x4EE5;&#x9632;&#x6B62;&#x5BF9;&#x8C61;&#x7684;&#x51FA;&#x73B0;&#xFF1B;&#x5728;&#x6709;&#x7EC8;&#x7ED3;&#x5668;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5C31;&#x4E0D;&#x662F;&#x8FD9;&#x6837;&#x4E86;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x653B;&#x51FB;&#x53EF;&#x80FD;&#x4F1A;&#x9020;&#x6210;&#x53EF;&#x6015;&#x7684;&#x540E;&#x679C;&#x3002;&#x6700;&#x7EC8;&#x7C7B;&#x5BF9;&#x7EC8;&#x7ED3;&#x5668;&#x653B;&#x51FB;&#x514D;&#x75AB;&#xFF0C;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x4EBA;&#x80FD;&#x591F;&#x7F16;&#x5199;&#x6700;&#x7EC8;&#x7C7B;&#x7684;&#x6076;&#x610F;&#x5B50;&#x7C7B;&#x3002;&#x4E3A;&#x4E86;&#x4FDD;&#x62A4;&#x975E;&#x6700;&#x7EC8;&#x7C7B;&#x4E0D;&#x53D7;&#x7EC8;&#x7ED3;&#x5668;&#x653B;&#x51FB;&#xFF0C;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x4E0D;&#x6267;&#x884C;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;&#x7684;&#x6700;&#x7EC8;&#x7EC8;&#x7ED3;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>So what should you do instead of writing a finalizer or cleaner for a class whose objects encapsulate resources that require termination, such as files or threads? Just have your class implement AutoCloseable, and require its clients to invoke the close method on each instance when it is no longer needed, typically using try-with-resources to ensure termination even in the face of exceptions (Item 9). One detail worth mentioning is that the instance must keep track of whether it has been closed: the close method must record in a field that the object is no longer valid, and other methods must check this field and throw an IllegalStateException if they are called after the object has been closed.</p>
+<p>&#x90A3;&#x4E48;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;&#x5C01;&#x88C5;&#x4E86;&#x9700;&#x8981;&#x7EC8;&#x6B62;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x4F8B;&#x5982;&#x6587;&#x4EF6;&#x6216;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x5E94;&#x8BE5;&#x505A;&#x4EC0;&#x4E48;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E3A;&#x5B83;&#x7F16;&#x5199;&#x7EC8;&#x7ED3;&#x5668;&#x6216;&#x6E05;&#x9664;&#x5668;&#x5462;&#xFF1F;&#x53EA;&#x6709;&#x4F60;&#x7684;&#x7C7B;&#x5B9E;&#x73B0; AutoCloseable&#xFF0C;&#x8981;&#x6C42;&#x5176;&#x5BA2;&#x6237;&#x7AEF;&#x6BCF;&#x4E2A;&#x5B9E;&#x4F8B;&#x5728;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x65F6;&#x8C03;&#x7528;&#x5173;&#x95ED;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x5E38;&#x4F7F;&#x7528; try-with-resources &#x786E;&#x4FDD;&#x7EC8;&#x6B62;&#xFF0C;&#x5373;&#x4F7F;&#x9762;&#x5BF9;&#x5F02;&#x5E38;&#xFF08;<a href="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">Item-9</a>&#xFF09;&#x3002;&#x4E00;&#x4E2A;&#x503C;&#x5F97;&#x4E00;&#x63D0;&#x7684;&#x7EC6;&#x8282;&#x662F;&#x5B9E;&#x4F8B;&#x5FC5;&#x987B;&#x8DDF;&#x8E2A;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5173;&#x95ED;&#xFF1A;close &#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x5728;&#x5B57;&#x6BB5;&#x4E2D;&#x8BB0;&#x5F55;&#x5BF9;&#x8C61;&#x4E0D;&#x518D;&#x6709;&#x6548;&#xFF0C;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x68C0;&#x67E5;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x5982;&#x679C;&#x5728;&#x5BF9;&#x8C61;&#x5173;&#x95ED;&#x540E;&#x8C03;&#x7528;&#x5B83;&#x4EEC;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x629B;&#x51FA;&#x4E00;&#x4E2A; IllegalStateException&#x3002;</p>
+<p>So what, if anything, are cleaners and finalizers good for? They have perhaps two legitimate uses. One is to act as a safety net in case the owner of a resource neglects to call its close method. While there&#x2019;s no guarantee that the cleaner or finalizer will run promptly (or at all), it is better to free the resource late than never if the client fails to do so. If you&#x2019;re considering writing such a safety-net finalizer, think long and hard about whether the protection is worth the cost.Some Java library classes, such as FileInputStream,FileOutputStream, ThreadPoolExecutor, and java.sql.Connection, have finalizers that serve as safety nets.</p>
+<p>&#x90A3;&#x4E48;&#xFF0C;&#x6E05;&#x9664;&#x5668;&#x548C;&#x7EC8;&#x7ED3;&#x5668;&#x6709;&#x4EC0;&#x4E48;&#x7528;&#x5462;&#xFF1F;&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x6709;&#x4E24;&#x79CD;&#x5408;&#x6CD5;&#x7528;&#x9014;&#x3002;&#x4E00;&#x79CD;&#x662F;&#x5145;&#x5F53;&#x4E00;&#x4E2A;&#x5B89;&#x5168;&#x7F51;&#xFF0C;&#x4EE5;&#x9632;&#x8D44;&#x6E90;&#x7684;&#x6240;&#x6709;&#x8005;&#x5FFD;&#x7565;&#x8C03;&#x7528;&#x5B83;&#x7684; close &#x65B9;&#x6CD5;&#x3002;&#x867D;&#x7136;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x6E05;&#x9664;&#x5668;&#x6216;&#x7EC8;&#x7ED3;&#x5668;&#x5C06;&#x7ACB;&#x5373;&#x8FD0;&#x884C;&#xFF08;&#x6216;&#x6839;&#x672C;&#x4E0D;&#x8FD0;&#x884C;&#xFF09;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x5BA2;&#x6237;&#x7AEF;&#x6CA1;&#x6709;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x6700;&#x597D;&#x662F;&#x5EF6;&#x8FDF;&#x91CA;&#x653E;&#x8D44;&#x6E90;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6B63;&#x5728;&#x8003;&#x8651;&#x7F16;&#x5199;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x5B89;&#x5168;&#x7F51;&#x7EDC;&#x7EC8;&#x7ED3;&#x5668;&#xFF0C;&#x90A3;&#x5C31;&#x597D;&#x597D;&#x8003;&#x8651;&#x4E00;&#x4E0B;&#x8FD9;&#x79CD;&#x4FDD;&#x62A4;&#x662F;&#x5426;&#x503C;&#x5F97;&#x3002;&#x4E00;&#x4E9B; Java &#x5E93;&#x7C7B;&#xFF0C;&#x5982; FileInputStream&#x3001;FileOutputStream&#x3001;ThreadPoolExecutor &#x548C; java.sql.Connection&#xFF0C;&#x90FD;&#x6709;&#x7EC8;&#x7ED3;&#x5668;&#x4F5C;&#x4E3A;&#x5B89;&#x5168;&#x7F51;&#x3002;</p>
+<p>A second legitimate use of cleaners concerns objects with native peers. A native peer is a native (non-Java) object to which a normal object delegates via native methods. Because a native peer is not a normal object, the garbage collector doesn&#x2019;t know about it and can&#x2019;t reclaim it when its Java peer is reclaimed. A cleaner or finalizer may be an appropriate vehicle for this task,assuming the performance is acceptable and the native peer holds no critical resources. If the performance is unacceptable or the native peer holds resources that must be reclaimed promptly, the class should have a close method, as described earlier.</p>
+<p>&#x6E05;&#x6D01;&#x5668;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x5408;&#x6CD5;&#x4F7F;&#x7528;&#x6D89;&#x53CA;&#x5230;&#x4E0E;&#x672C;&#x673A;&#x5BF9;&#x7B49;&#x4F53;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x672C;&#x673A;&#x5BF9;&#x7B49;&#x70B9;&#x662F;&#x666E;&#x901A;&#x5BF9;&#x8C61;&#x901A;&#x8FC7;&#x672C;&#x673A;&#x65B9;&#x6CD5;&#x59D4;&#x6258;&#x7ED9;&#x7684;&#x672C;&#x673A;&#xFF08;&#x975E; java&#xFF09;&#x5BF9;&#x8C61;&#x3002;&#x56E0;&#x4E3A;&#x672C;&#x673A;&#x5BF9;&#x7B49;&#x70B9;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x6B63;&#x5E38;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x4E0D;&#x77E5;&#x9053;&#x5B83;&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x80FD;&#x5728;&#x56DE;&#x6536; Java &#x5BF9;&#x7B49;&#x70B9;&#x65F6;&#x56DE;&#x6536;&#x5B83;&#x3002;&#x5982;&#x679C;&#x6027;&#x80FD;&#x662F;&#x53EF;&#x63A5;&#x53D7;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x672C;&#x673A;&#x5BF9;&#x7B49;&#x4F53;&#x4E0D;&#x6301;&#x6709;&#x4EFB;&#x4F55;&#x5173;&#x952E;&#x8D44;&#x6E90;&#xFF0C;&#x90A3;&#x4E48;&#x66F4;&#x6E05;&#x6D01;&#x6216;&#x7EC8;&#x7ED3;&#x5668;&#x53EF;&#x80FD;&#x662F;&#x5B8C;&#x6210;&#x8FD9;&#x9879;&#x4EFB;&#x52A1;&#x7684;&#x5408;&#x9002;&#x5DE5;&#x5177;&#x3002;&#x5982;&#x679C;&#x6027;&#x80FD;&#x4E0D;&#x53EF;&#x63A5;&#x53D7;&#xFF0C;&#x6216;&#x8005;&#x672C;&#x673A;&#x5BF9;&#x7B49;&#x4F53;&#x6301;&#x6709;&#x5FC5;&#x987B;&#x7ACB;&#x5373;&#x56DE;&#x6536;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x5219;&#x7C7B;&#x5E94;&#x8BE5;&#x5177;&#x6709;&#x524D;&#x9762;&#x63CF;&#x8FF0;&#x7684;&#x5173;&#x95ED;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>Cleaners are a bit tricky to use. Below is a simple Room class demonstrating the facility. Let&#x2019;s assume that rooms must be cleaned before they are reclaimed.The Room class implements AutoCloseable; the fact that its automatic cleaning safety net uses a cleaner is merely an implementation detail. Unlike finalizers, cleaners do not pollute a class&#x2019;s public API:</p>
+<p>&#x6E05;&#x9664;&#x5668;&#x7684;&#x4F7F;&#x7528;&#x6709;&#x4E9B;&#x68D8;&#x624B;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; Room &#x7C7B;&#xFF0C;&#x5C55;&#x793A;&#x4E86;&#x8FD9;&#x4E2A;&#x8BBE;&#x65BD;&#x3002;&#x8BA9;&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x623F;&#x95F4;&#x5728;&#x56DE;&#x6536;&#x4E4B;&#x524D;&#x5FC5;&#x987B;&#x88AB;&#x6E05;&#x7406;&#x3002;Room &#x7C7B;&#x5B9E;&#x73B0;&#x4E86; AutoCloseable&#xFF1B;&#x5B83;&#x7684;&#x81EA;&#x52A8;&#x6E05;&#x6D17;&#x5B89;&#x5168;&#x7F51;&#x4F7F;&#x7528;&#x4E86;&#x6E05;&#x9664;&#x5668;&#xFF0C;&#x8FD9;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;&#x4E0E;&#x7EC8;&#x7ED3;&#x5668;&#x4E0D;&#x540C;&#xFF0C;&#x6E05;&#x9664;&#x5668;&#x4E0D;&#x4F1A;&#x6C61;&#x67D3;&#x7C7B;&#x7684;&#x516C;&#x5171; API&#xFF1A;</p>
+<pre><code>import sun.misc.Cleaner;
+
+// An autocloseable class using a cleaner as a safety net
+public class Room implements AutoCloseable {
+    private static final Cleaner cleaner = Cleaner.create();
+
+    // Resource that requires cleaning. Must not refer to Room!
+    private static class State implements Runnable {
+        int numJunkPiles; // Number of junk piles in this room
+
+        State(int numJunkPiles) {
+            this.numJunkPiles = numJunkPiles;
+        }
+
+        // Invoked by close method or cleaner
+        @Override
+        public void run() {
+            System.out.println(&quot;Cleaning room&quot;);
+            numJunkPiles = 0;
+        }
+    }
+
+    // The state of this room, shared with our cleanable
+    private final State state;
+    // Our cleanable. Cleans the room when it&#x2019;s eligible for gc
+    private final Cleaner.Cleanable cleanable;
+
+    public Room(int numJunkPiles) {
+        state = new State(numJunkPiles);
+        cleanable = cleaner.register(this, state);
+    }
+
+    @Override
+    public void close() {
+        cleanable.clean();
+    }
+}
+</code></pre><p>The static nested State class holds the resources that are required by the cleaner to clean the room. In this case, it is simply the numJunkPiles field,which represents the amount of mess in the room. More realistically, it might be a final long that contains a pointer to a native peer. State implements Runnable, and its run method is called at most once, by the Cleanable that we get when we register our State instance with our cleaner in the Room constructor. The call to the run method will be triggered by one of two things:Usually it is triggered by a call to Room&#x2019;s close method calling Cleanable&#x2019;s clean method. If the client fails to call the close method by the time a Room instance is eligible for garbage collection, the cleaner will (hopefully) call State&#x2019;s run method.</p>
+<p>&#x9759;&#x6001;&#x5D4C;&#x5957; State &#x7C7B;&#x6301;&#x6709;&#x6E05;&#x6D01;&#x5668;&#x6E05;&#x6D01;&#x623F;&#x95F4;&#x6240;&#x9700;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B83;&#x4EC5;&#x4EC5;&#x662F; numJunkPiles &#x5B57;&#x6BB5;&#xFF0C;&#x8868;&#x793A;&#x623F;&#x95F4;&#x7684;&#x6DF7;&#x4E71;&#x7A0B;&#x5EA6;&#x3002;&#x66F4;&#x5B9E;&#x9645;&#x5730;&#x8BF4;&#xFF0C;&#x5B83;&#x53EF;&#x80FD;&#x662F;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6307;&#x5411;&#x672C;&#x673A;&#x5BF9;&#x7B49;&#x70B9;&#x7684; long &#x6307;&#x9488;&#x3002;State &#x5B9E;&#x73B0;&#x4E86; Runnable&#xFF0C;&#x5B83;&#x7684;&#x8FD0;&#x884C;&#x65B9;&#x6CD5;&#x6700;&#x591A;&#x88AB;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#xFF0C;&#x7531;&#x6211;&#x4EEC;&#x5728; Room &#x6784;&#x9020;&#x5668;&#x4E2D;&#x5411; cleaner &#x5B9E;&#x4F8B;&#x6CE8;&#x518C;&#x72B6;&#x6001;&#x5B9E;&#x4F8B;&#x65F6;&#x5F97;&#x5230;&#x7684; Cleanable &#x8C03;&#x7528;&#x3002;&#x5BF9; run &#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x5C06;&#x7531;&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x4E4B;&#x4E00;&#x89E6;&#x53D1;&#xFF1A;&#x901A;&#x5E38;&#x662F;&#x901A;&#x8FC7;&#x8C03;&#x7528; Room &#x7684; close &#x65B9;&#x6CD5;&#x6765;&#x89E6;&#x53D1;&#xFF0C;&#x8C03;&#x7528; Cleanable &#x7684; clean &#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x5F53;&#x4E00;&#x4E2A; Room &#x5B9E;&#x4F8B;&#x6709;&#x8D44;&#x683C;&#x8FDB;&#x884C;&#x5783;&#x573E;&#x6536;&#x96C6;&#x65F6;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6CA1;&#x6709;&#x8C03;&#x7528; close &#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x6E05;&#x9664;&#x5668;&#x5C06;&#x8C03;&#x7528; State &#x7684; run &#x65B9;&#x6CD5;&#xFF08;&#x5E0C;&#x671B;&#x5982;&#x6B64;&#xFF09;&#x3002;</p>
+<p>It is critical that a State instance does not refer to its Room instance. If it did, it would create a circularity that would prevent the Room instance from becoming eligible for garbage collection (and from being automatically cleaned).Therefore, State must be a static nested class because nonstatic nested classes contain references to their enclosing instances (Item 24). It is similarly inadvisable to use a lambda because they can easily capture references to enclosing objects.</p>
+<p>&#x72B6;&#x6001;&#x5B9E;&#x4F8B;&#x4E0D;&#x5F15;&#x7528;&#x5176; Room &#x5B9E;&#x4F8B;&#x662F;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x3002;&#x5982;&#x679C;&#x5B83;&#x8FD9;&#x6837;&#x505A;&#x4E86;&#xFF0C;&#x5B83;&#x5C06;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#xFF0C;&#x4EE5;&#x9632;&#x6B62; Room &#x5B9E;&#x4F8B;&#x6709;&#x8D44;&#x683C;&#x8FDB;&#x884C;&#x5783;&#x573E;&#x6536;&#x96C6;&#xFF08;&#x4EE5;&#x53CA;&#x81EA;&#x52A8;&#x6E05;&#x7406;&#xFF09;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x72B6;&#x6001;&#x5FC5;&#x987B;&#x662F;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x5D4C;&#x5957;&#x7C7B;&#xFF0C;&#x56E0;&#x4E3A;&#x975E;&#x9759;&#x6001;&#x5D4C;&#x5957;&#x7C7B;&#x5305;&#x542B;&#x5BF9;&#x5176;&#x5C01;&#x95ED;&#x5B9E;&#x4F8B;&#x7684;&#x5F15;&#x7528;&#xFF08;<a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">Item-24</a>&#xFF09;&#x3002;&#x540C;&#x6837;&#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; lambda&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x5F88;&#x5BB9;&#x6613;&#x5730;&#x6355;&#x83B7;&#x5BF9;&#x5305;&#x56F4;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x3002;</p>
+<p>As we said earlier, Room&#x2019;s cleaner is used only as a safety net. If clients surround all Room instantiations in try-with-resource blocks, automatic cleaning will never be required. This well-behaved client demonstrates that behavior:</p>
+<p>&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x8BF4;&#x7684;&#xFF0C;Room &#x7C7B;&#x7684;&#x6E05;&#x9664;&#x5668;&#x53EA;&#x662F;&#x7528;&#x4F5C;&#x5B89;&#x5168;&#x7F51;&#x3002;&#x5982;&#x679C;&#x5BA2;&#x6237;&#x7AEF;&#x5C06;&#x6240;&#x6709; Room &#x5B9E;&#x4F8B;&#x5305;&#x56F4;&#x5728;&#x5E26;&#x6709;&#x8D44;&#x6E90;&#x7684; try &#x5757;&#x4E2D;&#xFF0C;&#x5219;&#x6C38;&#x8FDC;&#x4E0D;&#x9700;&#x8981;&#x81EA;&#x52A8;&#x6E05;&#x7406;&#x3002;&#x8FD9;&#x4F4D;&#x8868;&#x73B0;&#x826F;&#x597D;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x5C55;&#x793A;&#x4E86;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#xFF1A;</p>
+<pre><code>public class Adult {
+    public static void main(String[] args) {
+        try (Room myRoom = new Room(7)) {
+            System.out.println(&quot;Goodbye&quot;);
+        }
+    }
+}
+</code></pre><p>As you&#x2019;d expect, running the Adult program prints Goodbye, followed by Cleaning room. But what about this ill-behaved program, which never cleans its room?</p>
+<p>&#x5982;&#x4F60;&#x6240;&#x6599;&#xFF0C;&#x8FD0;&#x884C; Adult &#x7A0B;&#x5E8F;&#x6253;&#x5370;&#x300C;Goodbye&#x300D;&#xFF0C;&#x7136;&#x540E;&#x662F;&#x6253;&#x626B;&#x623F;&#x95F4;&#x3002;&#x4F46;&#x8FD9;&#x4E2A;&#x4ECE;&#x4E0D;&#x6253;&#x626B;&#x623F;&#x95F4;&#x7684;&#x4E0D;&#x5B88;&#x89C4;&#x77E9;&#x7684;&#x7A0B;&#x5E8F;&#x600E;&#x4E48;&#x529E;&#xFF1F;</p>
+<pre><code>public class Teenager {
+    public static void main(String[] args) {
+        new Room(99);
+        System.out.println(&quot;Peace out&quot;);
+    }
+}
+</code></pre><p>You might expect it to print Peace out, followed by Cleaning room, but on my machine, it never prints Cleaning room; it just exits. This is the unpredictability we spoke of earlier. The Cleaner spec says, &#x201C;The behavior of cleaners during System.exit is implementation specific. No guarantees are made relating to whether cleaning actions are invoked or not.&#x201D; While the spec does not say it, the same holds true for normal program exit. On my machine,adding the line System.gc() to Teenager&#x2019;s main method is enough to make it print Cleaning room prior to exit, but there&#x2019;s no guarantee that you&#x2019;ll see the same behavior on your machine.In summary, don&#x2019;t use cleaners, or in releases prior to Java 9, finalizers,except as a safety net or to terminate noncritical native resources. Even then,beware the indeterminacy and performance consequences.</p>
+<p>&#x4F60;&#x53EF;&#x80FD;&#x671F;&#x671B;&#x5B83;&#x6253;&#x5370;&#x51FA;&#x300C;Peace out&#x300D;&#xFF0C;&#x7136;&#x540E;&#x6253;&#x626B;&#x623F;&#x95F4;&#xFF0C;&#x4F46;&#x5728;&#x6211;&#x7684;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x5B83;&#x4ECE;&#x4E0D;&#x6253;&#x626B;&#x623F;&#x95F4;&#xFF1B;&#x5B83;&#x53EA;&#x662F;&#x9000;&#x51FA;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x63D0;&#x5230;&#x7684;&#x4E0D;&#x53EF;&#x9884;&#x6D4B;&#x6027;&#x3002;Cleaner &#x89C4;&#x8303;&#x8BF4;&#xFF1A;&#x300C;&#x5728; System.exit &#x4E2D;&#xFF0C;&#x6E05;&#x6D01;&#x5668;&#x7684;&#x884C;&#x4E3A;&#x662F;&#x7279;&#x5B9A;&#x4E8E;&#x5B9E;&#x73B0;&#x7684;&#x3002;&#x4E0D;&#x4FDD;&#x8BC1;&#x6E05;&#x7406;&#x64CD;&#x4F5C;&#x662F;&#x5426;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x300D;&#x867D;&#x7136;&#x89C4;&#x8303;&#x6CA1;&#x6709;&#x8BF4;&#x660E;&#xFF0C;&#x4F46;&#x5BF9;&#x4E8E;&#x666E;&#x901A;&#x7A0B;&#x5E8F;&#x9000;&#x51FA;&#x6765;&#x8BF4;&#x4E5F;&#x662F;&#x4E00;&#x6837;&#x3002;&#x5728;&#x6211;&#x7684;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x5C06; System.gc() &#x6DFB;&#x52A0;&#x5230; Teenager &#x7684;&#x4E3B;&#x8981;&#x65B9;&#x6CD5;&#x4E2D;&#x5C31;&#x8DB3;&#x4EE5;&#x8BA9;&#x5B83;&#x5728;&#x9000;&#x51FA;&#x4E4B;&#x524D;&#x6253;&#x626B;&#x623F;&#x95F4;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x5728;&#x5176;&#x4ED6;&#x673A;&#x5668;&#x4E0A;&#x770B;&#x5230;&#x76F8;&#x540C;&#x7684;&#x884C;&#x4E3A;&#x3002;&#x603B;&#x4E4B;&#xFF0C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x6E05;&#x6D01;&#x5668;&#xFF0C;&#x6216;&#x8005;&#x5728; Java 9 &#x4E4B;&#x524D;&#x7684;&#x7248;&#x672C;&#x4E2D;&#x4F7F;&#x7528;&#x7EC8;&#x7ED3;&#x5668;&#xFF0C;&#x9664;&#x975E;&#x662F;&#x4F5C;&#x4E3A;&#x5B89;&#x5168;&#x7F51;&#x6216;&#x7EC8;&#x6B62;&#x975E;&#x5173;&#x952E;&#x7684;&#x672C;&#x673A;&#x8D44;&#x6E90;&#x3002;&#x5373;&#x4FBF;&#x5982;&#x6B64;&#xFF0C;&#x4E5F;&#x8981;&#x5C0F;&#x5FC3;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x548C;&#x6027;&#x80FD;&#x540E;&#x679C;&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-2-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Previous Item&#xFF08;&#x4E0A;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-2-Item-7-Eliminate-obsolete-object-references.html">Item 7: Eliminate obsolete object references&#xFF08;&#x6392;&#x9664;&#x8FC7;&#x65F6;&#x7684;&#x5BF9;&#x8C61;&#x5F15;&#x7528;&#xFF09;</a></strong></li>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">Item 9: Prefer try with resources to try finally&#xFF08;&#x4F7F;&#x7528; try-with-resources &#x4F18;&#x4E8E; try-finally&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-2-Item-7-Eliminate-obsolete-object-references.html" class="navigation navigation-prev " aria-label="Previous page: Item 7: Eliminate obsolete object references（排除过时的对象引用）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html" class="navigation navigation-next " aria-label="Next page: Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）","level":"1.2.9","depth":2,"next":{"title":"Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）","level":"1.2.10","depth":2,"path":"Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.md","ref":"Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.md","articles":[]},"previous":{"title":"Item 7: Eliminate obsolete object references（排除过时的对象引用）","level":"1.2.8","depth":2,"path":"Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.md","ref":"Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.md","mtime":"2021-12-19T09:10:38.034Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1892 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 18: Favor composition over inheritance（优先选择复合而不是继承） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html" />
+    
+    
+    <link rel="prev" href="Chapter-4-Item-17-Minimize-mutability.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Chapter-4-Introduction.html">
+            
+                <a href="Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="Chapter-4-Introduction.html">
+            
+                <a href="Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.5" data-path="Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 18: Favor composition over inheritance（优先选择复合而不是继承）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-4-classes-and-interfaces&#xFF08;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#xFF09;">Chapter 4. Classes and Interfaces&#xFF08;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#xFF09;</h2>
+<h3 id="item-18-favor-composition-over-inheritance&#xFF08;&#x4F18;&#x5148;&#x9009;&#x62E9;&#x590D;&#x5408;&#x800C;&#x4E0D;&#x662F;&#x7EE7;&#x627F;&#xFF09;">Item 18: Favor composition over inheritance&#xFF08;&#x4F18;&#x5148;&#x9009;&#x62E9;&#x590D;&#x5408;&#x800C;&#x4E0D;&#x662F;&#x7EE7;&#x627F;&#xFF09;</h3>
+<p>Inheritance is a powerful way to achieve code reuse, but it is not always the best tool for the job. Used inappropriately, it leads to fragile software. It is safe to use inheritance within a package, where the subclass and the superclass implementations are under the control of the same programmers. It is also safe to use inheritance when extending classes specifically designed and documented for extension (Item 19). Inheriting from ordinary concrete classes across package boundaries, however, is dangerous. As a reminder, this book uses the word &#x201C;inheritance&#x201D; to mean implementation inheritance (when one class extends another). The problems discussed in this item do not apply to interface inheritance (when a class implements an interface or when one interface extends another).</p>
+<p>&#x7EE7;&#x627F;&#x662F;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x590D;&#x7528;&#x7684;&#x4E00;&#x79CD;&#x5F3A;&#x5927;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x5B83;&#x5E76;&#x4E0D;&#x603B;&#x662F;&#x6700;&#x4F73;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x4F7F;&#x7528;&#x4E0D;&#x5F53;&#x4F1A;&#x5BFC;&#x81F4;&#x8F6F;&#x4EF6;&#x53D8;&#x5F97;&#x8106;&#x5F31;&#x3002;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x5305;&#x4E2D;&#x4F7F;&#x7528;&#x7EE7;&#x627F;&#x662F;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x5176;&#x4E2D;&#x5B50;&#x7C7B;&#x548C;&#x8D85;&#x7C7B;&#x5B9E;&#x73B0;&#x7531;&#x76F8;&#x540C;&#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x63A7;&#x5236;&#x3002;&#x5728;&#x5BF9;&#x4E13;&#x4E3A;&#x6269;&#x5C55;&#x800C;&#x8BBE;&#x8BA1;&#x548C;&#x6587;&#x6863;&#x5316;&#x7684;&#x7C7B;&#x65F6;&#x4F7F;&#x7528;&#x7EE7;&#x627F;&#x4E5F;&#x662F;&#x5B89;&#x5168;&#x7684;&#xFF08;<a href="Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">Item-19</a>&#xFF09;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5BF9;&#x666E;&#x901A;&#x7684;&#x5177;&#x4F53;&#x7C7B;&#x8FDB;&#x884C;&#x8DE8;&#x8D8A;&#x5305;&#x8FB9;&#x754C;&#x7684;&#x7EE7;&#x627F;&#x662F;&#x5371;&#x9669;&#x7684;&#x3002;&#x4F5C;&#x4E3A;&#x63D0;&#x9192;&#xFF0C;&#x672C;&#x4E66;&#x4F7F;&#x7528;&#x300C;&#x7EE7;&#x627F;&#x300D;&#x4E00;&#x8BCD;&#x6765;&#x8868;&#x793A;&#x5B9E;&#x73B0;&#x7EE7;&#x627F;&#xFF08;&#x5F53;&#x4E00;&#x4E2A;&#x7C7B;&#x6269;&#x5C55;&#x53E6;&#x4E00;&#x4E2A;&#x7C7B;&#x65F6;&#xFF09;&#x3002;&#x672C;&#x6761;&#x76EE;&#x4E2D;&#x8BA8;&#x8BBA;&#x7684;&#x95EE;&#x9898;&#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x63A5;&#x53E3;&#x7EE7;&#x627F;&#xFF08;&#x5F53;&#x7C7B;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;&#x6216;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x6269;&#x5C55;&#x53E6;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x65F6;&#xFF09;&#x3002;</p>
+<p>Unlike method invocation, inheritance violates encapsulation [Snyder86]. In other words, a subclass depends on the implementation details of its superclass for its proper function. The superclass&#x2019;s implementation may change from release to release, and if it does, the subclass may break, even though its code has not been touched. As a consequence, a subclass must evolve in tandem with its superclass, unless the superclass&#x2019;s authors have designed and documented it specifically for the purpose of being extended.</p>
+<p>&#x4E0E;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x4E0D;&#x540C;&#xFF0C;&#x7EE7;&#x627F;&#x7834;&#x574F;&#x4E86;&#x5C01;&#x88C5; [Snyder86]&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x5B50;&#x7C7B;&#x7684;&#x529F;&#x80FD;&#x6B63;&#x786E;&#x4E0E;&#x5426;&#x4F9D;&#x8D56;&#x4E8E;&#x5B83;&#x7684;&#x8D85;&#x7C7B;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;&#x8D85;&#x7C7B;&#x7684;&#x5B9E;&#x73B0;&#x53EF;&#x80FD;&#x5728;&#x7248;&#x672C;&#x4E4B;&#x95F4;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#xFF0C;&#x5B50;&#x7C7B;&#x53EF;&#x80FD;&#x4F1A;&#x5D29;&#x6E83;&#xFF0C;&#x5373;&#x4F7F;&#x5B50;&#x7C7B;&#x7684;&#x4EE3;&#x7801;&#x6CA1;&#x6709;&#x88AB;&#x4FEE;&#x6539;&#x8FC7;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5B50;&#x7C7B;&#x5FC5;&#x987B;&#x4E0E;&#x5176;&#x8D85;&#x7C7B;&#x540C;&#x6B65;&#x53D1;&#x5C55;&#xFF0C;&#x9664;&#x975E;&#x8D85;&#x7C7B;&#x662F;&#x4E13;&#x95E8;&#x4E3A;&#x6269;&#x5C55;&#x7684;&#x76EE;&#x7684;&#x800C;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x5E76;&#x5177;&#x6709;&#x5F88;&#x660E;&#x786E;&#x7684;&#x6587;&#x6863;&#x8BF4;&#x660E;&#x3002;</p>
+<p>To make this concrete, let&#x2019;s suppose we have a program that uses a HashSet. To tune the performance of our program, we need to query the HashSet as to how many elements have been added since it was created (not to be confused with its current size, which goes down when an element is removed). To provide this functionality, we write a HashSet variant that keeps count of the number of attempted element insertions and exports an accessor for this count. The HashSet class contains two methods capable of adding elements, add and addAll, so we override both of these methods:</p>
+<p>&#x4E3A;&#x4E86;&#x4F7F;&#x95EE;&#x9898;&#x66F4;&#x5177;&#x4F53;&#x4E00;&#x4E9B;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x6709;&#x4E00;&#x4E2A;&#x4F7F;&#x7528; HashSet &#x7684;&#x7A0B;&#x5E8F;&#x3002;&#x4E3A;&#x4E86;&#x4F18;&#x5316;&#x7A0B;&#x5E8F;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x67E5;&#x8BE2; HashSet&#xFF0C;&#x4EE5;&#x786E;&#x5B9A;&#x81EA;&#x521B;&#x5EFA;&#x4EE5;&#x6765;&#x6DFB;&#x52A0;&#x4E86;&#x591A;&#x5C11;&#x5143;&#x7D20;&#xFF08;&#x4E0D;&#x8981;&#x4E0E;&#x5F53;&#x524D;&#x7684;&#x5927;&#x5C0F;&#x6DF7;&#x6DC6;&#xFF0C;&#x5F53;&#x5143;&#x7D20;&#x88AB;&#x5220;&#x9664;&#x65F6;&#xFF0C;&#x5F53;&#x524D;&#x7684;&#x5927;&#x5C0F;&#x4F1A;&#x9012;&#x51CF;&#xFF09;&#x3002;&#x4E3A;&#x4E86;&#x63D0;&#x4F9B;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#xFF0C;&#x6211;&#x4EEC;&#x7F16;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x5B83;&#x8BB0;&#x5F55;&#x8BD5;&#x56FE;&#x63D2;&#x5165; HashSet &#x7684;&#x5143;&#x7D20;&#x6570;&#x91CF;&#xFF0C;&#x5E76;&#x4E3A;&#x8FD9;&#x4E2A;&#x8BA1;&#x6570;&#x53D8;&#x91CF;&#x5BFC;&#x51FA;&#x4E00;&#x4E2A;&#x8BBF;&#x95EE;&#x5668;&#x3002;HashSet &#x7C7B;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x80FD;&#x591F;&#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;add &#x548C; addAll&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x8986;&#x76D6;&#x8FD9;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code>// Broken - Inappropriate use of inheritance!
+public class InstrumentedHashSet&lt;E&gt; extends HashSet&lt;E&gt; {
+
+    // The number of attempted element insertions
+    private int addCount = 0;
+
+    public InstrumentedHashSet() {
+    }
+
+    public InstrumentedHashSet(int initCap, float loadFactor) {
+        super(initCap, loadFactor);
+    }
+
+    @Override
+    public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+
+    @Override
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+
+    public int getAddCount() {
+        return addCount;
+    }
+}
+</code></pre><p>This class looks reasonable, but it doesn&#x2019;t work. Suppose we create an instance and add three elements using the addAll method. Incidentally, note that we create a list using the static factory method List.of, which was added in Java 9; if you&#x2019;re using an earlier release, use Arrays.asList instead:</p>
+<p>&#x8FD9;&#x4E2A;&#x7C7B;&#x770B;&#x8D77;&#x6765;&#x662F;&#x5408;&#x7406;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#x3002;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x4F7F;&#x7528; addAll &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x4E86;&#x4E09;&#x4E2A;&#x5143;&#x7D20;&#x3002;&#x987A;&#x4FBF;&#x8BF4;&#x4E00;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; Java 9 &#x4E2D;&#x6DFB;&#x52A0;&#x7684;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x65B9;&#x6CD5; <code>List.of</code> &#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#xFF1B;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x65E9;&#x671F;&#x7248;&#x672C;&#xFF0C;&#x90A3;&#x4E48;&#x4F7F;&#x7528; <code>Arrays.asList</code>:</p>
+<pre><code>InstrumentedHashSet&lt;String&gt; s = new InstrumentedHashSet&lt;&gt;();
+s.addAll(List.of(&quot;Snap&quot;, &quot;Crackle&quot;, &quot;Pop&quot;));
+</code></pre><p>We would expect the getAddCount method to return three at this point, but it returns six. What went wrong? Internally, HashSet&#x2019;s addAll method is implemented on top of its add method, although HashSet, quite reasonably, does not document this implementation detail. The addAll method in Instrumented-HashSet added three to addCount and then invoked HashSet&#x2019;s addAll implementation using super.addAll. This in turn invoked the add method, as overridden in InstrumentedHashSet, once for each element. Each of these three invocations added one more to addCount, for a total increase of six: each element added with the addAll method is double-counted.</p>
+<p>&#x6211;&#x4EEC;&#x5E0C;&#x671B; getAddCount &#x65B9;&#x6CD5;&#x6B64;&#x65F6;&#x8FD4;&#x56DE; 3&#xFF0C;&#x4F46;&#x5B83;&#x8FD4;&#x56DE; 6&#x3002;&#x5230;&#x5E95;&#x662F;&#x54EA;&#x91CC;&#x51FA;&#x4E86;&#x9519;&#xFF1F;&#x5728; HashSet &#x5185;&#x90E8;&#xFF0C;addAll &#x65B9;&#x6CD5;&#x662F;&#x57FA;&#x4E8E; add &#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5C3D;&#x7BA1; HashSet &#x7406;&#x6240;&#x5F53;&#x7136;&#x7684;&#x6CA1;&#x6709;&#x8BB0;&#x5F55;&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;InstrumentedHashSet &#x4E2D;&#x7684; addAll &#x65B9;&#x6CD5;&#x4F7F; addCount &#x53D8;&#x91CF;&#x589E;&#x52A0;&#x4E86; 3&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7; <code>super.addAll</code> &#x8C03;&#x7528; HashSet &#x7684; addAll &#x5B9E;&#x73B0;&#x3002;&#x8FD9;&#x76F8;&#x5F53;&#x4E8E;&#x53CD;&#x8FC7;&#x6765;&#x8C03;&#x7528;&#x5728; InstrumentedHashSet &#x4E2D;&#x88AB;&#x8986;&#x76D6;&#x7684; add &#x65B9;&#x6CD5;&#xFF0C;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x4E00;&#x6B21;&#x3002;&#x8FD9;&#x4E09;&#x4E2A;&#x8C03;&#x7528;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x90FD;&#x4F7F; addCount &#x53D8;&#x91CF;&#x589E;&#x52A0;&#x4E86; 1&#xFF0C;&#x603B;&#x5171;&#x589E;&#x52A0;&#x4E86; 6&#xFF0C;&#x5373;&#x4F7F;&#x7528; addAll &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x90FD;&#x88AB;&#x91CD;&#x590D;&#x8BA1;&#x6570;&#x3002;</p>
+<p>We could &#x201C;fix&#x201D; the subclass by eliminating its override of the addAll method. While the resulting class would work, it would depend for its proper function on the fact that HashSet&#x2019;s addAll method is implemented on top of its add method. This &#x201C;self-use&#x201D; is an implementation detail, not guaranteed to hold in all implementations of the Java platform and subject to change from release to release. Therefore, the resulting InstrumentedHashSet class would be fragile.</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x79FB;&#x9664;&#x5B50;&#x7C7B;&#x8986;&#x76D6;&#x7684; addAll &#x65B9;&#x6CD5;&#x6765;&#x300C;&#x4FEE;&#x590D;&#x300D;&#x3002;&#x867D;&#x7136;&#x751F;&#x6210;&#x7684;&#x7C7B;&#x53EF;&#x4EE5;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F46;&#x5B83;&#x7684;&#x6B63;&#x786E;&#x529F;&#x80FD;&#x53D6;&#x51B3;&#x4E8E; HashSet &#x7684; addAll &#x65B9;&#x6CD5;&#x662F;&#x57FA;&#x4E8E; add &#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x7684;&#x4E8B;&#x5B9E;&#x3002;&#x8FD9;&#x79CD;&#x300C;&#x81EA;&#x7528;&#x300D;&#x662F;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#xFF0C;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x5728; Java &#x5E73;&#x53F0;&#x7684;&#x6240;&#x6709;&#x5B9E;&#x73B0;&#x4E2D;&#x90FD;&#x4FDD;&#x7559;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7248;&#x672C;&#x4E2D;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x53D8;&#x5316;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x751F;&#x6210;&#x7684; InstrumentedHashSet &#x7C7B;&#x662F;&#x8106;&#x5F31;&#x7684;&#x3002;</p>
+<p>It would be slightly better to override the addAll method to iterate over the specified collection, calling the add method once for each element. This would guarantee the correct result whether or not HashSet&#x2019;s addAll method were implemented atop its add method because HashSet&#x2019;s addAll implementation would no longer be invoked. This technique, however, does not solve all our problems. It amounts to reimplementing superclass methods that may or may not result in self-use, which is difficult, time-consuming, errorprone,and may reduce performance. Additionally, it isn&#x2019;t always possible because some methods cannot be implemented without access to private fields inaccessible to the subclass.</p>
+<p>&#x5982;&#x679C;&#x901A;&#x8FC7;&#x8986;&#x76D6; addAll &#x65B9;&#x6CD5;&#x6765;&#x904D;&#x5386;&#x6307;&#x5B9A;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5BF9;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x8C03;&#x7528;&#x4E00;&#x6B21; add &#x65B9;&#x6CD5;&#x4F1A;&#x7A0D;&#x597D;&#x4E00;&#x4E9B;&#x3002;&#x65E0;&#x8BBA; HashSet &#x7684; addAll &#x65B9;&#x6CD5;&#x662F;&#x5426;&#x57FA;&#x4E8E; add &#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x90FD;&#x80FD;&#x4FDD;&#x8BC1;&#x5F97;&#x5230;&#x6B63;&#x786E;&#x7ED3;&#x679C;&#xFF0C;&#x56E0;&#x4E3A; HashSet &#x7684; addAll &#x5B9E;&#x73B0;&#x5C06;&#x4E0D;&#x518D;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x8FD9;&#x79CD;&#x6280;&#x672F;&#x5E76;&#x4E0D;&#x80FD;&#x89E3;&#x51B3;&#x6211;&#x4EEC;&#x6240;&#x6709;&#x7684;&#x95EE;&#x9898;&#x3002;&#x5B83;&#x76F8;&#x5F53;&#x4E8E;&#x91CD;&#x65B0;&#x5B9E;&#x73B0;&#x8D85;&#x7C7B;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x300C;&#x81EA;&#x7528;&#x300D;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x4E0D;&#x4F1A;&#xFF0C;&#x8FD9;&#x662F;&#x56F0;&#x96BE;&#x7684;&#x3001;&#x8017;&#x65F6;&#x7684;&#x3001;&#x5BB9;&#x6613;&#x51FA;&#x9519;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x80FD;&#x4F1A;&#x964D;&#x4F4E;&#x6027;&#x80FD;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x603B;&#x662F;&#x53EF;&#x884C;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x5B50;&#x7C7B;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#x67D0;&#x4E9B;&#x79C1;&#x6709;&#x5B57;&#x6BB5;&#xFF0C;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x5C31;&#x65E0;&#x6CD5;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>A related cause of fragility in subclasses is that their superclass can acquire new methods in subsequent releases. Suppose a program depends for its security on the fact that all elements inserted into some collection satisfy some predicate.This can be guaranteed by subclassing the collection and overriding each method capable of adding an element to ensure that the predicate is satisfied before adding the element. This works fine until a new method capable of inserting an element is added to the superclass in a subsequent release. Once this happens, it becomes possible to add an &#x201C;illegal&#x201D; element merely by invoking the new method, which is not overridden in the subclass. This is not a purely theoretical problem. Several security holes of this nature had to be fixed when Hashtable and Vector were retrofitted to participate in the Collections Framework.</p>
+<p>&#x5B50;&#x7C7B;&#x8106;&#x5F31;&#x7684;&#x4E00;&#x4E2A;&#x539F;&#x56E0;&#x662F;&#x4ED6;&#x4EEC;&#x7684;&#x8D85;&#x7C7B;&#x53EF;&#x4EE5;&#x5728;&#x540E;&#x7EED;&#x7248;&#x672C;&#x4E2D;&#x83B7;&#x5F97;&#x65B0;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5047;&#x8BBE;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x7684;&#x5B89;&#x5168;&#x6027;&#x53D6;&#x51B3;&#x4E8E;&#x63D2;&#x5165;&#x5230;&#x67D0;&#x4E2A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x6EE1;&#x8DB3;&#x67D0;&#x4E2A;&#x65AD;&#x8A00;&#x3002;&#x8FD9;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B50;&#x7C7B;&#x5316;&#x96C6;&#x5408;&#x548C;&#x8986;&#x76D6;&#x6BCF;&#x4E2A;&#x80FD;&#x591F;&#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x786E;&#x4FDD;&#x5728;&#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x4E4B;&#x524D;&#x6EE1;&#x8DB3;&#x65AD;&#x8A00;&#x3002;&#x8FD9;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x5730;&#x5DE5;&#x4F5C;&#xFF0C;&#x76F4;&#x5230;&#x5728;&#x540E;&#x7EED;&#x7248;&#x672C;&#x4E2D;&#x5411;&#x8D85;&#x7C7B;&#x4E2D;&#x6DFB;&#x52A0;&#x80FD;&#x591F;&#x63D2;&#x5165;&#x5143;&#x7D20;&#x7684;&#x65B0;&#x65B9;&#x6CD5;&#x3002;&#x4E00;&#x65E6;&#x53D1;&#x751F;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x53EA;&#x9700;&#x8C03;&#x7528;&#x65B0;&#x65B9;&#x6CD5;&#x5C31;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x300C;&#x975E;&#x6CD5;&#x300D;&#x5143;&#x7D20;&#xFF0C;&#x800C;&#x65B0;&#x65B9;&#x6CD5;&#x5728;&#x5B50;&#x7C7B;&#x4E2D;&#x4E0D;&#x4F1A;&#x88AB;&#x8986;&#x76D6;&#x3002;&#x8FD9;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x7EAF;&#x7CB9;&#x7684;&#x7406;&#x8BBA;&#x95EE;&#x9898;&#x3002;&#x5F53; Hashtable &#x548C; Vector &#x88AB;&#x91CD;&#x65B0;&#x6539;&#x88C5;&#x4EE5;&#x52A0;&#x5165; Collections &#x6846;&#x67B6;&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x4FEE;&#x590D;&#x51E0;&#x4E2A;&#x8FD9;&#x79CD;&#x6027;&#x8D28;&#x7684;&#x5B89;&#x5168;&#x6F0F;&#x6D1E;&#x3002;</p>
+<p>Both of these problems stem from overriding methods. You might think that it is safe to extend a class if you merely add new methods and refrain from overriding existing methods. While this sort of extension is much safer, it is not without risk. If the superclass acquires a new method in a subsequent release and you have the bad luck to have given the subclass a method with the same signature and a different return type, your subclass will no longer compile [JLS, 8.4.8.3]. If you&#x2019;ve given the subclass a method with the same signature and return type as the new superclass method, then you&#x2019;re now overriding it, so you&#x2019;re subject to the problems described earlier. Furthermore, it is doubtful that your method will fulfill the contract of the new superclass method, because that contract had not yet been written when you wrote the subclass method.</p>
+<p>&#x8FD9;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#x90FD;&#x6E90;&#x4E8E;&#x8986;&#x76D6;&#x65B9;&#x6CD5;&#x3002;&#x4F60;&#x53EF;&#x80FD;&#x8BA4;&#x4E3A;&#xFF0C;&#x5982;&#x679C;&#x53EA;&#x6DFB;&#x52A0;&#x65B0;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x8986;&#x76D6;&#x73B0;&#x6709;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x6269;&#x5C55;&#x7C7B;&#x662F;&#x5B89;&#x5168;&#x7684;&#x3002;&#x867D;&#x7136;&#x8FD9;&#x79CD;&#x6269;&#x5C55;&#x4F1A;&#x66F4;&#x5B89;&#x5168;&#xFF0C;&#x4F46;&#x4E5F;&#x4E0D;&#x662F;&#x6CA1;&#x6709;&#x98CE;&#x9669;&#x3002;&#x5982;&#x679C;&#x8D85;&#x7C7B;&#x5728;&#x968F;&#x540E;&#x7684;&#x7248;&#x672C;&#x4E2D;&#x83B7;&#x5F97;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x5B50;&#x7C7B;&#x5177;&#x6709;&#x4E00;&#x4E2A;&#x76F8;&#x540C;&#x7B7E;&#x540D;&#x548C;&#x4E0D;&#x540C;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x7684;&#x5B50;&#x7C7B;&#x5C06;&#x4E0D;&#x80FD;&#x7F16;&#x8BD1; [JLS, 8.4.8.3]&#x3002;&#x5982;&#x679C;&#x7ED9;&#x5B50;&#x7C7B;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x5177;&#x6709;&#x4E0E;&#x65B0;&#x8D85;&#x7C7B;&#x65B9;&#x6CD5;&#x76F8;&#x540C;&#x7684;&#x7B7E;&#x540D;&#x548C;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x4E48;&#x73B0;&#x5728;&#x8981;&#x8986;&#x76D6;&#x5B83;&#xFF0C;&#x56E0;&#x6B64;&#x4F60;&#x8981;&#x9762;&#x5BF9;&#x524D;&#x9762;&#x63CF;&#x8FF0;&#x7684;&#x95EE;&#x9898;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x4F60;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x5426;&#x80FD;&#x591F;&#x5B8C;&#x6210;&#x65B0;&#x7684;&#x8D85;&#x7C7B;&#x65B9;&#x6CD5;&#x7684;&#x7EA6;&#x5B9A;&#x662F;&#x503C;&#x5F97;&#x6000;&#x7591;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x4F60;&#x7F16;&#x5199;&#x5B50;&#x7C7B;&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;&#x8BE5;&#x7EA6;&#x5B9A;&#x8FD8;&#x6CA1;&#x6709;&#x88AB;&#x5199;&#x5165;&#x3002;</p>
+<p>Luckily, there is a way to avoid all of the problems described above. Instead of extending an existing class, give your new class a private field that references an instance of the existing class. This design is called composition because the existing class becomes a component of the new one. Each instance method in the new class invokes the corresponding method on the contained instance of the existing class and returns the results. This is known as forwarding, and the methods in the new class are known as forwarding methods. The resulting class will be rock solid, with no dependencies on the implementation details of the existing class. Even adding new methods to the existing class will have no impact on the new class. To make this concrete, here&#x2019;s a replacement for InstrumentedHashSet that uses the composition-and-forwarding approach. Note that the implementation is broken into two pieces, the class itself and a reusable forwarding class, which contains all of the forwarding methods and nothing else:</p>
+<p>&#x5E78;&#x8FD0;&#x7684;&#x662F;&#xFF0C;&#x6709;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x4E0A;&#x8FF0;&#x6240;&#x6709;&#x95EE;&#x9898;&#x3002;&#x4E0E;&#x5176;&#x6269;&#x5C55;&#x73B0;&#x6709;&#x7C7B;&#xFF0C;&#x4E0D;&#x5982;&#x4E3A;&#x65B0;&#x7C7B;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x5F15;&#x7528;&#x73B0;&#x6709;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x79C1;&#x6709;&#x5B57;&#x6BB5;&#x3002;&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x79F0;&#x4E3A;&#x590D;&#x5408;&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x6709;&#x7684;&#x7C7B;&#x662F;&#x65B0;&#x7C7B;&#x7684;&#x4E00;&#x4E2A;&#x7EC4;&#x4EF6;&#x3002;&#x65B0;&#x7C7B;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x73B0;&#x6709;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x5BF9;&#x5E94;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x3002;&#x8FD9;&#x79F0;&#x4E3A;&#x8F6C;&#x53D1;&#xFF0C;&#x65B0;&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x79F0;&#x4E3A;&#x8F6C;&#x53D1;&#x65B9;&#x6CD5;&#x3002;&#x751F;&#x6210;&#x7684;&#x7C7B;&#x5C06;&#x975E;&#x5E38;&#x575A;&#x56FA;&#xFF0C;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E;&#x73B0;&#x6709;&#x7C7B;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;&#x5373;&#x4F7F;&#x5411;&#x73B0;&#x6709;&#x7C7B;&#x6DFB;&#x52A0;&#x65B0;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x5BF9;&#x65B0;&#x7C7B;&#x4EA7;&#x751F;&#x5F71;&#x54CD;&#x3002;&#x4E3A;&#x4E86;&#x8BF4;&#x660E;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;&#x590D;&#x5408;&#x548C;&#x8F6C;&#x53D1;&#x65B9;&#x6CD5;&#x7684;&#x6848;&#x4F8B;&#xFF0C;&#x7528;&#x4EE5;&#x66FF;&#x4EE3; InstrumentedHashSet&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x5B9E;&#x73B0;&#x88AB;&#x5206;&#x6210;&#x4E24;&#x90E8;&#x5206;&#xFF0C;&#x7C7B;&#x672C;&#x8EAB;&#x548C;&#x4E00;&#x4E2A;&#x53EF;&#x590D;&#x7528;&#x7684;&#x8F6C;&#x53D1;&#x7C7B;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x6240;&#x6709;&#x7684;&#x8F6C;&#x53D1;&#x65B9;&#x6CD5;&#xFF0C;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x5185;&#x5BB9;&#xFF1A;</p>
+<pre><code>// Wrapper class - uses composition in place of inheritance
+public class InstrumentedSet&lt;E&gt; extends ForwardingSet&lt;E&gt; {
+
+    private int addCount = 0;
+
+    public InstrumentedSet(Set&lt;E&gt; s) {
+        super(s);
+    }
+
+    @Override
+    public boolean add(E e) {
+        addCount++;
+        return super.add(e);
+    }
+
+    @Override
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+        addCount += c.size();
+        return super.addAll(c);
+    }
+
+    public int getAddCount() {
+        return addCount;
+    }
+}
+
+// Reusable forwarding class
+public class ForwardingSet&lt;E&gt; implements Set&lt;E&gt; {
+    private final Set&lt;E&gt; s;
+    public ForwardingSet(Set&lt;E&gt; s) { this.s = s; }
+    public void clear() { s.clear(); }
+    public boolean contains(Object o) { return s.contains(o); }
+    public boolean isEmpty() { return s.isEmpty(); }
+    public int size() { return s.size(); }
+    public Iterator&lt;E&gt; iterator() { return s.iterator(); }
+    public boolean add(E e) { return s.add(e); }
+    public boolean remove(Object o) { return s.remove(o); }
+    public boolean containsAll(Collection&lt;?&gt; c)
+    { return s.containsAll(c); }
+    public boolean addAll(Collection&lt;? extends E&gt; c)
+    { return s.addAll(c); }
+    public boolean removeAll(Collection&lt;?&gt; c)
+    { return s.removeAll(c); }
+    public boolean retainAll(Collection&lt;?&gt; c)
+    { return s.retainAll(c); }
+    public Object[] toArray() { return s.toArray(); }
+    public &lt;T&gt; T[] toArray(T[] a) { return s.toArray(a); }
+
+    @Override
+    public boolean equals(Object o){ return s.equals(o); }
+
+    @Override
+    public int hashCode() { return s.hashCode(); }
+
+    @Override
+    public String toString() { return s.toString(); }
+}
+</code></pre><p>The design of the InstrumentedSet class is enabled by the existence of the Set interface, which captures the functionality of the HashSet class. Besides being robust, this design is extremely flexible. The InstrumentedSet class implements the Set interface and has a single constructor whose argument is also of type Set. In essence, the class transforms one Set into another, adding the instrumentation functionality. Unlike the inheritance-based approach, which works only for a single concrete class and requires a separate constructor for each supported constructor in the superclass, the wrapper class can be used to instrument any Set implementation and will work in conjunction with any preexisting constructor:</p>
+<p>InstrumentedSet &#x7C7B;&#x7684;&#x8BBE;&#x8BA1;&#x662F;&#x901A;&#x8FC7; Set &#x63A5;&#x53E3;&#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x53EF;&#x4EE5;&#x6355;&#x83B7; HashSet &#x7C7B;&#x7684;&#x529F;&#x80FD;&#x3002;&#x9664;&#x4E86;&#x5065;&#x58EE;&#x5916;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BBE;&#x8BA1;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#x3002;InstrumentedSet &#x7C7B;&#x5B9E;&#x73B0;&#x4E86; Set &#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x4E5F;&#x662F; Set &#x7C7B;&#x578B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x8BE5;&#x7C7B;&#x5177;&#x6709;&#x300C;&#x63D2;&#x88C5;&#x300D;&#x529F;&#x80FD;&#xFF0C;&#x53EF;&#x95F4;&#x63A5;&#x5C06;&#x4E00;&#x79CD; Set &#x7684;&#x8F6C;&#x5316;&#x4E3A;&#x53E6;&#x4E00;&#x79CD; Set&#x3002;&#x57FA;&#x4E8E;&#x7EE7;&#x627F;&#x7684;&#x65B9;&#x6CD5;&#x53EA;&#x9002;&#x7528;&#x4E8E;&#x5355;&#x4E2A;&#x5177;&#x4F53;&#x7C7B;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x4E3A;&#x8D85;&#x7C7B;&#x4E2D;&#x6BCF;&#x4E2A;&#x53D7;&#x652F;&#x6301;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x63D0;&#x4F9B;&#x5355;&#x72EC;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x4E0E;&#x6B64;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x5305;&#x88C5;&#x5668;&#x7C7B;&#x53EF;&#x7528;&#x4E8E;&#x63D2;&#x88C5;&#x4EFB;&#x4F55; Set &#x5B9E;&#x73B0;&#xFF0C;&#x5E76;&#x5C06;&#x4E0E;&#x4EFB;&#x4F55;&#x73B0;&#x6709;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E00;&#x8D77;&#x5DE5;&#x4F5C;&#xFF1A;</p>
+<p><strong>&#x8BD1;&#x6CE8;&#xFF1A;instrumentation &#x8BD1;&#x4E3A;&#x300C;&#x63D2;&#x88C5;&#x300D;&#xFF0C;&#x7C7B;&#x6BD4;&#x786C;&#x76D8;&#xFF08;Set&#xFF09;&#x63D2;&#x88C5;&#x5230;&#x4E3B;&#x677F;&#xFF08;ForwardingSet&#xFF09;&#xFF0C;&#x65E0;&#x8BBA;&#x786C;&#x76D8;&#x5982;&#x4F55;&#x66F4;&#x65B0;&#x6362;&#x4EE3;&#xFF0C;&#x4F46;&#x662F;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x7684;&#x529F;&#x80FD;&#x4E0D;&#x4F1A;&#x53D8;&#x3002;&#x5916;&#x8BBE;&#xFF08;&#x5BA2;&#x6237;&#x7AEF;&#xFF09;&#x901A;&#x8FC7;&#x4E3B;&#x677F;&#x7684; USB2.0 &#x53E3;&#xFF08;InstrumentedSet2.0&#xFF09;&#x6216; USB3.0 &#x53E3;&#xFF08;InstrumentedSet3.0&#xFF09;&#xFF0C;&#x4E0E;&#x786C;&#x76D8;&#x4EA4;&#x4E92;&#xFF0C;&#x4F7F;&#x7528;&#x5176;&#x5B58;&#x50A8;&#x529F;&#x80FD;&#x3002;</strong></p>
+<pre><code>Set&lt;Instant&gt; times = new InstrumentedSet&lt;&gt;(new TreeSet&lt;&gt;(cmp));
+Set&lt;E&gt; s = new InstrumentedSet&lt;&gt;(new HashSet&lt;&gt;(INIT_CAPACITY));
+</code></pre><p>The InstrumentedSet class can even be used to temporarily instrument a set instance that has already been used without instrumentation:</p>
+<p>InstrumentedSet &#x7C7B;&#x751A;&#x81F3;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x4E34;&#x65F6;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x300C;&#x63D2;&#x88C5;&#x300D;&#x529F;&#x80FD;&#x7684; Set &#x5B9E;&#x4F8B;&#xFF1A;</p>
+<pre><code>static void walk(Set&lt;Dog&gt; dogs) {
+InstrumentedSet&lt;Dog&gt; iDogs = new InstrumentedSet&lt;&gt;(dogs);
+... // Within this method use iDogs instead of dogs
+}
+</code></pre><p>The InstrumentedSet class is known as a wrapper class because each InstrumentedSet instance contains (&#x201C;wraps&#x201D;) another Set instance. This is also known as the Decorator pattern [Gamma95] because the InstrumentedSet class &#x201C;decorates&#x201D; a set by adding instrumentation. Sometimes the combination of composition and forwarding is loosely referred to as delegation. Technically it&#x2019;s not delegation unless the wrapper object passes itself to the wrapped object [Lieberman86; Gamma95].</p>
+<p>InstrumentedSet &#x7C7B;&#x88AB;&#x79F0;&#x4E3A;&#x5305;&#x88C5;&#x5668;&#x7C7B;&#xFF0C;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A; InstrumentedSet &#x5B9E;&#x4F8B;&#x90FD;&#x5305;&#x542B;&#xFF08;&#x300C;&#x5305;&#x88C5;&#x300D;&#xFF09;&#x4E86;&#x53E6;&#x4E00;&#x4E2A; Set &#x5B9E;&#x4F8B;&#x3002;&#x8FD9;&#x4E5F;&#x79F0;&#x4E3A;&#x88C5;&#x9970;&#x8005;&#x6A21;&#x5F0F; [Gamma95]&#xFF0C;&#x56E0;&#x4E3A; InstrumentedSet &#x7C7B;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x300C;&#x63D2;&#x88C5;&#x300D;&#x6765;&#x300C;&#x88C5;&#x9970;&#x300D;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x3002;&#x6709;&#x65F6;&#x590D;&#x5408;&#x548C;&#x8F6C;&#x53D1;&#x7684;&#x7EC4;&#x5408;&#x88AB;&#x4E0D;&#x5F53;&#x5730;&#x79F0;&#x4E3A;&#x59D4;&#x6258;&#x3002;&#x4E25;&#x683C;&#x6765;&#x8BF4;&#xFF0C;&#x9664;&#x975E;&#x5305;&#x88C5;&#x5668;&#x5BF9;&#x8C61;&#x5C06;&#x81EA;&#x8EAB;&#x4F20;&#x9012;&#x7ED9;&#x5305;&#x88C5;&#x5BF9;&#x8C61;&#xFF0C;&#x5426;&#x5219;&#x5B83;&#x4E0D;&#x662F;&#x59D4;&#x6258; [Lieberman86; Gamma95]&#x3002;</p>
+<p>The disadvantages of wrapper classes are few. One caveat is that wrapper classes are not suited for use in callback frameworks, wherein objects pass selfreferences to other objects for subsequent invocations (&#x201C;callbacks&#x201D;). Because a wrapped object doesn&#x2019;t know of its wrapper, it passes a reference to itself (this) and callbacks elude the wrapper. This is known as the SELF problem [Lieberman86]. Some people worry about the performance impact of forwarding method invocations or the memory footprint impact of wrapper objects. Neither turn out to have much impact in practice. It&#x2019;s tedious to write forwarding methods, but you have to write the reusable forwarding class for each interface only once, and forwarding classes may be provided for you. For example, Guava provides forwarding classes for all of the collection interfaces [Guava].</p>
+<p>&#x5305;&#x88C5;&#x5668;&#x7C7B;&#x7684;&#x7F3A;&#x70B9;&#x5F88;&#x5C11;&#x3002;&#x4E00;&#x4E2A;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x70B9;&#x662F;&#xFF1A;&#x5305;&#x88C5;&#x5668;&#x7C7B;&#x4E0D;&#x9002;&#x5408;&#x5728;&#x56DE;&#x8C03;&#x6846;&#x67B6;&#x4E2D;&#x4F7F;&#x7528;&#xFF0C;&#x5728;&#x56DE;&#x8C03;&#x6846;&#x67B6;&#x4E2D;&#xFF0C;&#x5BF9;&#x8C61;&#x4E3A;&#x540E;&#x7EED;&#x8C03;&#x7528;(&#x300C;&#x56DE;&#x8C03;&#x300D;)&#x5C06;&#x81EA;&#x5B9A;&#x4E49;&#x4F20;&#x9012;&#x7ED9;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x3002;&#x56E0;&#x4E3A;&#x5305;&#x88C5;&#x5BF9;&#x8C61;&#x4E0D;&#x77E5;&#x9053;&#x5B83;&#x5BF9;&#x5E94;&#x7684;&#x5305;&#x88C5;&#x5668;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x5BF9;&#x5B83;&#x81EA;&#x5DF1;&#x7684;&#x5F15;&#x7528;&#xFF08;this&#xFF09;&#xFF0C;&#x56DE;&#x8C03;&#x907F;&#x5F00;&#x5305;&#x88C5;&#x5668;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x6240;&#x8C13;&#x7684;&#x300C;&#x81EA;&#x7528;&#x300D;&#x95EE;&#x9898;&#x3002;&#x6709;&#x4E9B;&#x4EBA;&#x62C5;&#x5FC3;&#x8F6C;&#x53D1;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x7684;&#x6027;&#x80FD;&#x5F71;&#x54CD;&#x6216;&#x5305;&#x88C5;&#x5668;&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x5B58;&#x5360;&#x7528;&#x5F71;&#x54CD;&#x3002;&#x8FD9;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#x90FD;&#x6CA1;&#x6709;&#x591A;&#x5927;&#x5F71;&#x54CD;&#x3002;&#x7F16;&#x5199;&#x8F6C;&#x53D1;&#x65B9;&#x6CD5;&#x5F88;&#x9EBB;&#x70E6;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x5FC5;&#x987B;&#x53EA;&#x4E3A;&#x6BCF;&#x4E2A;&#x63A5;&#x53E3;&#x7F16;&#x5199;&#x4E00;&#x6B21;&#x53EF;&#x590D;&#x7528;&#x7684;&#x8F6C;&#x53D1;&#x7C7B;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x80FD;&#x4F1A;&#x4E3A;&#x4F60;&#x63D0;&#x4F9B;&#x8F6C;&#x53D1;&#x7C7B;&#x3002;&#x4F8B;&#x5982;&#xFF0C;Guava &#x4E3A;&#x6240;&#x6709;&#x7684;&#x96C6;&#x5408;&#x63A5;&#x53E3;&#x63D0;&#x4F9B;&#x4E86;&#x8F6C;&#x53D1;&#x7C7B; [Guava]&#x3002;</p>
+<p>Inheritance is appropriate only in circumstances where the subclass really is a subtype of the superclass. In other words, a class B should extend a class A only if an &#x201C;is-a&#x201D; relationship exists between the two classes. If you are tempted to have a class B extend a class A, ask yourself the question: Is every B really an A? If you cannot truthfully answer yes to this question, B should not extend A. If the answer is no, it is often the case that B should contain a private instance of A and expose a different API: A is not an essential part of B, merely a detail of its implementation.</p>
+<p>&#x53EA;&#x6709;&#x5B50;&#x7C7B;&#x786E;&#x5B9E;&#x662F;&#x8D85;&#x7C7B;&#x7684;&#x5B50;&#x7C7B;&#x578B;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7EE7;&#x627F;&#x624D;&#x5408;&#x9002;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x4E24;&#x4E2A;&#x7C7B; A&#x3001;B &#x4E4B;&#x95F4;&#x53EA;&#x6709; B &#x6EE1;&#x8DB3;&#x300C;is-a&#x300D;&#x5173;&#x7CFB;&#x65F6;&#x624D;&#x5E94;&#x8BE5;&#x6269;&#x5C55; A&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8BA9; B &#x6269;&#x5C55; A&#xFF0C;&#x90A3;&#x5C31;&#x95EE;&#x95EE;&#x81EA;&#x5DF1;&#xFF1A;&#x6BCF;&#x4E2A; B &#x90FD;&#x662F; A &#x5417;&#xFF1F;&#x5982;&#x679C;&#x4E0D;&#x80FD;&#x5BF9;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x7ED9;&#x51FA;&#x80AF;&#x5B9A;&#x56DE;&#x7B54;&#xFF0C;B &#x4E0D;&#x5E94;&#x8BE5;&#x6269;&#x5C55; A&#xFF1B;&#x5982;&#x679C;&#x7B54;&#x6848;&#x662F;&#x5426;&#x5B9A;&#x7684;&#xFF0C;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;B &#x5E94;&#x8BE5;&#x5305;&#x542B; A &#x7684;&#x79C1;&#x6709;&#x5B9E;&#x4F8B;&#x5E76;&#x66B4;&#x9732;&#x4E0D;&#x540C;&#x7684; API&#xFF1A;A &#x4E0D;&#x662F; B &#x7684;&#x57FA;&#x672C;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#xFF0C;&#x800C;&#x4EC5;&#x4EC5;&#x662F;&#x5176;&#x5B9E;&#x73B0;&#x7684;&#x4E00;&#x4E2A;&#x7EC6;&#x8282;&#x3002;</p>
+<p>There are a number of obvious violations of this principle in the Java platform libraries. For example, a stack is not a vector, so Stack should not extend Vector. Similarly, a property list is not a hash table, so Properties should not extend Hashtable. In both cases, composition would have been preferable.</p>
+<p>&#x5728; Java &#x5E93;&#x4E2D;&#x6709;&#x8BB8;&#x591A;&#x660E;&#x663E;&#x8FDD;&#x53CD;&#x8FD9;&#x4E00;&#x539F;&#x5219;&#x7684;&#x5730;&#x65B9;&#x3002;&#x4F8B;&#x5982;&#xFF0C;stack &#x4E0D;&#x662F; vector&#xFF0C;&#x56E0;&#x6B64; Stack &#x4E0D;&#x5E94;&#x8BE5;&#x7EE7;&#x627F; Vector&#x3002;&#x7C7B;&#x4F3C;&#x5730;&#xFF0C;property &#x5217;&#x8868;&#x4E0D;&#x662F; hash &#x8868;&#xFF0C;&#x56E0;&#x6B64; Properties &#x4E0D;&#x5E94;&#x8BE5;&#x7EE7;&#x627F; Hashtable&#x3002;&#x5728;&#x8FD9;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x590D;&#x5408;&#x90FD;&#x662F;&#x53EF;&#x53D6;&#x7684;&#x3002;</p>
+<p>If you use inheritance where composition is appropriate, you needlessly expose implementation details. The resulting API ties you to the original implementation, forever limiting the performance of your class. More seriously,by exposing the internals you let clients access them directly. At the very least, it can lead to confusing semantics. For example, if p refers to a Properties instance, then p.getProperty(key) may yield different results from p.get(key): the former method takes defaults into account, while the latter method, which is inherited from Hashtable, does not. Most seriously, the client may be able to corrupt invariants of the subclass by modifying the superclass directly. In the case of Properties, the designers intended that only strings be allowed as keys and values, but direct access to the underlying Hashtable allows this invariant to be violated. Once violated, it is no longer possible to use other parts of the Properties API (load and store). By the time this problem was discovered, it was too late to correct it because clients depended on the use of non-string keys and values.</p>
+<p>&#x5982;&#x679C;&#x5728;&#x590D;&#x5408;&#x9002;&#x7528;&#x7684;&#x5730;&#x65B9;&#x4F7F;&#x7528;&#x4E86;&#x7EE7;&#x627F;&#xFF0C;&#x5C31;&#x4F1A;&#x4E0D;&#x5FC5;&#x8981;&#x5730;&#x66B4;&#x9732;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;&#x751F;&#x6210;&#x7684; API &#x5C06;&#x4F60;&#x4E0E;&#x539F;&#x59CB;&#x5B9E;&#x73B0;&#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x6C38;&#x8FDC;&#x9650;&#x5236;&#x4E86;&#x7C7B;&#x7684;&#x6027;&#x80FD;&#x3002;&#x66F4;&#x4E25;&#x91CD;&#x7684;&#x662F;&#xFF0C;&#x901A;&#x8FC7;&#x66B4;&#x9732;&#x5185;&#x90E8;&#x7EC4;&#x4EF6;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8BA9;&#x5BA2;&#x6237;&#x7AEF;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x5B83;&#x4EEC;&#x3002;&#x81F3;&#x5C11;&#xFF0C;&#x5B83;&#x4F1A;&#x5BFC;&#x81F4;&#x8BED;&#x4E49;&#x6DF7;&#x4E71;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C; p &#x5F15;&#x7528;&#x4E86;&#x4E00;&#x4E2A; Properties &#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x90A3;&#x4E48; <code>p.getProperty(key)</code> &#x53EF;&#x80FD;&#x4F1A;&#x4EA7;&#x751F;&#x4E0E; <code>p.get(key)</code> &#x4E0D;&#x540C;&#x7684;&#x7ED3;&#x679C;&#xFF1A;&#x524D;&#x8005;&#x8003;&#x8651;&#x4E86;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x800C;&#x540E;&#x8005;&#xFF08;&#x4ECE; Hashtable &#x7EE7;&#x627F;&#x800C;&#x6765;&#xFF09;&#x5219;&#x4E0D;&#x4F1A;&#x3002;&#x6700;&#x4E25;&#x91CD;&#x7684;&#x662F;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x8D85;&#x7C7B;&#x6765;&#x7834;&#x574F;&#x5B50;&#x7C7B;&#x7684;&#x4E0D;&#x53D8;&#x91CF;&#x3002;&#x5BF9;&#x4E8E; Properties &#x7C7B;&#xFF0C;&#x8BBE;&#x8BA1;&#x8005;&#x5E0C;&#x671B;&#x53EA;&#x5141;&#x8BB8;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x952E;&#x548C;&#x503C;&#xFF0C;&#x4F46;&#x662F;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x5E95;&#x5C42; Hashtable &#x5141;&#x8BB8;&#x8FDD;&#x53CD;&#x8FD9;&#x4E2A;&#x4E0D;&#x53D8;&#x6027;&#x3002;&#x4E00;&#x65E6;&#x8FDD;&#x53CD;&#xFF0C;&#x5C31;&#x4E0D;&#x518D;&#x53EF;&#x80FD;&#x4F7F;&#x7528; Properties API &#x7684;&#x5176;&#x4ED6;&#x90E8;&#x5206;&#xFF08;&#x52A0;&#x8F7D;&#x548C;&#x5B58;&#x50A8;&#xFF09;&#x3002;&#x5F53;&#x53D1;&#x73B0;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x65F6;&#xFF0C;&#x5DF2;&#x7ECF;&#x6765;&#x4E0D;&#x53CA;&#x7EA0;&#x6B63;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x5BA2;&#x6237;&#x7AEF;&#x4F9D;&#x8D56;&#x4E8E;&#x975E;&#x5B57;&#x7B26;&#x4E32;&#x952E;&#x548C;&#x503C;&#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+<p>There is one last set of questions you should ask yourself before deciding to use inheritance in place of composition. Does the class that you contemplate extending have any flaws in its API? If so, are you comfortable propagating those flaws into your class&#x2019;s API? Inheritance propagates any flaws in the superclass&#x2019;s API, while composition lets you design a new API that hides these flaws.</p>
+<p>&#x5728;&#x51B3;&#x5B9A;&#x4F7F;&#x7528;&#x7EE7;&#x627F;&#x800C;&#x4E0D;&#x662F;&#x590D;&#x5408;&#x4E4B;&#x524D;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x95EE;&#x81EA;&#x5DF1;&#x6700;&#x540E;&#x4E00;&#x7EC4;&#x95EE;&#x9898;&#x3002;&#x4F60;&#x6253;&#x7B97;&#x6269;&#x5C55;&#x7684;&#x7C7B;&#x5728;&#x5176; API &#x4E2D;&#x6709;&#x4EFB;&#x4F55;&#x7F3A;&#x9677;&#x5417;&#xFF1F;&#x5982;&#x679C;&#x662F;&#x8FD9;&#x6837;&#xFF0C;&#x4F60;&#x662F;&#x5426;&#x613F;&#x610F;&#x5C06;&#x8FD9;&#x4E9B;&#x7F3A;&#x9677;&#x4F20;&#x64AD;&#x5230;&#x7C7B;&#x7684; API &#x4E2D;&#xFF1F;&#x7EE7;&#x627F;&#x4F20;&#x64AD;&#x8D85;&#x7C7B; API &#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x7F3A;&#x9677;&#xFF0C;&#x800C;&#x590D;&#x5408;&#x5141;&#x8BB8;&#x4F60;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x65B0;&#x7684; API &#x6765;&#x9690;&#x85CF;&#x8FD9;&#x4E9B;&#x7F3A;&#x9677;&#x3002;</p>
+<p>To summarize, inheritance is powerful, but it is problematic because it violates encapsulation. It is appropriate only when a genuine subtype relationship exists between the subclass and the superclass. Even then, inheritance may lead to fragility if the subclass is in a different package from the superclass and the superclass is not designed for inheritance. To avoid this fragility, use composition and forwarding instead of inheritance, especially if an appropriate interface to implement a wrapper class exists. Not only are wrapper classes more robust than subclasses, they are also more powerful.</p>
+<p>&#x603B;&#x800C;&#x8A00;&#x4E4B;&#xFF0C;&#x7EE7;&#x627F;&#x662F;&#x5F3A;&#x5927;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x662F;&#x6709;&#x95EE;&#x9898;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x6253;&#x7834;&#x4E86;&#x5C01;&#x88C5;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x5B50;&#x7C7B;&#x548C;&#x8D85;&#x7C7B;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#x771F;&#x6B63;&#x7684;&#x5B50;&#x7C7B;&#x578B;&#x5173;&#x7CFB;&#x65F6;&#x624D;&#x5408;&#x9002;&#x3002;&#x5373;&#x4F7F;&#x8FD9;&#x6837;&#xFF0C;&#x5982;&#x679C;&#x5B50;&#x7C7B;&#x4E0E;&#x8D85;&#x7C7B;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5305;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x8D85;&#x7C7B;&#x4E0D;&#x662F;&#x4E3A;&#x7EE7;&#x627F;&#x800C;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x7EE7;&#x627F;&#x4E5F;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x7A0B;&#x5E8F;&#x8106;&#x5F31;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x8FD9;&#x79CD;&#x7F3A;&#x9677;&#xFF0C;&#x5E94;&#x4F7F;&#x7528;&#x590D;&#x5408;&#x548C;&#x8F6C;&#x53D1;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5B58;&#x5728;&#x9002;&#x5F53;&#x63A5;&#x53E3;&#x80FD;&#x5B9E;&#x73B0;&#x5305;&#x88C5;&#x5668;&#x7C7B;&#x65F6;&#x66F4;&#x5E94;&#x5982;&#x6B64;&#x3002;&#x5305;&#x88C5;&#x7C7B;&#x4E0D;&#x4EC5;&#x6BD4;&#x5B50;&#x7C7B;&#x66F4;&#x5065;&#x58EE;&#xFF0C;&#x800C;&#x4E14;&#x529F;&#x80FD;&#x66F4;&#x5F3A;&#x5927;&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-4-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Previous Item&#xFF08;&#x4E0A;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-4-Item-17-Minimize-mutability.html">Item 17: Minimize mutability&#xFF08;&#x51CF;&#x5C11;&#x53EF;&#x53D8;&#x6027;&#xFF09;</a></strong></li>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">Item 19: Design and document for inheritance or else prohibit it&#xFF08;&#x7EE7;&#x627F;&#x8981;&#x8BBE;&#x8BA1;&#x826F;&#x597D;&#x5E76;&#x4E14;&#x5177;&#x6709;&#x6587;&#x6863;&#xFF0C;&#x5426;&#x5219;&#x7981;&#x6B62;&#x4F7F;&#x7528;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-4-Item-17-Minimize-mutability.html" class="navigation navigation-prev " aria-label="Previous page: Item 17: Minimize mutability（减少可变性）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html" class="navigation navigation-next " aria-label="Next page: Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 18: Favor composition over inheritance（优先选择复合而不是继承）","level":"1.4.5","depth":2,"next":{"title":"Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）","level":"1.4.6","depth":2,"path":"Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.md","ref":"Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.md","articles":[]},"previous":{"title":"Item 17: Minimize mutability（减少可变性）","level":"1.4.4","depth":2,"path":"Chapter-4/Chapter-4-Item-17-Minimize-mutability.md","ref":"Chapter-4/Chapter-4-Item-17-Minimize-mutability.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.md","mtime":"2021-12-19T09:10:38.041Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

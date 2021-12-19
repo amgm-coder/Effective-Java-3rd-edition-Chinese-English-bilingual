@@ -1,0 +1,1986 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 13: Override clone judiciously（明智地覆盖 clone 方法） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-3-Item-14-Consider-implementing-Comparable.html" />
+    
+    
+    <link rel="prev" href="Chapter-3-Item-12-Always-override-toString.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Chapter-3-Introduction.html">
+            
+                <a href="Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="Chapter-3-Introduction.html">
+            
+                <a href="Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.5" data-path="Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Chapter-7/Chapter-7-Introduction.html">
+            
+                <a href="../Chapter-7/Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="../Chapter-7/Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 13: Override clone judiciously（明智地覆盖 clone 方法）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-3-methods-common-to-all-objects&#xFF08;&#x5BF9;&#x8C61;&#x7684;&#x901A;&#x7528;&#x65B9;&#x6CD5;&#xFF09;">Chapter 3. Methods Common to All Objects&#xFF08;&#x5BF9;&#x8C61;&#x7684;&#x901A;&#x7528;&#x65B9;&#x6CD5;&#xFF09;</h2>
+<h3 id="item-13-override-clone-judiciously&#xFF08;&#x660E;&#x667A;&#x5730;&#x8986;&#x76D6;-clone-&#x65B9;&#x6CD5;&#xFF09;">Item 13: Override clone judiciously&#xFF08;&#x660E;&#x667A;&#x5730;&#x8986;&#x76D6; clone &#x65B9;&#x6CD5;&#xFF09;</h3>
+<p>The Cloneable interface was intended as a mixin interface (Item 20) for classes to advertise that they permit cloning. Unfortunately, it fails to serve this purpose. Its primary flaw is that it lacks a clone method, and Object&#x2019;s clone method is protected. You cannot, without resorting to reflection (Item 65), invoke clone on an object merely because it implements Cloneable. Even a reflective invocation may fail, because there is no guarantee that the object has an accessible clone method. Despite this flaw and many others, the facility is in reasonably wide use, so it pays to understand it. This item tells you how to implement a well-behaved clone method, discusses when it is appropriate to do so, and presents alternatives.</p>
+<p>Cloneable &#x63A5;&#x53E3;&#x7684;&#x76EE;&#x7684;&#x662F;&#x4F5C;&#x4E3A; mixin &#x63A5;&#x53E3;&#xFF08;<a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">Item-20</a>&#xFF09;&#xFF0C;&#x7528;&#x4E8E;&#x8BA9;&#x7C7B;&#x6765;&#x5BA3;&#x79F0;&#x5B83;&#x4EEC;&#x5141;&#x8BB8;&#x514B;&#x9686;&#x3002;&#x4E0D;&#x5E78;&#x7684;&#x662F;&#xFF0C;&#x5B83;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x7684;&#x3002;&#x5B83;&#x7684;&#x4E3B;&#x8981;&#x7F3A;&#x70B9;&#x662F;&#x7F3A;&#x5C11; clone &#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14; Object &#x7C7B;&#x7684; clone &#x65B9;&#x6CD5;&#x662F;&#x53D7;&#x4FDD;&#x62A4;&#x7684;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x6C42;&#x52A9;&#x4E8E;&#x53CD;&#x5C04;&#xFF08;<a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">Item-65</a>&#xFF09;&#xFF0C;&#x5C31;&#x4E0D;&#x80FD;&#x4EC5;&#x4EC5;&#x56E0;&#x4E3A;&#x5BF9;&#x8C61;&#x5B9E;&#x73B0;&#x4E86; Cloneable &#x63A5;&#x53E3;&#x5C31;&#x80FD;&#x8C03;&#x7528; clone &#x65B9;&#x6CD5;&#x3002;&#x5373;&#x4F7F;&#x53CD;&#x5C04;&#x8C03;&#x7528;&#x4E5F;&#x53EF;&#x80FD;&#x5931;&#x8D25;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x5BF9;&#x8C61;&#x5177;&#x6709;&#x53EF;&#x8BBF;&#x95EE;&#x7684; clone &#x65B9;&#x6CD5;&#x3002;&#x5C3D;&#x7BA1;&#x5B58;&#x5728;&#x591A;&#x79CD;&#x7F3A;&#x9677;&#xFF0C;&#x4F46;&#x8BE5;&#x673A;&#x5236;&#x7684;&#x4F7F;&#x7528;&#x8303;&#x56F4;&#x76F8;&#x5F53;&#x5E7F;&#x6CDB;&#xFF0C;&#x56E0;&#x6B64;&#x7406;&#x89E3;&#x5B83;&#x662F;&#x503C;&#x5F97;&#x7684;&#x3002;&#x672C;&#x6761;&#x76EE;&#x5C06;&#x544A;&#x8BC9;&#x4F60;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x884C;&#x4E3A;&#x826F;&#x597D;&#x7684; clone &#x65B9;&#x6CD5;&#xFF0C;&#x8BA8;&#x8BBA;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5E94;&#x8BE5;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x66FF;&#x4EE3;&#x65B9;&#x6848;&#x3002;</p>
+<p><strong>&#x8BD1;&#x6CE8;&#xFF1A;mixin &#x63A5;&#x53E3;&#x5F88;&#x53EF;&#x80FD;&#x662F;&#x6307;&#x4E00;&#x79CD;&#x5E26;&#x6709;&#x5168;&#x90E8;&#x5B9E;&#x73B0;&#x6216;&#x8005;&#x90E8;&#x5206;&#x5B9E;&#x73B0;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5176;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#x662F;&#xFF1A;&#xFF08;1&#xFF09;&#x66F4;&#x597D;&#x7684;&#x8FDB;&#x884C;&#x4EE3;&#x7801;&#x590D;&#x7528;&#xFF1B;&#xFF08;2&#xFF09;&#x95F4;&#x63A5;&#x5B9E;&#x73B0;&#x591A;&#x91CD;&#x7EE7;&#x627F;&#xFF1B;&#xFF08;3&#xFF09;&#x6269;&#x5C55;&#x529F;&#x80FD;&#x3002;&#x4E0E;&#x4F20;&#x7EDF;&#x63A5;&#x53E3;&#x76F8;&#x6BD4;&#xFF0C;&#x4F20;&#x7EDF;&#x63A5;&#x53E3;&#x4E2D;&#x4E0D;&#x5E26;&#x5B9E;&#x73B0;&#xFF0C;&#x800C; mixin &#x63A5;&#x53E3;&#x5E26;&#x6709;&#x5B9E;&#x73B0;&#x3002;</strong></p>
+<p>So what does Cloneable do, given that it contains no methods? It determines the behavior of Object&#x2019;s protected clone implementation: if a class implements Cloneable, Object&#x2019;s clone method returns a field-byfield copy of the object; otherwise it throws CloneNotSupportedException. This is a highly atypical use of interfaces and not one to be emulated. Normally, implementing an interface says something about what a class can do for its clients. In this case, it modifies the behavior of a protected method on a superclass.</p>
+<p>&#x65E2;&#x7136; Cloneable &#x63A5;&#x53E3;&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x5B83;&#x6765;&#x505A;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;&#x5B83;&#x51B3;&#x5B9A;&#x4E86; Object &#x7C7B;&#x53D7;&#x4FDD;&#x62A4;&#x7684; clone &#x5B9E;&#x73B0;&#x7684;&#x884C;&#x4E3A;&#xFF1A;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7C7B;&#x5B9E;&#x73B0;&#x4E86; Cloneable &#x63A5;&#x53E3;&#xFF0C;Object &#x7C7B;&#x7684; clone &#x65B9;&#x6CD5;&#x5219;&#x8FD4;&#x56DE;&#x8BE5;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x9010;&#x5B57;&#x6BB5;&#x62F7;&#x8D1D;&#xFF1B;&#x5426;&#x5219;&#x5B83;&#x4F1A;&#x629B;&#x51FA; CloneNotSupportedException&#x3002;&#x8FD9;&#x662F;&#x63A5;&#x53E3;&#x975E;&#x5E38;&#x4E0D;&#x5178;&#x578B;&#x7684;&#x4E00;&#x79CD;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0D;&#x5E94;&#x8BE5;&#x6548;&#x4EFF;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x7C7B;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;&#x53EF;&#x4EE5;&#x8868;&#x660E;&#x7C7B;&#x80FD;&#x591F;&#x4E3A;&#x5176;&#x5BA2;&#x6237;&#x7AEF;&#x505A;&#x4E9B;&#x4EC0;&#x4E48;&#x3002;&#x5728;&#x672C;&#x4F8B;&#x4E2D;&#xFF0C;&#x5B83;&#x4FEE;&#x6539;&#x4E86;&#x8D85;&#x7C7B;&#x4E0A;&#x53D7;&#x4FDD;&#x62A4;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<p>Though the specification doesn&#x2019;t say it, in practice, a class implementing Cloneable is expected to provide a properly functioning public clone method. In order to achieve this, the class and all of its superclasses must obey a complex, unenforceable, thinly documented protocol. The resulting mechanism is fragile, dangerous, and extralinguistic: it creates objects without calling a constructor.</p>
+<p>&#x867D;&#x7136;&#x89C4;&#x8303;&#x6CA1;&#x6709;&#x8BF4;&#x660E;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#xFF0C;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x5E94;&#x8BE5;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x6B63;&#x5E38;&#x7684;&#x516C;&#x5171; clone &#x65B9;&#x6CD5;&#x3002;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x7C7B;&#x53CA;&#x5176;&#x6240;&#x6709;&#x8D85;&#x7C7B;&#x5FC5;&#x987B;&#x9075;&#x5B88;&#x590D;&#x6742;&#x7684;&#x3001;&#x4E0D;&#x53EF;&#x5F3A;&#x5236;&#x6267;&#x884C;&#x7684;&#x3001;&#x6587;&#x6863;&#x5F88;&#x5C11;&#x7684;&#x534F;&#x8BAE;&#x3002;&#x4EA7;&#x751F;&#x7684;&#x673A;&#x5236;&#x662F;&#x8106;&#x5F31;&#x7684;&#x3001;&#x5371;&#x9669;&#x7684;&#x548C;&#x975E;&#x8BED;&#x8A00;&#x7684;&#xFF1A;&#x5373;&#x5B83;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x800C;&#x4E0D;&#x8C03;&#x7528;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</p>
+<p>The general contract for the clone method is weak. Here it is, copied from the Object specification:</p>
+<p>clone &#x65B9;&#x6CD5;&#x7684;&#x4E00;&#x822C;&#x7EA6;&#x5B9A;&#x5F88;&#x8584;&#x5F31;&#x3002;&#x4E0B;&#x9762;&#x7684;&#x5185;&#x5BB9;&#x662F;&#x4ECE; Object &#x89C4;&#x8303;&#x590D;&#x5236;&#x8FC7;&#x6765;&#x7684;&#xFF1A;</p>
+<hr>
+<p>Creates and returns a copy of this object. The precise meaning of &#x201C;copy&#x201D; may depend on the class of the object. The general intent is that, for any object x,the expression</p>
+<pre><code>x.clone() != x
+</code></pre><p>will be true, and the expression</p>
+<pre><code>x.clone().getClass() == x.getClass()
+</code></pre><p>will be true, but these are not absolute requirements. While it is typically the case that</p>
+<pre><code>x.clone().equals(x)
+</code></pre><p>will be true, this is not an absolute requirement.</p>
+<hr>
+<p>clone &#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x5E76;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x7684;&#x526F;&#x672C;&#x3002;&#x300C;&#x526F;&#x672C;&#x300D;&#x7684;&#x786E;&#x5207;&#x542B;&#x4E49;&#x53EF;&#x80FD;&#x53D6;&#x51B3;&#x4E8E;&#x5BF9;&#x8C61;&#x7684;&#x7C7B;&#x522B;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x5BF9;&#x4E8E;&#x4EFB;&#x4F55;&#x5BF9;&#x8C61; x&#xFF0C;&#x8868;&#x8FBE;&#x5F0F; <code>x.clone() != x</code>&#x3001;<code>x.clone().getClass() == x.getClass()</code> &#x4EE5;&#x53CA; <code>x.clone().equals(x)</code> &#x7684;&#x503C;&#x90FD;&#x5C06;&#x4E3A; true&#xFF0C;&#x4F46;&#x90FD;&#x4E0D;&#x662F;&#x7EDD;&#x5BF9;&#x7684;&#x3002;</p>
+<p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x4EE5;&#x4E0A;&#x60C5;&#x51B5;&#x7684; equals &#x65B9;&#x6CD5;&#x5E94;&#x8986;&#x76D6;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;&#xFF0C;&#x6539;&#x4E3A;&#x6BD4;&#x8F83;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x624D;&#x80FD;&#x5F97;&#x5230; true&#x3002;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;&#x662F;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#xFF0C;&#x7ED3;&#x679C;&#x5FC5;&#x7136;&#x4E3A; false</strong></p>
+<p>By convention, the object returned by this method should be obtained by calling super.clone. If a class and all of its superclasses (except Object) obey this convention, it will be the case that</p>
+<pre><code>x.clone().getClass() == x.getClass().
+</code></pre><p>&#x6309;&#x7167;&#x7EA6;&#x5B9A;&#xFF0C;clone &#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x5E94;&#x8BE5;&#x901A;&#x8FC7;&#x8C03;&#x7528; super.clone() &#x6765;&#x83B7;&#x5F97;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7C7B;&#x548C;&#x5B83;&#x7684;&#x6240;&#x6709;&#x8D85;&#x7C7B;&#xFF08;Object &#x7C7B;&#x9664;&#x5916;&#xFF09;&#x90FD;&#x9075;&#x5B88;&#x8FD9;&#x4E2A;&#x7EA6;&#x5B9A;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8868;&#x8FBE;&#x5F0F; <code>x.clone().getClass() == x.getClass()</code> &#x5219;&#x4E3A; true</p>
+<p>By convention, the returned object should be independent of the object being cloned. To achieve this independence, it may be necessary to modify one or more fields of the object returned by super.clone before returning it.</p>
+<p>&#x6309;&#x7167;&#x7EA6;&#x5B9A;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x5E94;&#x8BE5;&#x72EC;&#x7ACB;&#x4E8E;&#x88AB;&#x514B;&#x9686;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x8FD9;&#x79CD;&#x72EC;&#x7ACB;&#x6027;&#xFF0C;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x5728; super.clone() &#x8FD4;&#x56DE;&#x524D;&#xFF0C;&#x4FEE;&#x6539;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x5B57;&#x6BB5;&#x3002;</p>
+<p>This mechanism is vaguely similar to constructor chaining, except that it isn&#x2019;t enforced: if a class&#x2019;s clone method returns an instance that is not obtained by calling super.clone but by calling a constructor, the compiler won&#x2019;t complain, but if a subclass of that class calls super.clone, the resulting object will have the wrong class, preventing the subclass from clone method from working properly. If a class that overrides clone is final, this convention may be safely ignored, as there are no subclasses to worry about. But if a final class has a clone method that does not invoke super.clone, there is no reason for the class to implement Cloneable, as it doesn&#x2019;t rely on the behavior of Object&#x2019;s clone implementation.</p>
+<p>&#x8FD9;&#x79CD;&#x673A;&#x5236;&#x6709;&#x70B9;&#x7C7B;&#x4F3C;&#x4E8E;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x94FE;&#xFF0C;&#x53EA;&#x662F;&#x6CA1;&#x6709;&#x5F3A;&#x5236;&#x6267;&#x884C;&#xFF1A;</p>
+<ul>
+<li>&#xFF08;1&#xFF09;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7C7B;&#x7684; clone &#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x5B9E;&#x4F8B;&#x4E0D;&#x662F;&#x901A;&#x8FC7;&#x8C03;&#x7528; super.clone() &#x800C;&#x662F;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x6784;&#x9020;&#x51FD;&#x6570;&#x83B7;&#x5F97;&#x7684;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x7C7B;&#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x7C7B;&#x8C03;&#x7528; super.clone()&#xFF0C;&#x7531;&#x6B64;&#x4EA7;&#x751F;&#x7684;&#x5BF9;&#x8C61;&#x7C7B;&#x578B;&#x5C06;&#x662F;&#x9519;&#x8BEF;&#x7684;&#xFF0C;&#x5F71;&#x54CD;&#x5B50;&#x7C7B; clone &#x65B9;&#x6CD5;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#x3002;</li>
+<li>&#xFF08;2&#xFF09;&#x5982;&#x679C;&#x8986;&#x76D6; clone &#x65B9;&#x6CD5;&#x7684;&#x7C7B;&#x662F; final &#x4FEE;&#x9970;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x5B89;&#x5168;&#x5730;&#x5FFD;&#x7565;&#x8FD9;&#x4E2A;&#x7EA6;&#x5B9A;&#xFF0C;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x5B50;&#x7C7B;&#x9700;&#x8981;&#x62C5;&#x5FC3;&#x3002;</li>
+<li>&#xFF08;3&#xFF09;&#x5982;&#x679C;&#x4E00;&#x4E2A; final &#x4FEE;&#x9970;&#x7684;&#x7C7B;&#x4E0D;&#x8C03;&#x7528; super.clone() &#x7684; clone &#x65B9;&#x6CD5;&#x3002;&#x7C7B;&#x6CA1;&#x6709;&#x7406;&#x7531;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E; Object &#x7C7B;&#x7684; clone &#x5B9E;&#x73B0;&#x7684;&#x884C;&#x4E3A;&#x3002;</li>
+</ul>
+<p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x672C;&#x6BB5;&#x63CF;&#x8FF0;&#xFF08;1&#xFF09;&#x7684;&#x4F8B;&#x5B50;&#x5982;&#x4E0B;&#xFF0C;&#x8868;&#x8FBE;&#x5F0F; <code>x.clone().getClass() == x.getClass()</code> &#x503C;&#x4E3A; false</strong></p>
+<pre><code>class Base {
+    @Override protected Object clone() throws CloneNotSupportedException {
+        return new Base(); // &#x2460;
+    }
+}
+
+class BasePro extends Base implements Cloneable {
+    @Override protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public static void main(String[] args) throws Exception {
+        BasePro basePro = new BasePro();
+        System.out.println(basePro.clone().getClass()); // &#x8F93;&#x51FA; class com.example.demo.Base
+        System.out.println(basePro.getClass()); // &#x8F93;&#x51FA; class com.example.demo.BasePro
+    }
+}
+</code></pre><p>&#x53EF;&#x91C7;&#x7528;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x4FEE;&#x590D;</p>
+<ul>
+<li>&#x2460; &#x5904;&#x6539;&#x7528; super.clone()</li>
+<li>&#x79FB;&#x9664; Base &#x7C7B;&#x6574;&#x4E2A; clone() &#x5B9E;&#x73B0;</li>
+</ul>
+<p>Suppose you want to implement Cloneable in a class whose superclass provides a well-behaved clone method. First call super.clone. The object you get back will be a fully functional replica of the original. Any fields declared in your class will have values identical to those of the original. If every field contains a primitive value or a reference to an immutable object, the returned object may be exactly what you need, in which case no further processing is necessary. This is the case, for example, for the PhoneNumber class in Item 11, but note that <strong>immutable classes should never provide a clone method</strong> because it would merely encourage wasteful copying. With that caveat, here&#x2019;s how a clone method for PhoneNumber would look:</p>
+<p>&#x5047;&#x8BBE;&#x4F60;&#x5E0C;&#x671B;&#x5728;&#x4E00;&#x4E2A;&#x7C7B;&#x4E2D;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#xFF0C;&#x8BE5;&#x7C7B;&#x7684;&#x8D85;&#x7C7B;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x8868;&#x73B0;&#x826F;&#x597D;&#x7684; clone &#x65B9;&#x6CD5;&#x3002;&#x9996;&#x5148;&#x8C03;&#x7528; super.clone()&#x3002;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x5C06;&#x662F;&#x539F;&#x59CB;&#x5BF9;&#x8C61;&#x7684;&#x5B8C;&#x6574;&#x529F;&#x80FD;&#x526F;&#x672C;&#x3002;&#x7C7B;&#x4E2D;&#x58F0;&#x660E;&#x7684;&#x4EFB;&#x4F55;&#x5B57;&#x6BB5;&#x90FD;&#x5177;&#x6709;&#x4E0E;&#x539F;&#x59CB;&#x5B57;&#x6BB5;&#x76F8;&#x540C;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x90FD;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x6216;&#x5BF9;&#x4E0D;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x53EF;&#x80FD;&#x6B63;&#x662F;&#x4F60;&#x6240;&#x9700;&#x8981;&#x7684;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4E0D;&#x9700;&#x8981;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x5904;&#x7406;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5BF9;&#x4E8E;<a href="Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">Item-11</a>&#x4E2D;&#x7684; PhoneNumber &#x7C7B;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#xFF0C;<strong>&#x4E0D;&#x53EF;&#x53D8;&#x7C7B;&#x6C38;&#x8FDC;&#x4E0D;&#x5E94;&#x8BE5;&#x63D0;&#x4F9B; clone &#x65B9;&#x6CD5;</strong>&#xFF0C;because it would merely encourage wasteful copying. &#x6709;&#x4E86;&#x8FD9;&#x4E2A;&#x8B66;&#x544A;&#xFF0C;&#x4EE5;&#x4E0B;&#x662F; PhoneNumber &#x7C7B;&#x7684; clone &#x65B9;&#x6CD5;&#x6982;&#x8C8C;&#xFF1A;</p>
+<pre><code>// Clone method for class with no references to mutable state
+@Override public PhoneNumber clone() {
+    try {
+        return (PhoneNumber) super.clone();
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError(); // Can&apos;t happen
+    }
+}
+</code></pre><p>In order for this method to work, the class declaration for PhoneNumber would have to be modified to indicate that it implements Cloneable. Though Object&#x2019;s clone method returns Object, this clone method returns PhoneNumber. It is legal and desirable to do this because Java supports covariant return types. In other words, an overriding method&#x2019;s return type can be a subclass of the overridden method&#x2019;s return type. This eliminates the need for casting in the client. We must cast the result of super.clone from Object to PhoneNumber before returning it, but the cast is guaranteed to succeed.</p>
+<p>&#x4E3A;&#x4E86;&#x8BA9;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5DE5;&#x4F5C;&#xFF0C;&#x5FC5;&#x987B;&#x4FEE;&#x6539; PhoneNumber &#x7C7B;&#x7684;&#x58F0;&#x660E;&#xFF0C;&#x4F7F;&#x4E4B;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#x3002;&#x867D;&#x7136; Object &#x7684; clone &#x65B9;&#x6CD5;&#x8FD4;&#x56DE; Object &#x7C7B;&#x578B;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A; clone &#x65B9;&#x6CD5;&#x8FD4;&#x56DE; PhoneNumber &#x7C7B;&#x578B;&#x3002;&#x8FD9;&#x6837;&#x505A;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x4E5F;&#x662F;&#x53EF;&#x53D6;&#x7684;&#xFF0C;&#x56E0;&#x4E3A; Java &#x7684;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x652F;&#x6301;&#x534F;&#x53D8;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x8986;&#x76D6;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x662F;&#x88AB;&#x8986;&#x76D6;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x7684;&#x5B50;&#x7C7B;&#x3002;&#x8FD9;&#x6837;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x4E2D;&#x8FDB;&#x884C;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x3002;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x628A;&#x6E90;&#x81EA; Object &#x7C7B;&#x7684; super.clone() &#x65B9;&#x6CD5;&#x5728;&#x8FD4;&#x56DE;&#x524D;&#x5C06;&#x7ED3;&#x679C;&#x8F6C;&#x6362;&#x4E3A; PhoneNumber &#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x7C7B;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x80AF;&#x5B9A;&#x4F1A;&#x6210;&#x529F;&#x3002;</p>
+<p>The call to super.clone is contained in a try-catch block. This is because Object declares its clone method to throw CloneNotSupportedException, which is a checked exception. Because PhoneNumber implements Cloneable, we know the call to super.clone will succeed. The need for this boilerplate indicates that CloneNotSupportedException should have been unchecked (Item 71).</p>
+<p>&#x5C06; super.clone() &#x5305;&#x542B;&#x5728; try-catch &#x5757;&#x4E2D;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A; Object &#x7C7B;&#x58F0;&#x660E;&#x7684; clone &#x65B9;&#x6CD5;&#x4F1A;&#x629B;&#x51FA; CloneNotSupportedException&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x79CD; checked exception&#x3002;&#x56E0;&#x4E3A; PhoneNumber &#x7C7B;&#x5B9E;&#x73B0;&#x4E86; Cloneable &#x63A5;&#x53E3;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x5BF9; super.clone() &#x7684;&#x8C03;&#x7528;&#x5C06;&#x4F1A;&#x6210;&#x529F;&#x3002;&#x8FD9;&#x4E2A;&#x6837;&#x677F;&#x6587;&#x4EF6;&#x7684;&#x9700;&#x6C42;&#x8868;&#x660E; CloneNotSupportedException &#x5E94;&#x8BE5;&#x662F; unchecked exception&#xFF08;<a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">Item-71</a>&#xFF09;&#x3002;</p>
+<p>If an object contains fields that refer to mutable objects, the simple clone implementation shown earlier can be disastrous. For example, consider the Stack class in Item 7:</p>
+<p>&#x5982;&#x679C;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x6BB5;&#x5305;&#x542B;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x524D;&#x9762;&#x6240;&#x793A; clone &#x65B9;&#x6CD5;&#x7684;&#x8FD9;&#x79CD;&#x7B80;&#x6613;&#x5B9E;&#x73B0;&#x53EF;&#x80FD;&#x5F15;&#x53D1;&#x707E;&#x96BE;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8003;&#x8651; <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">Item-7</a> &#x4E2D;&#x7684; Stack &#x7C7B;&#xFF1A;</p>
+<pre><code>public class Stack {
+    private Object[] elements;
+    private int size = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
+
+    public Stack() {
+      this.elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+
+    public void push(Object e) {
+        ensureCapacity();
+        elements[size++] = e;
+    }
+
+    public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+        Object result = elements[--size];
+        elements[size] = null; // Eliminate obsolete reference
+        return result;
+    }
+
+    // Ensure space for at least one more element.
+    private void ensureCapacity() {
+        if (elements.length == size)
+            elements = Arrays.copyOf(elements, 2 * size + 1);
+    }
+}
+</code></pre><p>Suppose you want to make this class cloneable. If the clone method merely returns super.clone(), the resulting Stack instance will have the correct value in its size field, but its elements field will refer to the same array as the original Stack instance. Modifying the original will destroy the invariants in the clone and vice versa. You will quickly find that your program produces nonsensical results or throws a NullPointerException.</p>
+<p>&#x5047;&#x8BBE;&#x4F60;&#x60F3;&#x8BA9;&#x8FD9;&#x4E2A;&#x7C7B;&#x53EF;&#x514B;&#x9686;&#x3002;&#x5982;&#x679C; clone &#x65B9;&#x6CD5;&#x53EA;&#x8FD4;&#x56DE; super.clone()&#xFF0C;&#x5F97;&#x5230;&#x7684; Stack &#x5B9E;&#x4F8B;&#x5728;&#x5176; size &#x5B57;&#x6BB5;&#x4E2D;&#x4F1A;&#x6709;&#x6B63;&#x786E;&#x7684;&#x503C;&#xFF0C;&#x4F46;&#x5176; elements &#x5B57;&#x6BB5;&#x5C06;&#x5F15;&#x7528;&#x4E0E;&#x539F;&#x59CB; Stack &#x5B9E;&#x4F8B;&#x76F8;&#x540C;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x4FEE;&#x6539;&#x521D;&#x59CB;&#x503C;&#x5C06;&#x7834;&#x574F;&#x514B;&#x9686;&#x7684;&#x4E0D;&#x53D8;&#x6027;&#xFF0C;&#x53CD;&#x4E4B;&#x4EA6;&#x7136;&#x3002;&#x4F60;&#x5C06;&#x5F88;&#x5FEB;&#x53D1;&#x73B0;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x4EA7;&#x751F;&#x4E86;&#x65E0;&#x610F;&#x4E49;&#x7684;&#x7ED3;&#x679C;&#x6216;&#x629B;&#x51FA; NullPointerException&#x3002;</p>
+<p>This situation could never occur as a result of calling the sole constructor in the Stack class. In effect, the clone method functions as a constructor; you must ensure that it does no harm to the original object and that it properly establishes invariants on the clone. In order for the clone method on Stack to work properly, it must copy the internals of the stack. The easiest way to do this is to call clone recursively on the elements array:</p>
+<p>&#x8C03;&#x7528; Stack &#x7C7B;&#x4E2D;&#x552F;&#x4E00;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x60C5;&#x51B5;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x53D1;&#x751F;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;clone &#x65B9;&#x6CD5;&#x5C06;&#x5145;&#x5F53;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1B;&#x4F60;&#x5FC5;&#x987B;&#x786E;&#x4FDD;&#x5B83;&#x4E0D;&#x4F1A;&#x5BF9;&#x539F;&#x59CB;&#x5BF9;&#x8C61;&#x9020;&#x6210;&#x4F24;&#x5BB3;&#xFF0C;&#x5E76;&#x4E14; clone &#x65B9;&#x6CD5;&#x6B63;&#x786E;&#x5730;&#x5B9E;&#x73B0;&#x4E86;&#x4E0D;&#x53D8;&#x6027;&#x3002;&#x4E3A;&#x4E86;&#x4F7F; Stack &#x7C7B;&#x4E0A;&#x7684; clone &#x65B9;&#x6CD5;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#xFF0C;&#x5B83;&#x5FC5;&#x987B;&#x590D;&#x5236; Stack &#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x5185;&#x90E8;&#x3002;&#x6700;&#x7B80;&#x5355;&#x7684;&#x505A;&#x6CD5;&#x662F;&#x5728; elements &#x5B57;&#x6BB5;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x7EC4;&#x9012;&#x5F52;&#x8C03;&#x7528; clone &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code>// Clone method for class with references to mutable state
+@Override
+public Stack clone() {
+    try {
+        Stack result = (Stack) super.clone();
+        result.elements = elements.clone();
+        return result;
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError();
+    }
+}
+</code></pre><p>Note that we do not have to cast the result of elements.clone to Object[]. Calling clone on an array returns an array whose runtime and compile-time types are identical to those of the array being cloned. This is the preferred idiom to duplicate an array. In fact, arrays are the sole compelling use of the clone facility.</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x5C06; <code>elements.clone</code> &#x7684;&#x7ED3;&#x679C;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x5230; <code>Object[]</code>&#x3002;&#x5728;&#x6570;&#x7EC4;&#x4E0A;&#x8C03;&#x7528; clone &#x65B9;&#x6CD5;&#x5C06;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x8BE5;&#x6570;&#x7EC4;&#x7684;&#x8FD0;&#x884C;&#x65F6;&#x548C;&#x7F16;&#x8BD1;&#x65F6;&#x7C7B;&#x578B;&#x4E0E;&#x88AB;&#x514B;&#x9686;&#x7684;&#x6570;&#x7EC4;&#x76F8;&#x540C;&#x3002;&#x8FD9;&#x662F;&#x590D;&#x5236;&#x6570;&#x7EC4;&#x7684;&#x9996;&#x9009;&#x4E60;&#x60EF;&#x7528;&#x6CD5;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x590D;&#x5236;&#x6570;&#x7EC4;&#x662F; clone &#x673A;&#x5236;&#x552F;&#x4E00;&#x4EE4;&#x4EBA;&#x4FE1;&#x670D;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;</p>
+<p>Note also that the earlier solution would not work if the elements field were final because clone would be prohibited from assigning a new value to the field. This is a fundamental problem: like serialization, the Cloneable architecture is incompatible with normal use of final fields referring to mutable objects, except in cases where the mutable objects may be safely shared between an object and its clone. In order to make a class cloneable, it may be necessary to remove final modifiers from some fields.</p>
+<p>&#x8FD8;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C; elements &#x5B57;&#x6BB5;&#x662F; final &#x4FEE;&#x9970;&#x7684;&#xFF0C;&#x4E0A;&#x8FF0;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5C31;&#x65E0;&#x6CD5;&#x5DE5;&#x4F5C;&#xFF0C;&#x56E0;&#x4E3A; clone &#x65B9;&#x6CD5;&#x5C06;&#x88AB;&#x7981;&#x6B62;&#x4E3A;&#x5B57;&#x6BB5;&#x5206;&#x914D;&#x65B0;&#x503C;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x7840;&#x95EE;&#x9898;&#xFF1A;&#x4E0E;&#x5E8F;&#x5217;&#x5316;&#x4E00;&#x6837;&#xFF0C;&#x53EF;&#x514B;&#x9686;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x4E0E;&#x4F7F;&#x7528; final &#x4FEE;&#x9970;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x5F15;&#x7528;&#x7684;&#x5E38;&#x7528;&#x65B9;&#x5F0F;&#x4E0D;&#x517C;&#x5BB9;&#xFF0C;&#x9664;&#x975E;&#x5728;&#x5BF9;&#x8C61;&#x4E0E;&#x5176;&#x514B;&#x9686;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x5B89;&#x5168;&#x5730;&#x5171;&#x4EAB;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x3002;&#x4E3A;&#x4E86;&#x4F7F;&#x7C7B;&#x53EF;&#x514B;&#x9686;&#xFF0C;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x4ECE;&#x67D0;&#x4E9B;&#x5B57;&#x6BB5;&#x4E2D;&#x5220;&#x9664; final &#x4FEE;&#x9970;&#x7B26;&#x3002;</p>
+<p>It is not always sufficient merely to call clone recursively. For example,suppose you are writing a clone method for a hash table whose internals consist of an array of buckets, each of which references the first entry in a linked list of key-value pairs. For performance, the class implements its own lightweight singly linked list instead of using java.util.LinkedList internally:</p>
+<p>&#x4EC5;&#x4EC5;&#x9012;&#x5F52;&#x8C03;&#x7528; clone &#x65B9;&#x6CD5;&#x5E76;&#x4E0D;&#x603B;&#x662F;&#x8DB3;&#x591F;&#x7684;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x6B63;&#x5728;&#x4E3A; HashTable &#x7F16;&#x5199;&#x4E00;&#x4E2A; clone &#x65B9;&#x6CD5;&#xFF0C;HashTable &#x7684;&#x5185;&#x90E8;&#x7531;&#x4E00;&#x7EC4; bucket &#x7EC4;&#x6210;&#xFF0C;&#x6BCF;&#x4E2A; bucket &#x5F15;&#x7528;&#x952E;-&#x503C;&#x5BF9;&#x94FE;&#x8868;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x6761;&#x76EE;&#x3002;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x6027;&#x80FD;&#xFF0C;&#x7C7B;&#x5B9E;&#x73B0;&#x4E86;&#x81EA;&#x5DF1;&#x7684;&#x8F7B;&#x91CF;&#x7EA7;&#x5355;&#x94FE;&#x8868;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x5185;&#x90E8;&#x4F7F;&#x7528; <code>java.util.LinkedList</code>&#xFF1A;</p>
+<pre><code>public class HashTable implements Cloneable {
+    private Entry[] buckets = ...;
+
+    private static class Entry {
+        final Object key;
+        Object value;
+        Entry next;
+
+        Entry(Object key, Object value, Entry next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    } ... // Remainder omitted
+}
+</code></pre><p>Suppose you merely clone the bucket array recursively, as we did for Stack:</p>
+<p>&#x5047;&#x8BBE;&#x4F60;&#x53EA;&#x662F;&#x50CF;&#x5BF9; Stack &#x6240;&#x505A;&#x7684;&#x90A3;&#x6837;&#xFF0C;&#x9012;&#x5F52;&#x514B;&#x9686; bucket &#x6570;&#x7EC4;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre><code>// Broken clone method - results in shared mutable state!
+@Override
+public HashTable clone() {
+    try {
+        HashTable result = (HashTable) super.clone();
+        result.buckets = buckets.clone();
+        return result;
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError();
+    }
+}
+</code></pre><p>Though the clone has its own bucket array, this array references the same linked lists as the original, which can easily cause nondeterministic behavior in both the clone and the original. To fix this problem, you&#x2019;ll have to copy the linked list that comprises each bucket. Here is one common approach:</p>
+<p>&#x5C3D;&#x7BA1; clone &#x65B9;&#x6CD5;&#x6709;&#x81EA;&#x5DF1;&#x7684; bucket &#x6570;&#x7EC4;&#xFF0C;&#x4F46;&#x8BE5;&#x6570;&#x7EC4;&#x5F15;&#x7528;&#x7684;&#x94FE;&#x63A5;&#x5217;&#x8868;&#x4E0E;&#x539F;&#x59CB;&#x94FE;&#x8868;&#x76F8;&#x540C;&#xFF0C;&#x8FD9;&#x5F88;&#x5BB9;&#x6613;&#x5BFC;&#x81F4;&#x514B;&#x9686;&#x548C;&#x539F;&#x59CB;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x884C;&#x4E3A;&#x3002;&#x8981;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x590D;&#x5236;&#x5305;&#x542B;&#x6BCF;&#x4E2A; bucket &#x7684;&#x94FE;&#x8868;&#x3002;&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x4E2A;&#x5E38;&#x89C1;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code>// Recursive clone method for class with complex mutable state
+public class HashTable implements Cloneable {
+    private Entry[] buckets = ...;
+
+    private static class Entry {
+        final Object key;
+        Object value;
+        Entry next;
+
+        Entry(Object key, Object value, Entry next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        // Recursively copy the linked list headed by this Entry
+        Entry deepCopy() {
+            return new Entry(key, value,next == null ? null : next.deepCopy());
+        }
+    }
+
+    @Override
+    public HashTable clone() {
+        try {
+            HashTable result = (HashTable) super.clone();
+            result.buckets = new Entry[buckets.length];
+
+            for (int i = 0; i &lt; buckets.length; i++)
+                if (buckets[i] != null)
+                    result.buckets[i] = buckets[i].deepCopy();
+
+            return result;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    } ... // Remainder omitted
+}
+</code></pre><p>The private class HashTable.Entry has been augmented to support a &#x201C;deep copy&#x201D; method. The clone method on HashTable allocates a new buckets array of the proper size and iterates over the original buckets array,deep-copying each nonempty bucket. The deepCopy method on Entry invokes itself recursively to copy the entire linked list headed by the entry. While this technique is cute and works fine if the buckets aren&#x2019;t too long, it is not a good way to clone a linked list because it consumes one stack frame for each element in the list. If the list is long, this could easily cause a stack overflow. To prevent this from happening, you can replace the recursion in deepCopy with iteration:</p>
+<p>&#x79C1;&#x6709;&#x5185;&#x90E8;&#x7C7B; HashTable.Entry &#x5DF2;&#x7ECF;&#x88AB;&#x589E;&#x5F3A;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x8FDB;&#x884C;&#x300C;&#x6DF1;&#x62F7;&#x8D1D;&#x300D;&#x7684;&#x65B9;&#x6CD5;&#x3002;HashTable &#x4E0A;&#x7684; clone &#x65B9;&#x6CD5;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x5927;&#x5C0F;&#x5408;&#x9002;&#x7684;&#x65B0; buckets &#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x904D;&#x5386;&#x539F;&#x59CB; buckets &#x6570;&#x7EC4;&#xFF0C;&#x5BF9;&#x6BCF;&#x4E2A;&#x975E;&#x7A7A; buckets &#x5143;&#x7D20;&#x8FDB;&#x884C;&#x6DF1;&#x62F7;&#x8D1D;&#x3002;Entry &#x7C7B;&#x7684; deepCopy() &#x65B9;&#x6CD5;&#x4F1A;&#x88AB;&#x9012;&#x5F52;&#x8C03;&#x7528;&#x76F4;&#x81F3;&#x590D;&#x5236;&#x5B8C;&#x6574;&#x4E2A;&#x94FE;&#x8868;&#xFF08;&#x8BE5;&#x94FE;&#x8868;&#x4EE5; Entry &#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;&#x5934;&#x8282;&#x70B9;&#xFF09;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x867D;&#x7136;&#x5F88;&#x7075;&#x6D3B;&#xFF0C;&#x800C;&#x4E14;&#x5728; buckets &#x4E0D;&#x592A;&#x957F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x5730;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x514B;&#x9686;&#x94FE;&#x8868;&#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4E3A;&#x94FE;&#x8868;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x6D88;&#x8017;&#x4E00;&#x4E2A;&#x5806;&#x6808;&#x5E27;&#x3002;&#x5982;&#x679C;&#x5217;&#x8868;&#x5F88;&#x957F;&#xFF0C;&#x5F88;&#x5BB9;&#x6613;&#x5BFC;&#x81F4;&#x5806;&#x6808;&#x6EA2;&#x51FA;&#x3002;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x7684;&#x53D1;&#x751F;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x8FED;&#x4EE3;&#x66FF;&#x6362; deepCopy() &#x65B9;&#x6CD5;&#x7684;&#x9012;&#x5F52;&#x8C03;&#x7528;&#xFF1A;</p>
+<pre><code>// Iteratively copy the linked list headed by this Entry
+Entry deepCopy() {
+    Entry result = new Entry(key, value, next);
+    for (Entry p = result; p.next != null; p = p.next)
+        p.next = new Entry(p.next.key, p.next.value, p.next.next);
+    return result;
+}
+</code></pre><p>A final approach to cloning complex mutable objects is to call super.clone, set all of the fields in the resulting object to their initial state,and then call higher-level methods to regenerate the state of the original object. In the case of our HashTable example, the buckets field would be initialized to a new bucket array, and the put(key, value) method (not shown) would be invoked for each key-value mapping in the hash table being cloned. This approach typically yields a simple, reasonably elegant clone method that does not run as quickly as one that directly manipulates the innards of the clone. While this approach is clean, it is antithetical to the whole Cloneable architecture because it blindly overwrites the field-by-field object copy that forms the basis of the architecture.</p>
+<p>&#x514B;&#x9686;&#x590D;&#x6742;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x7684;&#x6700;&#x540E;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x662F;&#x8C03;&#x7528; super.clone()&#xFF0C;&#x5C06;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x4E3A;&#x521D;&#x59CB;&#x72B6;&#x6001;&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;&#x66F4;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#x65B9;&#x6CD5;&#x91CD;&#x65B0;&#x751F;&#x6210;&#x539F;&#x59CB;&#x5BF9;&#x8C61;&#x7684;&#x72B6;&#x6001;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x7684; HashTable &#x793A;&#x4F8B;&#x4E2D;&#xFF0C;buckets &#x5B57;&#x6BB5;&#x5C06;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x7684; bucket &#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x4E8E;&#x514B;&#x9686;&#x7684; hash &#x8868;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x952E;&#x503C;&#x6620;&#x5C04;&#x5C06;&#x8C03;&#x7528; put(key, value) &#x65B9;&#x6CD5;&#xFF08;&#x672A;&#x663E;&#x793A;&#xFF09;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x901A;&#x5E38;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x3001;&#x76F8;&#x5F53;&#x4F18;&#x96C5;&#x7684; clone &#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x7684;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#x4E0D;&#x5982;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x514B;&#x9686;&#x7684;&#x5185;&#x90E8;&#x7684;&#x65B9;&#x6CD5;&#x5FEB;&#x3002;&#x867D;&#x7136;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x5F88;&#x7B80;&#x6D01;&#xFF0C;&#x4F46;&#x5B83;&#x4E0E;&#x6574;&#x4E2A;&#x53EF;&#x514B;&#x9686;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x662F;&#x5BF9;&#x7ACB;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x76F2;&#x76EE;&#x5730;&#x8986;&#x76D6;&#x4E86;&#x6784;&#x6210;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x57FA;&#x7840;&#x7684;&#x9010;&#x5B57;&#x6BB5;&#x5BF9;&#x8C61;&#x526F;&#x672C;&#x3002;</p>
+<p>Like a constructor, a clone method must never invoke an overridable method on the clone under construction (Item 19). If clone invokes a method that is overridden in a subclass, this method will execute before the subclass has had a chance to fix its state in the clone, quite possibly leading to corruption in the clone and the original. Therefore, the put(key, value) method discussed in the previous paragraph should be either final or private. (If it is private, it is presumably the &#x201C;helper method&#x201D; for a nonfinal public method.)</p>
+<p>&#x4E0E;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E00;&#x6837;&#xFF0C;clone &#x65B9;&#x6CD5;&#x7EDD;&#x4E0D;&#x80FD;&#x5728;&#x6B63;&#x5728;&#x6784;&#x5EFA;&#x7684;&#x514B;&#x9686;&#x4E0A;&#x8C03;&#x7528;&#x53EF;&#x8986;&#x76D6;&#x65B9;&#x6CD5;&#xFF08;<a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">Item-19</a>&#xFF09;&#x3002;&#x5982;&#x679C; clone &#x8C03;&#x7528;&#x4E00;&#x4E2A;&#x5728;&#x5B50;&#x7C7B;&#x4E2D;&#x88AB;&#x91CD;&#x5199;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5C06;&#x5728;&#x5B50;&#x7C7B;&#x6709;&#x673A;&#x4F1A;&#x4FEE;&#x590D;&#x5176;&#x5728;&#x514B;&#x9686;&#x4E2D;&#x7684;&#x72B6;&#x6001;&#x4E4B;&#x524D;&#x6267;&#x884C;&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x514B;&#x9686;&#x548C;&#x539F;&#x59CB;&#x7684;&#x7834;&#x574F;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x524D;&#x4E00;&#x6BB5;&#x4E2D;&#x8BA8;&#x8BBA;&#x7684; put(key, value) &#x65B9;&#x6CD5;&#x5E94;&#x8BE5;&#x662F; final &#x4FEE;&#x9970;&#x6216; private &#x4FEE;&#x9970;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#xFF08;&#x5982;&#x679C;&#x5B83;&#x662F;&#x79C1;&#x6709;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x53EF;&#x80FD;&#x662F;&#x6CA1;&#x6709; final &#x4FEE;&#x9970;&#x7684;&#x516C;&#x5171;&#x300C;&#x52A9;&#x624B;&#x65B9;&#x6CD5;&#x300D;&#x3002;)</p>
+<p>Object&#x2019;s clone method is declared to throw CloneNotSupportedException, but overriding methods need not. <strong>Public clone methods should omit the throws clause,</strong> as methods that don&#x2019;t throw checked exceptions are easier to use (Item 71).</p>
+<p>&#x5BF9;&#x8C61;&#x7684; clone &#x65B9;&#x6CD5;&#x88AB;&#x58F0;&#x660E;&#x4E3A;&#x629B;&#x51FA; CloneNotSupportedException&#xFF0C;&#x4F46;&#x662F;&#x91CD;&#x5199;&#x65B9;&#x6CD5;&#x4E0D;&#x9700;&#x8981;&#x3002;<strong>&#x516C;&#x5171;&#x514B;&#x9686;&#x65B9;&#x6CD5;&#x5E94;&#x8BE5;&#x7701;&#x7565; throw &#x5B50;&#x53E5;&#xFF0C;</strong> &#x4F5C;&#x4E3A;&#x4E0D;&#x629B;&#x51FA;&#x53D7;&#x63A7;&#x5F02;&#x5E38;&#x7684;&#x65B9;&#x6CD5;&#x66F4;&#x5BB9;&#x6613;&#x4F7F;&#x7528;&#xFF08;<a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">Item-71</a>&#xFF09;&#x3002;</p>
+<p>You have two choices when designing a class for inheritance (Item 19), but whichever one you choose, the class should not implement Cloneable. You may choose to mimic the behavior of Object by implementing a properly functioning protected clone method that is declared to throw CloneNotSupportedException. This gives subclasses the freedom to implement Cloneable or not, just as if they extended Object directly.Alternatively, you may choose not to implement a working clone method, and to prevent subclasses from implementing one, by providing the following degenerate clone implementation:</p>
+<p>&#x7528;&#x7EE7;&#x627F;&#xFF08;<a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">Item-19</a>&#xFF09;&#x65B9;&#x5F0F;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;&#x7C7B;&#x65F6;&#xFF0C;&#x4F60;&#x6709;&#x4E24;&#x79CD;&#x9009;&#x62E9;&#xFF0C;&#x4F46;&#x662F;&#x65E0;&#x8BBA;&#x4F60;&#x9009;&#x62E9;&#x54EA;&#x4E00;&#x79CD;&#xFF0C;&#x90FD;&#x4E0D;&#x5E94;&#x8BE5;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x901A;&#x8FC7;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x6B63;&#x5E38;&#x7684;&#x53D7;&#x4FDD;&#x62A4;&#x514B;&#x9686;&#x65B9;&#x6CD5;&#x6765;&#x6A21;&#x62DF; Object &#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x58F0;&#x660E;&#x4E3A;&#x629B;&#x51FA; CloneNotSupportedException&#x3002;&#x8FD9;&#x7ED9;&#x5B50;&#x7C7B;&#x5B9E;&#x73B0; Cloneable &#x6216;&#x4E0D;&#x5B9E;&#x73B0; Cloneable &#x7684;&#x81EA;&#x7531;&#xFF0C;&#x5C31;&#x50CF;&#x5B83;&#x4EEC;&#x76F4;&#x63A5;&#x6269;&#x5C55;&#x5BF9;&#x8C61;&#x4E00;&#x6837;&#x3002;&#x6216;&#x8005;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x4E0D;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x7684;&#x514B;&#x9686;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x63D0;&#x4F9B;&#x4EE5;&#x4E0B;&#x9000;&#x5316;&#x7684;&#x514B;&#x9686;&#x5B9E;&#x73B0;&#x6765;&#x9632;&#x6B62;&#x5B50;&#x7C7B;&#x5B9E;&#x73B0;&#x5B83;&#xFF1A;</p>
+<pre><code>// clone method for extendable class not supporting Cloneable
+@Override
+protected final Object clone() throws CloneNotSupportedException {
+    throw new CloneNotSupportedException();
+}
+</code></pre><p>There is one more detail that bears noting. If you write a thread-safe class that implements Cloneable, remember that its clone method must be properly synchronized, just like any other method (Item 78). Object&#x2019;s clone method is not synchronized, so even if its implementation is otherwise satisfactory, you may have to write a synchronized clone method that returns super.clone().</p>
+<p>&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x7EC6;&#x8282;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x3002;&#x5982;&#x679C;&#x4F60;&#x7F16;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86; Cloneable &#x63A5;&#x53E3;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7C7B;&#xFF0C;&#x8BF7;&#x8BB0;&#x4F4F;&#x5B83;&#x7684; clone &#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x6B63;&#x786E;&#x540C;&#x6B65;&#xFF0C;&#x5C31;&#x50CF;&#x5176;&#x4ED6;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x4E00;&#x6837;&#xFF08;<a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">Item-78</a>&#xFF09;&#x3002;Object &#x7C7B;&#x7684; clone &#x65B9;&#x6CD5;&#x4E0D;&#x662F;&#x540C;&#x6B65;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5373;&#x4F7F;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x5728;&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x662F;&#x4EE4;&#x4EBA;&#x6EE1;&#x610F;&#x7684;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x8FD4;&#x56DE; super.clone() &#x7684;&#x540C;&#x6B65; clone &#x65B9;&#x6CD5;&#x3002;</p>
+<p>To recap, all classes that implement Cloneable should override clone with a public method whose return type is the class itself. This method should first call super.clone, then fix any fields that need fixing. Typically, this means copying any mutable objects that comprise the internal &#x201C;deep structure&#x201D; of the object and replacing the clone&#x2019;s references to these objects with references to their copies. While these internal copies can usually be made by calling clone recursively, this is not always the best approach. If the class contains only primitive fields or references to immutable objects, then it is likely the case that no fields need to be fixed. There are exceptions to this rule. For example, a field representing a serial number or other unique ID will need to be fixed even if it is primitive or immutable.</p>
+<p>&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x90FD;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x4E3A;&#x7C7B;&#x672C;&#x8EAB;&#x7684;&#x516C;&#x5171;&#x65B9;&#x6CD5;&#x8986;&#x76D6; clone&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5E94;&#x8BE5;&#x9996;&#x5148;&#x8C03;&#x7528; super.clone()&#xFF0C;&#x7136;&#x540E;&#x300C;&#x4FEE;&#x590D;&#x300D;&#x4EFB;&#x4F55;&#x9700;&#x8981;&#x300C;&#x4FEE;&#x590D;&#x300D;&#x7684;&#x5B57;&#x6BB5;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x590D;&#x5236;&#x4EFB;&#x4F55;&#x5305;&#x542B;&#x5BF9;&#x8C61;&#x5185;&#x90E8;&#x300C;&#x6DF1;&#x5C42;&#x7ED3;&#x6784;&#x300D;&#x7684;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x5C06;&#x514B;&#x9686;&#x5BF9;&#x8C61;&#x5BF9;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x66FF;&#x6362;&#x4E3A;&#x5BF9;&#x5176;&#x526F;&#x672C;&#x7684;&#x5F15;&#x7528;&#x3002;&#x867D;&#x7136;&#x8FD9;&#x4E9B;&#x5185;&#x90E8;&#x526F;&#x672C;&#x901A;&#x5E38;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x9012;&#x5F52;&#x8C03;&#x7528; clone &#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x8FD9;&#x5E76;&#x4E0D;&#x603B;&#x662F;&#x6700;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x7C7B;&#x53EA;&#x5305;&#x542B;&#x57FA;&#x672C;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#x6216;&#x5BF9;&#x4E0D;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x5F88;&#x53EF;&#x80FD;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x590D;&#x4EFB;&#x4F55;&#x5B57;&#x6BB5;&#x3002;&#x8FD9;&#x6761;&#x89C4;&#x5219;&#x4E5F;&#x6709;&#x4F8B;&#x5916;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8868;&#x793A;&#x5E8F;&#x5217;&#x53F7;&#x6216;&#x5176;&#x4ED6;&#x552F;&#x4E00; ID &#x7684;&#x5B57;&#x6BB5;&#x9700;&#x8981;&#x4FEE;&#x590D;&#xFF0C;&#x5373;&#x4F7F;&#x5B83;&#x662F;&#x57FA;&#x672C;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6216;&#x4E0D;&#x53EF;&#x53D8;&#x7684;&#x3002;</p>
+<p>Is all this complexity really necessary? Rarely. If you extend a class that already implements Cloneable, you have little choice but to implement a well-behaved clone method. Otherwise, you are usually better off providing an alternative means of object copying. A better approach to object copying is to provide a copy constructor or copy factory. A copy constructor is simply a constructor that takes a single argument whose type is the class containing the constructor, for example,</p>
+<p>&#x641E;&#x8FD9;&#x4E48;&#x590D;&#x6742;&#x771F;&#x7684;&#x6709;&#x5FC5;&#x8981;&#x5417;&#xFF1F;&#x7B54;&#x6848;&#x662F;&#x5426;&#x5B9A;&#x7684;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6269;&#x5C55;&#x4E86;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x4E86; Cloneable &#x63A5;&#x53E3;&#x7684;&#x7C7B;&#xFF0C;&#x90A3;&#x4E48;&#x9664;&#x4E86;&#x5B9E;&#x73B0;&#x884C;&#x4E3A;&#x826F;&#x597D;&#x7684; clone &#x65B9;&#x6CD5;&#x4E4B;&#x5916;&#xFF0C;&#x4F60;&#x522B;&#x65E0;&#x9009;&#x62E9;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x6700;&#x597D;&#x63D0;&#x4F9B;&#x5BF9;&#x8C61;&#x590D;&#x5236;&#x7684;&#x66FF;&#x4EE3;&#x65B9;&#x6CD5;&#x3002;&#x4E00;&#x4E2A;&#x66F4;&#x597D;&#x7684;&#x5BF9;&#x8C61;&#x590D;&#x5236;&#x65B9;&#x6CD5;&#x662F;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6216;&#x590D;&#x5236;&#x5DE5;&#x5382;&#x3002;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x5355;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5176;&#x7C7B;&#x578B;&#x662F;&#x5305;&#x542B;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x7C7B;&#xFF0C;&#x4F8B;&#x5982;</p>
+<pre><code>// Copy constructor
+public Yum(Yum yum) { ... };
+</code></pre><p>A copy factory is the static factory (Item 1) analogue of a copy constructor:</p>
+<p>&#x590D;&#x5236;&#x5DE5;&#x5382;&#x4E0E;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x7684;&#x9759;&#x6001;&#x5DE5;&#x5382;&#xFF08;<a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">Item-1</a>&#xFF09;&#x7C7B;&#x4F3C;&#xFF1A;</p>
+<pre><code>// Copy factory
+public static Yum newInstance(Yum yum) { ... };
+</code></pre><p>The copy constructor approach and its static factory variant have many advantages over Cloneable/clone: they don&#x2019;t rely on a risk-prone extralinguistic object creation mechanism; they don&#x2019;t demand unenforceable adherence to thinly documented conventions; they don&#x2019;t conflict with the proper use of final fields; they don&#x2019;t throw unnecessary checked exceptions; and they don&#x2019;t require casts.</p>
+<p>&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x65B9;&#x6CD5;&#x53CA;&#x5176;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x53D8;&#x4F53;&#x4E0E;&#x514B;&#x9686;/&#x514B;&#x9686;&#x76F8;&#x6BD4;&#x6709;&#x8BB8;&#x591A;&#x4F18;&#x70B9;&#xFF1A;&#x5B83;&#x4EEC;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E;&#x6613;&#x53D1;&#x751F;&#x98CE;&#x9669;&#x7684;&#x8BED;&#x8A00;&#x5916;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x673A;&#x5236;&#xFF1B;&#x4ED6;&#x4EEC;&#x4E0D;&#x8981;&#x6C42;&#x65E0;&#x6CD5;&#x5F3A;&#x5236;&#x6267;&#x884C;&#x7684;&#x7EA6;&#x5B9A;&#xFF1B;&#x5B83;&#x4EEC;&#x4E0E;&#x6700;&#x7EC8;&#x5B57;&#x6BB5;&#x7684;&#x6B63;&#x786E;&#x4F7F;&#x7528;&#x4E0D;&#x51B2;&#x7A81;&#xFF1B;&#x5B83;&#x4EEC;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x68C0;&#x67E5;&#x5F02;&#x5E38;&#xFF1B;&#x800C;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x3002;</p>
+<p>Furthermore, a copy constructor or factory can take an argument whose type is an interface implemented by the class. For example, by convention all generalpurpose collection implementations provide a constructor whose argument is of type Collection or Map. Interface-based copy constructors and factories,more properly known as conversion constructors and conversion factories, allow the client to choose the implementation type of the copy rather than forcing the client to accept the implementation type of the original. For example, suppose you have a HashSet, s, and you want to copy it as a TreeSet. The clone method can&#x2019;t offer this functionality, but it&#x2019;s easy with a conversion constructor:new TreeSet&lt;&gt;(s).</p>
+<p>&#x6B64;&#x5916;&#xFF0C;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6216;&#x5DE5;&#x5382;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x7C7B;&#x578B;&#x4E3A;&#x7C7B;&#x5B9E;&#x73B0;&#x7684;&#x63A5;&#x53E3;&#x7684;&#x53C2;&#x6570;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x6309;&#x7167;&#x7EA6;&#x5B9A;&#xFF0C;&#x6240;&#x6709;&#x901A;&#x7528;&#x96C6;&#x5408;&#x5B9E;&#x73B0;&#x90FD;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x5176;&#x53C2;&#x6570;&#x4E3A; collection &#x6216; Map &#x7C7B;&#x578B;&#x3002;&#x57FA;&#x4E8E;&#x63A5;&#x53E3;&#x7684;&#x590D;&#x5236;&#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x5DE5;&#x5382;&#xFF08;&#x66F4;&#x786E;&#x5207;&#x5730;&#x79F0;&#x4E3A;&#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x8F6C;&#x6362;&#x5DE5;&#x5382;&#xFF09;&#x5141;&#x8BB8;&#x5BA2;&#x6237;&#x7AEF;&#x9009;&#x62E9;&#x526F;&#x672C;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5F3A;&#x8FEB;&#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53D7;&#x539F;&#x59CB;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x578B;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x6709;&#x4E00;&#x4E2A; HashSet s&#xFF0C;&#x5E76;&#x4E14;&#x5E0C;&#x671B;&#x5C06;&#x5B83;&#x590D;&#x5236;&#x4E3A; TreeSet&#x3002;&#x514B;&#x9686;&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x63D0;&#x4F9B;&#x8FD9;&#x79CD;&#x529F;&#x80FD;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;&#x8F6C;&#x6362;&#x6784;&#x9020;&#x51FD;&#x6570;&#x5F88;&#x5BB9;&#x6613;&#xFF1A;new TreeSet&lt;&gt;(s)&#x3002;</p>
+<p>Given all the problems associated with Cloneable, new interfaces should not extend it, and new extendable classes should not implement it. While it&#x2019;s less harmful for final classes to implement Cloneable, this should be viewed as a performance optimization, reserved for the rare cases where it is justified (Item 67). As a rule, copy functionality is best provided by constructors or factories. A notable exception to this rule is arrays, which are best copied with the clone method.</p>
+<p>&#x8003;&#x8651;&#x5230;&#x4E0E; Cloneable &#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x65B0;&#x7684;&#x63A5;&#x53E3;&#x4E0D;&#x5E94;&#x8BE5;&#x6269;&#x5C55;&#x5B83;&#xFF0C;&#x65B0;&#x7684;&#x53EF;&#x6269;&#x5C55;&#x7C7B;&#x4E0D;&#x5E94;&#x8BE5;&#x5B9E;&#x73B0;&#x5B83;&#x3002;&#x867D;&#x7136; final &#x7C7B;&#x5B9E;&#x73B0; Cloneable &#x63A5;&#x53E3;&#x7684;&#x5371;&#x5BB3;&#x8981;&#x5C0F;&#x4E00;&#x4E9B;&#xFF0C;&#x4F46;&#x8FD9;&#x5E94;&#x8BE5;&#x88AB;&#x89C6;&#x4E3A;&#x4E00;&#x79CD;&#x6027;&#x80FD;&#x4F18;&#x5316;&#xFF0C;&#x4EC5;&#x5728;&#x6781;&#x5C11;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF08;<a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">Item-67</a>&#xFF09;&#x662F;&#x5408;&#x7406;&#x7684;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x590D;&#x5236;&#x529F;&#x80FD;&#x6700;&#x597D;&#x7531;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6216;&#x5DE5;&#x5382;&#x63D0;&#x4F9B;&#x3002;&#x8FD9;&#x4E2A;&#x89C4;&#x5219;&#x7684;&#x4E00;&#x4E2A;&#x660E;&#x663E;&#x7684;&#x4F8B;&#x5916;&#x662F;&#x6570;&#x7EC4;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528; clone &#x65B9;&#x6CD5;&#x6765;&#x590D;&#x5236;&#x6570;&#x7EC4;&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-3-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Previous Item&#xFF08;&#x4E0A;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-3-Item-12-Always-override-toString.html">Item 12: Always override toString&#xFF08;&#x59CB;&#x7EC8;&#x8986;&#x76D6; toString &#x65B9;&#x6CD5;&#xFF09;</a></strong></li>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-3-Item-14-Consider-implementing-Comparable.html">Item 14: Consider implementing Comparable&#xFF08;&#x8003;&#x8651;&#x5B9E;&#x73B0; Comparable &#x63A5;&#x53E3;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-3-Item-12-Always-override-toString.html" class="navigation navigation-prev " aria-label="Previous page: Item 12: Always override toString（始终覆盖 toString 方法）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-3-Item-14-Consider-implementing-Comparable.html" class="navigation navigation-next " aria-label="Next page: Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 13: Override clone judiciously（明智地覆盖 clone 方法）","level":"1.3.5","depth":2,"next":{"title":"Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）","level":"1.3.6","depth":2,"path":"Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.md","ref":"Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.md","articles":[]},"previous":{"title":"Item 12: Always override toString（始终覆盖 toString 方法）","level":"1.3.4","depth":2,"path":"Chapter-3/Chapter-3-Item-12-Always-override-toString.md","ref":"Chapter-3/Chapter-3-Item-12-Always-override-toString.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.md","mtime":"2021-12-19T09:10:38.038Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

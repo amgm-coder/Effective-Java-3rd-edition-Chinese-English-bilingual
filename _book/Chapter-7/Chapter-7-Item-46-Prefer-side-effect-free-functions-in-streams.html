@@ -1,0 +1,1862 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html" />
+    
+    
+    <link rel="prev" href="Chapter-7-Item-45-Use-streams-judiciously.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2. Creating and Destroying Objects（创建和销毁对象）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Chapter-2/Chapter-2-Introduction.html">
+            
+                <a href="../Chapter-2/Chapter-2-Introduction.html">
+            
+                    
+                    Chapter 2 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-1-Consider-static-factory-methods-instead-of-constructors.html">
+            
+                    
+                    Item 1: Consider static factory methods instead of constructors（考虑以静态工厂方法代替构造函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-2-Consider-a-builder-when-faced-with-many-constructor-parameters.html">
+            
+                    
+                    Item 2: Consider a builder when faced with many constructor parameters（在面对多个构造函数参数时，请考虑构建器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-3-Enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type.html">
+            
+                    
+                    Item 3: Enforce the singleton property with a private constructor or an enum type（使用私有构造函数或枚举类型实施单例属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-4-Enforce-noninstantiability-with-a-private-constructor.html">
+            
+                    
+                    Item 4: Enforce noninstantiability with a private constructor（用私有构造函数实施不可实例化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-5-Prefer-dependency-injection-to-hardwiring-resources.html">
+            
+                    
+                    Item 5: Prefer dependency injection to hardwiring resources（依赖注入优于硬连接资源）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-6-Avoid-creating-unnecessary-objects.html">
+            
+                    
+                    Item 6: Avoid creating unnecessary objects（避免创建不必要的对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-7-Eliminate-obsolete-object-references.html">
+            
+                    
+                    Item 7: Eliminate obsolete object references（排除过时的对象引用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-8-Avoid-finalizers-and-cleaners.html">
+            
+                    
+                    Item 8: Avoid finalizers and cleaners（避免使用终结器和清除器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                <a href="../Chapter-2/Chapter-2-Item-9-Prefer-try-with-resources-to-try-finally.html">
+            
+                    
+                    Item 9: Prefer try with resources to try finally（使用 try-with-resources 优于 try-finally）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3. Methods Common to All Objects（对象的通用方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter-3/Chapter-3-Introduction.html">
+            
+                <a href="../Chapter-3/Chapter-3-Introduction.html">
+            
+                    
+                    Chapter 3 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-10-Obey-the-general-contract-when-overriding-equals.html">
+            
+                    
+                    Item 10: Obey the general contract when overriding equals（覆盖 equals 方法时应遵守的约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-11-Always-override-hashCode-when-you-override-equals.html">
+            
+                    
+                    Item 11: Always override hashCode when you override equals（当覆盖 equals 方法时，总要覆盖 hashCode 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-12-Always-override-toString.html">
+            
+                    
+                    Item 12: Always override toString（始终覆盖 toString 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-13-Override-clone-judiciously.html">
+            
+                    
+                    Item 13: Override clone judiciously（明智地覆盖 clone 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                <a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">
+            
+                    
+                    Item 14: Consider implementing Comparable（考虑实现 Comparable 接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4. Classes and Interfaces（类和接口）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Chapter-4/Chapter-4-Introduction.html">
+            
+                <a href="../Chapter-4/Chapter-4-Introduction.html">
+            
+                    
+                    Chapter 4 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-15-Minimize-the-accessibility-of-classes-and-members.html">
+            
+                    
+                    Item 15: Minimize the accessibility of classes and members（尽量减少类和成员的可访问性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-16-In-public-classes-use-accessor-methods-not-public-fields.html">
+            
+                    
+                    Item 16: In public classes use accessor methods not public fields（在公共类中，使用访问器方法，而不是公共字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-17-Minimize-mutability.html">
+            
+                    
+                    Item 17: Minimize mutability（减少可变性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-18-Favor-composition-over-inheritance.html">
+            
+                    
+                    Item 18: Favor composition over inheritance（优先选择复合而不是继承）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-19-Design-and-document-for-inheritance-or-else-prohibit-it.html">
+            
+                    
+                    Item 19: Design and document for inheritance or else prohibit it（继承要设计良好并且具有文档，否则禁止使用）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-20-Prefer-interfaces-to-abstract-classes.html">
+            
+                    
+                    Item 20: Prefer interfaces to abstract classes（接口优于抽象类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-21-Design-interfaces-for-posterity.html">
+            
+                    
+                    Item 21: Design interfaces for posterity（为后代设计接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-22-Use-interfaces-only-to-define-types.html">
+            
+                    
+                    Item 22: Use interfaces only to define types（接口只用于定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-23-Prefer-class-hierarchies-to-tagged-classes.html">
+            
+                    
+                    Item 23: Prefer class hierarchies to tagged classes（类层次结构优于带标签的类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-24-Favor-static-member-classes-over-nonstatic.html">
+            
+                    
+                    Item 24: Favor static member classes over nonstatic（静态成员类优于非静态成员类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                <a href="../Chapter-4/Chapter-4-Item-25-Limit-source-files-to-a-single-top-level-class.html">
+            
+                    
+                    Item 25: Limit source files to a single top level class（源文件仅限有单个顶层类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5. Generics（泛型）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Chapter-5/Chapter-5-Introduction.html">
+            
+                <a href="../Chapter-5/Chapter-5-Introduction.html">
+            
+                    
+                    Chapter 5 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-26-Do-not-use-raw-types.html">
+            
+                    
+                    Item 26: Do not use raw types（不要使用原始类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-27-Eliminate-unchecked-warnings.html">
+            
+                    
+                    Item 27: Eliminate unchecked warnings（消除 unchecked 警告）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-28-Prefer-lists-to-arrays.html">
+            
+                    
+                    Item 28: Prefer lists to arrays（list 优于数组）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-29-Favor-generic-types.html">
+            
+                    
+                    Item 29: Favor generic types（优先使用泛型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-30-Favor-generic-methods.html">
+            
+                    
+                    Item 30: Favor generic methods（优先使用泛型方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-31-Use-bounded-wildcards-to-increase-API-flexibility.html">
+            
+                    
+                    Item 31: Use bounded wildcards to increase API flexibility（使用有界通配符增加 API 的灵活性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-32-Combine-generics-and-varargs-judiciously.html">
+            
+                    
+                    Item 32: Combine generics and varargs judiciously（明智地合用泛型和可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                <a href="../Chapter-5/Chapter-5-Item-33-Consider-typesafe-heterogeneous-containers.html">
+            
+                    
+                    Item 33: Consider typesafe heterogeneous containers（考虑类型安全的异构容器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6. Enums and Annotations（枚举和注解）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Chapter-6/Chapter-6-Introduction.html">
+            
+                <a href="../Chapter-6/Chapter-6-Introduction.html">
+            
+                    
+                    Chapter 6 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">
+            
+                    
+                    Item 34: Use enums instead of int constants（用枚举类型代替 int 常量）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-35-Use-instance-fields-instead-of-ordinals.html">
+            
+                    
+                    Item 35: Use instance fields instead of ordinals（使用实例字段替代序数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-36-Use-EnumSet-instead-of-bit-fields.html">
+            
+                    
+                    Item 36: Use EnumSet instead of bit fields（用 EnumSet 替代位字段）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-37-Use-EnumMap-instead-of-ordinal-indexing.html">
+            
+                    
+                    Item 37: Use EnumMap instead of ordinal indexing（使用 EnumMap 替换序数索引）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-38-Emulate-extensible-enums-with-interfaces.html">
+            
+                    
+                    Item 38: Emulate extensible enums with interfaces（使用接口模拟可扩展枚举）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-39-Prefer-annotations-to-naming-patterns.html">
+            
+                    
+                    Item 39: Prefer annotations to naming patterns（注解优于命名模式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-40-Consistently-use-the-Override-annotation.html">
+            
+                    
+                    Item 40: Consistently use the Override annotation（坚持使用 @Override 注解）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                <a href="../Chapter-6/Chapter-6-Item-41-Use-marker-interfaces-to-define-types.html">
+            
+                    
+                    Item 41: Use marker interfaces to define types（使用标记接口定义类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Chapter-7-Introduction.html">
+            
+                <a href="Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7. Lambdas and Streams（λ 表达式和流）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Chapter-7-Introduction.html">
+            
+                <a href="Chapter-7-Introduction.html">
+            
+                    
+                    Chapter 7 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                <a href="Chapter-7-Item-42-Prefer-lambdas-to-anonymous-classes.html">
+            
+                    
+                    Item 42: Prefer lambdas to anonymous classes（λ 表达式优于匿名类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                <a href="Chapter-7-Item-43-Prefer-method-references-to-lambdas.html">
+            
+                    
+                    Item 43: Prefer method references to lambdas（方法引用优于 λ 表达式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                <a href="Chapter-7-Item-44-Favor-the-use-of-standard-functional-interfaces.html">
+            
+                    
+                    Item 44: Favor the use of standard functional interfaces（优先使用标准函数式接口）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                <a href="Chapter-7-Item-45-Use-streams-judiciously.html">
+            
+                    
+                    Item 45: Use streams judiciously（明智地使用流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.6" data-path="Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                <a href="Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.html">
+            
+                    
+                    Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                <a href="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">
+            
+                    
+                    Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                <a href="Chapter-7-Item-48-Use-caution-when-making-streams-parallel.html">
+            
+                    
+                    Item 48: Use caution when making streams parallel（谨慎使用并行流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8. Methods（方法）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Chapter-8/Chapter-8-Introduction.html">
+            
+                <a href="../Chapter-8/Chapter-8-Introduction.html">
+            
+                    
+                    Chapter 8 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-49-Check-parameters-for-validity.html">
+            
+                    
+                    Item 49: Check parameters for validity（检查参数的有效性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-50-Make-defensive-copies-when-needed.html">
+            
+                    
+                    Item 50: Make defensive copies when needed（在需要时制作防御性副本）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-51-Design-method-signatures-carefully.html">
+            
+                    
+                    Item 51: Design method signatures carefully（仔细设计方法签名）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-52-Use-overloading-judiciously.html">
+            
+                    
+                    Item 52: Use overloading judiciously（明智地使用重载）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-53-Use-varargs-judiciously.html">
+            
+                    
+                    Item 53: Use varargs judiciously（明智地使用可变参数）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-54-Return-empty-collections-or-arrays-not-nulls.html">
+            
+                    
+                    Item 54: Return empty collections or arrays, not nulls（返回空集合或数组，而不是 null）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-55-Return-optionals-judiciously.html">
+            
+                    
+                    Item 55: Return optionals judiciously（明智地的返回 Optional）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                <a href="../Chapter-8/Chapter-8-Item-56-Write-doc-comments-for-all-exposed-API-elements.html">
+            
+                    
+                    Item 56: Write doc comments for all exposed API elements（为所有公开的 API 元素编写文档注释）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9. General Programming（通用程序设计）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../Chapter-9/Chapter-9-Introduction.html">
+            
+                <a href="../Chapter-9/Chapter-9-Introduction.html">
+            
+                    
+                    Chapter 9 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-57-Minimize-the-scope-of-local-variables.html">
+            
+                    
+                    Item 57: Minimize the scope of local variables（将局部变量的作用域最小化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-58-Prefer-for-each-loops-to-traditional-for-loops.html">
+            
+                    
+                    Item 58: Prefer for-each loops to traditional for loops（for-each 循环优于传统的 for 循环）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-59-Know-and-use-the-libraries.html">
+            
+                    
+                    Item 59: Know and use the libraries（了解并使用库）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-60-Avoid-float-and-double-if-exact-answers-are-required.html">
+            
+                    
+                    Item 60: Avoid float and double if exact answers are required（若需要精确答案就应避免使用 float 和 double 类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-61-Prefer-primitive-types-to-boxed-primitives.html">
+            
+                    
+                    Item 61: Prefer primitive types to boxed primitives（基本数据类型优于包装类）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-62-Avoid-strings-where-other-types-are-more-appropriate.html">
+            
+                    
+                    Item 62: Avoid strings where other types are more appropriate（其他类型更合适时应避免使用字符串）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-63-Beware-the-performance-of-string-concatenation.html">
+            
+                    
+                    Item 63: Beware the performance of string concatenation（当心字符串连接引起的性能问题）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-64-Refer-to-objects-by-their-interfaces.html">
+            
+                    
+                    Item 64: Refer to objects by their interfaces（通过接口引用对象）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-65-Prefer-interfaces-to-reflection.html">
+            
+                    
+                    Item 65: Prefer interfaces to reflection（接口优于反射）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-66-Use-native-methods-judiciously.html">
+            
+                    
+                    Item 66: Use native methods judiciously（明智地使用本地方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-67-Optimize-judiciously.html">
+            
+                    
+                    Item 67: Optimize judiciously（明智地进行优化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                <a href="../Chapter-9/Chapter-9-Item-68-Adhere-to-generally-accepted-naming-conventions.html">
+            
+                    
+                    Item 68: Adhere to generally accepted naming conventions（遵守被广泛认可的命名约定）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10. Exceptions（异常）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Chapter-10/Chapter-10-Introduction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Introduction.html">
+            
+                    
+                    Chapter 10 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-69-Use-exceptions-only-for-exceptional-conditions.html">
+            
+                    
+                    Item 69: Use exceptions only for exceptional conditions（仅在确有异常条件下使用异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-70-Use-checked-exceptions-for-recoverable-conditions-and-runtime-exceptions-for-programming-errors.html">
+            
+                    
+                    Item 70: Use checked exceptions for recoverable conditions and runtime exceptions for programming errors（对可恢复情况使用 checked 异常，对编程错误使用运行时异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-71-Avoid-unnecessary-use-of-checked-exceptions.html">
+            
+                    
+                    Item 71: Avoid unnecessary use of checked exceptions（避免不必要地使用 checked 异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-72-Favor-the-use-of-standard-exceptions.html">
+            
+                    
+                    Item 72: Favor the use of standard exceptions（鼓励复用标准异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-73-Throw-exceptions-appropriate-to-the-abstraction.html">
+            
+                    
+                    Item 73: Throw exceptions appropriate to the abstraction（抛出能用抽象解释的异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-74-Document-all-exceptions-thrown-by-each-method.html">
+            
+                    
+                    Item 74: Document all exceptions thrown by each method（为每个方法记录会抛出的所有异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-75-Include-failure-capture-information-in-detail-messages.html">
+            
+                    
+                    Item 75: Include failure capture information in detail messages（异常详细消息中应包含捕获失败的信息）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-76-Strive-for-failure-atomicity.html">
+            
+                    
+                    Item 76: Strive for failure atomicity（尽力保证故障原子性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                <a href="../Chapter-10/Chapter-10-Item-77-Don’t-ignore-exceptions.html">
+            
+                    
+                    Item 77: Don’t ignore exceptions（不要忽略异常）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11. Concurrency（并发）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Chapter-11/Chapter-11-Introduction.html">
+            
+                <a href="../Chapter-11/Chapter-11-Introduction.html">
+            
+                    
+                    Chapter 11 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-78-Synchronize-access-to-shared-mutable-data.html">
+            
+                    
+                    Item 78: Synchronize access to shared mutable data（对共享可变数据的同步访问）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.html">
+            
+                    
+                    Item 79: Avoid excessive synchronization（避免过度同步）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-80-Prefer-executors,-tasks,-and-streams-to-threads.html">
+            
+                    
+                    Item 80: Prefer executors, tasks, and streams to threads（Executor、task、流优于直接使用线程）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-81-Prefer-concurrency-utilities-to-wait-and-notify.html">
+            
+                    
+                    Item 81: Prefer concurrency utilities to wait and notify（并发实用工具优于 wait 和 notify）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-82-Document-thread-safety.html">
+            
+                    
+                    Item 82: Document thread safety（文档应包含线程安全属性）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-83-Use-lazy-initialization-judiciously.html">
+            
+                    
+                    Item 83: Use lazy initialization judiciously（明智地使用延迟初始化）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                <a href="../Chapter-11/Chapter-11-Item-84-Don’t-depend-on-the-thread-scheduler.html">
+            
+                    
+                    Item 84: Don’t depend on the thread scheduler（不要依赖线程调度器）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12. Serialization（序列化）
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Chapter-12/Chapter-12-Introduction.html">
+            
+                <a href="../Chapter-12/Chapter-12-Introduction.html">
+            
+                    
+                    Chapter 12 Introduction（章节介绍）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-85-Prefer-alternatives-to-Java-serialization.html">
+            
+                    
+                    Item 85: Prefer alternatives to Java serialization（Java 序列化的替代方案）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-86-Implement-Serializable-with-great-caution.html">
+            
+                    
+                    Item 86: Implement Serializable with great caution（非常谨慎地实现 Serializable）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-87-Consider-using-a-custom-serialized-form.html">
+            
+                    
+                    Item 87: Consider using a custom serialized form（考虑使用自定义序列化形式）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-88-Write-readObject-methods-defensively.html">
+            
+                    
+                    Item 88: Write readObject methods defensively（防御性地编写 readObject 方法）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-89-For-instance-control-prefer-enum-types-to-readResolve.html">
+            
+                    
+                    Item 89: For instance control, prefer enum types to readResolve（对于实例控制，枚举类型优于 readResolve）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                <a href="../Chapter-12/Chapter-12-Item-90-Consider-serialization-proxies-instead-of-serialized-instances.html">
+            
+                    
+                    Item 90: Consider serialization proxies instead of serialized instances（考虑以序列化代理代替序列化实例）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="chapter-7-lambdas-and-streams&#xFF08;&#x3BB;-&#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x6D41;&#xFF09;">Chapter 7. Lambdas and Streams&#xFF08;&#x3BB; &#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x6D41;&#xFF09;</h2>
+<h3 id="item-46-prefer-side-effect-free-functions-in-streams&#xFF08;&#x5728;&#x6D41;&#x4E2D;&#x4F7F;&#x7528;&#x65E0;&#x526F;&#x4F5C;&#x7528;&#x7684;&#x51FD;&#x6570;&#xFF09;">Item 46: Prefer side-effect-free functions in streams&#xFF08;&#x5728;&#x6D41;&#x4E2D;&#x4F7F;&#x7528;&#x65E0;&#x526F;&#x4F5C;&#x7528;&#x7684;&#x51FD;&#x6570;&#xFF09;</h3>
+<p>If you&#x2019;re new to streams, it can be difficult to get the hang of them. Merely expressing your computation as a stream pipeline can be hard. When you succeed, your program will run, but you may realize little if any benefit. Streams isn&#x2019;t just an API, it&#x2019;s a paradigm based on functional programming. In order to obtain the expressiveness, speed, and in some cases parallelizability that streams have to offer, you have to adopt the paradigm as well as the API.</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x662F;&#x6D41;&#x7684;&#x65B0;&#x624B;&#xFF0C;&#x53EF;&#x80FD;&#x5F88;&#x96BE;&#x638C;&#x63E1;&#x5B83;&#x4EEC;&#x3002;&#x4EC5;&#x4EC5;&#x5C06;&#x8BA1;&#x7B97;&#x8868;&#x793A;&#x4E3A;&#x6D41;&#x7BA1;&#x9053;&#x662F;&#x56F0;&#x96BE;&#x7684;&#x3002;&#x5F53;&#x4F60;&#x6210;&#x529F;&#x65F6;&#xFF0C;&#x4F60;&#x7684;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#xFF0C;&#x4F46;&#x4F60;&#x53EF;&#x80FD;&#x610F;&#x8BC6;&#x4E0D;&#x5230;&#x4EC0;&#x4E48;&#x597D;&#x5904;&#x3002;&#x6D41;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E2A; API&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x7684;&#x8303;&#x5F0F;&#x3002;&#x4E3A;&#x4E86;&#x83B7;&#x5F97;&#x6D41;&#x63D0;&#x4F9B;&#x7684;&#x53EF;&#x8868;&#x8FBE;&#x6027;&#x3001;&#x901F;&#x5EA6;&#x4EE5;&#x53CA;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x5E76;&#x884C;&#x6027;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x91C7;&#x7EB3;&#x8303;&#x5F0F;&#x548C; API&#x3002;</p>
+<p>The most important part of the streams paradigm is to structure your computation as a sequence of transformations where the result of each stage is as close as possible to a pure function of the result of the previous stage. A pure function is one whose result depends only on its input: it does not depend on any mutable state, nor does it update any state. In order to achieve this, any function objects that you pass into stream operations, both intermediate and terminal, should be free of side-effects.</p>
+<p>&#x6D41;&#x8303;&#x5F0F;&#x4E2D;&#x6700;&#x91CD;&#x8981;&#x7684;&#x90E8;&#x5206;&#x662F;&#x5C06;&#x8BA1;&#x7B97;&#x6784;&#x9020;&#x4E3A;&#x4E00;&#x7CFB;&#x5217;&#x8F6C;&#x6362;&#xFF0C;&#x5176;&#x4E2D;&#x6BCF;&#x4E2A;&#x9636;&#x6BB5;&#x7684;&#x7ED3;&#x679C;&#x90FD;&#x5C3D;&#x53EF;&#x80FD;&#x5730;&#x63A5;&#x8FD1;&#x4E0A;&#x4E00;&#x9636;&#x6BB5;&#x7ED3;&#x679C;&#x7684;&#x7EAF;&#x51FD;&#x6570;&#x3002;&#x7EAF;&#x51FD;&#x6570;&#x7684;&#x7ED3;&#x679C;&#x53EA;&#x4F9D;&#x8D56;&#x4E8E;&#x5B83;&#x7684;&#x8F93;&#x5165;&#xFF1A;&#x5B83;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E;&#x4EFB;&#x4F55;&#x53EF;&#x53D8;&#x72B6;&#x6001;&#xFF0C;&#x4E5F;&#x4E0D;&#x66F4;&#x65B0;&#x4EFB;&#x4F55;&#x72B6;&#x6001;&#x3002;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x4F20;&#x9012;&#x5230;&#x6D41;&#x64CD;&#x4F5C;&#xFF08;&#x5305;&#x62EC; Intermediate &#x64CD;&#x4F5C;&#x548C; Terminal &#x64CD;&#x4F5C;&#xFF09;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x90FD;&#x5E94;&#x8BE5;&#x6CA1;&#x6709;&#x526F;&#x4F5C;&#x7528;&#x3002;</p>
+<p><strong>&#x8BD1;&#x6CE8;&#xFF1A;&#x6D41;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</strong></p>
+<p><strong>1&#x3001;Intermediate</strong></p>
+<ul>
+<li>&#x4E00;&#x4E2A;&#x6D41;&#x53EF;&#x4EE5;&#x540E;&#x9762;&#x8DDF;&#x968F;&#x96F6;&#x4E2A;&#x6216;&#x591A;&#x4E2A; intermediate &#x64CD;&#x4F5C;&#x3002;&#x5176;&#x76EE;&#x7684;&#x4E3B;&#x8981;&#x662F;&#x6253;&#x5F00;&#x6D41;&#xFF0C;&#x505A;&#x51FA;&#x67D0;&#x79CD;&#x7A0B;&#x5EA6;&#x7684;&#x6570;&#x636E;&#x6620;&#x5C04;/&#x8FC7;&#x6EE4;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6D41;&#xFF0C;&#x4EA4;&#x7ED9;&#x4E0B;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x4F7F;&#x7528;&#x3002;&#x8FD9;&#x7C7B;&#x64CD;&#x4F5C;&#x90FD;&#x662F;&#x60F0;&#x6027;&#x5316;&#x7684;&#xFF08;lazy&#xFF09;&#xFF0C;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4EC5;&#x4EC5;&#x8C03;&#x7528;&#x5230;&#x8FD9;&#x7C7B;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x5F00;&#x59CB;&#x6D41;&#x7684;&#x904D;&#x5386;&#x3002;&#x5E38;&#x89C1;&#x7684;&#x64CD;&#x4F5C;&#xFF1A;map&#xFF08;mapToInt&#x3001;flatMap &#x7B49;&#xFF09;&#x3001;filter&#x3001;distinct&#x3001;sorted&#x3001;peek&#x3001;limit&#x3001;skip&#x3001;parallel&#x3001;sequential&#x3001;unordered</li>
+</ul>
+<p><strong>2&#x3001;Terminal</strong></p>
+<ul>
+<li><p>&#x4E00;&#x4E2A;&#x6D41;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A; terminal &#x64CD;&#x4F5C;&#xFF0C;&#x5F53;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x6D41;&#x5C31;&#x88AB;&#x4F7F;&#x7528;&#x300C;&#x5149;&#x300D;&#x4E86;&#xFF0C;&#x65E0;&#x6CD5;&#x518D;&#x88AB;&#x64CD;&#x4F5C;&#x3002;&#x6240;&#x4EE5;&#x8FD9;&#x5FC5;&#x5B9A;&#x662F;&#x6D41;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x3002;Terminal &#x64CD;&#x4F5C;&#x7684;&#x6267;&#x884C;&#xFF0C;&#x624D;&#x4F1A;&#x771F;&#x6B63;&#x5F00;&#x59CB;&#x6D41;&#x7684;&#x904D;&#x5386;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x7ED3;&#x679C;&#xFF0C;&#x6216;&#x8005;&#x4E00;&#x4E2A; side effect&#x3002;&#x5E38;&#x89C1;&#x7684;&#x64CD;&#x4F5C;&#xFF1A;forEach&#x3001;forEachOrdered&#x3001;toArray&#x3001;reduce&#x3001;collect&#x3001;min&#x3001;max&#x3001;count&#x3001;anyMatch&#x3001;allMatch&#x3001;noneMatch&#x3001;findFirst&#x3001;findAny&#x3001;iterator</p>
+</li>
+<li><p>&#x5728;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x6D41;&#x8FDB;&#x884C;&#x591A;&#x6B21;&#x8F6C;&#x6362;&#x64CD;&#x4F5C; (Intermediate &#x64CD;&#x4F5C;)&#xFF0C;&#x6BCF;&#x6B21;&#x90FD;&#x5BF9;&#x6D41;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#xFF0C;&#x800C;&#x4E14;&#x662F;&#x6267;&#x884C;&#x591A;&#x6B21;&#xFF0C;&#x8FD9;&#x6837;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x5C31;&#x662F; N&#xFF08;&#x8F6C;&#x6362;&#x6B21;&#x6570;&#xFF09;&#x4E2A; for &#x5FAA;&#x73AF;&#x91CC;&#x628A;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x90FD;&#x505A;&#x6389;&#x7684;&#x603B;&#x548C;&#x5417;&#xFF1F;&#x5176;&#x5B9E;&#x4E0D;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF0C;&#x8F6C;&#x6362;&#x64CD;&#x4F5C;&#x90FD;&#x662F; lazy &#x7684;&#xFF0C;&#x591A;&#x4E2A;&#x8F6C;&#x6362;&#x64CD;&#x4F5C;&#x53EA;&#x4F1A;&#x5728; Terminal &#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#x878D;&#x5408;&#x8D77;&#x6765;&#xFF0C;&#x4E00;&#x6B21;&#x5FAA;&#x73AF;&#x5B8C;&#x6210;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x7B80;&#x5355;&#x7684;&#x7406;&#x89E3;&#xFF0C;&#x6D41;&#x91CC;&#x6709;&#x4E2A;&#x64CD;&#x4F5C;&#x51FD;&#x6570;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x6BCF;&#x6B21;&#x8F6C;&#x6362;&#x64CD;&#x4F5C;&#x5C31;&#x662F;&#x628A;&#x8F6C;&#x6362;&#x51FD;&#x6570;&#x653E;&#x5165;&#x8FD9;&#x4E2A;&#x96C6;&#x5408;&#x4E2D;&#xFF0C;&#x5728; Terminal &#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#x5FAA;&#x73AF;&#x6D41;&#x5BF9;&#x5E94;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x7136;&#x540E;&#x5BF9;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x6267;&#x884C;&#x6240;&#x6709;&#x7684;&#x51FD;&#x6570;&#x3002;</p>
+</li>
+</ul>
+<p><strong>3&#x3001;short-circuiting</strong></p>
+<ul>
+<li><p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A; intermediate &#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x63A5;&#x53D7;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x65E0;&#x9650;&#x5927;&#xFF08;infinite/unbounded&#xFF09;&#x7684;&#x6D41;&#xFF0C;&#x4F46;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6709;&#x9650;&#x7684;&#x65B0;&#x6D41;&#x3002;</p>
+</li>
+<li><p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A; terminal &#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x63A5;&#x53D7;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x65E0;&#x9650;&#x5927;&#x7684;&#x6D41;&#xFF0C;&#x4F46;&#x80FD;&#x5728;&#x6709;&#x9650;&#x7684;&#x65F6;&#x95F4;&#x8BA1;&#x7B97;&#x51FA;&#x7ED3;&#x679C;&#x3002;&#x5F53;&#x64CD;&#x4F5C;&#x4E00;&#x4E2A;&#x65E0;&#x9650;&#x5927;&#x7684;&#x6D41;&#xFF0C;&#x800C;&#x53C8;&#x5E0C;&#x671B;&#x5728;&#x6709;&#x9650;&#x65F6;&#x95F4;&#x5185;&#x5B8C;&#x6210;&#x64CD;&#x4F5C;&#xFF0C;&#x5219;&#x5728;&#x7BA1;&#x9053;&#x5185;&#x62E5;&#x6709;&#x4E00;&#x4E2A; short-circuiting &#x64CD;&#x4F5C;&#x662F;&#x5FC5;&#x8981;&#x975E;&#x5145;&#x5206;&#x6761;&#x4EF6;&#x3002;&#x5E38;&#x89C1;&#x7684;&#x64CD;&#x4F5C;&#xFF1A;anyMatch&#x3001;allMatch&#x3001; noneMatch&#x3001;findFirst&#x3001;findAny&#x3001;limit</p>
+</li>
+</ul>
+<p>Occasionally, you may see streams code that looks like this snippet, which builds a frequency table of the words in a text file:</p>
+<p>&#x5076;&#x5C14;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x770B;&#x5230;&#x5982;&#x4E0B;&#x4F7F;&#x7528;&#x6D41;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x6784;&#x5EFA;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x4E2D;&#x5355;&#x8BCD;&#x7684;&#x9891;&#x7387;&#x8868;&#xFF1A;</p>
+<pre><code>// Uses the streams API but not the paradigm--Don&apos;t do this!
+Map&lt;String, Long&gt; freq = new HashMap&lt;&gt;();
+try (Stream&lt;String&gt; words = new Scanner(file).tokens()) {
+    words.forEach(word -&gt; {
+        freq.merge(word.toLowerCase(), 1L, Long::sum);
+    });
+}
+</code></pre><p>What&#x2019;s wrong with this code? After all, it uses streams, lambdas, and method references, and gets the right answer. Simply put, it&#x2019;s not streams code at all; it&#x2019;s iterative code masquerading as streams code. It derives no benefits from the streams API, and it&#x2019;s (a bit) longer, harder to read, and less maintainable than the corresponding iterative code. The problem stems from the fact that this code is doing all its work in a terminal forEach operation, using a lambda that mutates external state (the frequency table). A forEach operation that does anything more than present the result of the computation performed by a stream is a &#x201C;bad smell in code,&#x201D; as is a lambda that mutates state. So how should this code look?</p>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6709;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF1F;&#x6BD5;&#x7ADF;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;&#x4E86;&#x6D41;&#x3001;lambda &#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x65B9;&#x6CD5;&#x5F15;&#x7528;&#xFF0C;&#x5E76;&#x5F97;&#x5230;&#x4E86;&#x6B63;&#x786E;&#x7684;&#x7B54;&#x6848;&#x3002;&#x7B80;&#x5355;&#x5730;&#x8BF4;&#xFF0C;&#x5B83;&#x6839;&#x672C;&#x4E0D;&#x662F;&#x6D41;&#x4EE3;&#x7801;&#xFF0C;&#x800C;&#x662F;&#x4F2A;&#x88C5;&#x6210;&#x6D41;&#x4EE3;&#x7801;&#x7684;&#x8FED;&#x4EE3;&#x4EE3;&#x7801;&#x3002;&#x5B83;&#x6CA1;&#x6709;&#x4ECE;&#x6D41; API &#x4E2D;&#x83B7;&#x5F97;&#x4EFB;&#x4F55;&#x597D;&#x5904;&#xFF0C;&#x800C;&#x4E14;&#x5B83;&#xFF08;&#x7A0D;&#x5FAE;&#xFF09;&#x6BD4;&#x76F8;&#x5E94;&#x7684;&#x8FED;&#x4EE3;&#x4EE3;&#x7801;&#x66F4;&#x957F;&#x3001;&#x66F4;&#x96BE;&#x4E8E;&#x9605;&#x8BFB;&#x548C;&#x66F4;&#x96BE;&#x4EE5;&#x7EF4;&#x62A4;&#x3002;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x6E90;&#x4E8E;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x4E8B;&#x5B9E;&#xFF1A;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5728;&#x4E00;&#x4E2A; Terminal  &#x64CD;&#x4F5C;&#x4E2D;&#xFF08;forEach&#xFF09;&#x6267;&#x884C;&#x5B83;&#x7684;&#x6240;&#x6709;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x4F1A;&#x6539;&#x53D8;&#x5916;&#x90E8;&#x72B6;&#x6001;&#x7684; lambda &#x8868;&#x8FBE;&#x5F0F;&#xFF08;&#x9891;&#x7387;&#x8868;&#xFF09;&#x3002;forEach &#x64CD;&#x4F5C;&#x9664;&#x4E86;&#x663E;&#x793A;&#x6D41;&#x6267;&#x884C;&#x7684;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x4F1A;&#x6267;&#x884C;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x300C;&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x4E0D;&#x826F;&#x4E60;&#x60EF;&#x300D;&#xFF0C;&#x5C31;&#x50CF; lambda &#x8868;&#x8FBE;&#x5F0F;&#x4F1A;&#x6539;&#x53D8;&#x72B6;&#x6001;&#x4E00;&#x6837;&#x3002;&#x90A3;&#x4E48;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5E94;&#x8BE5;&#x662F;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x5462;&#xFF1F;</p>
+<pre><code>// Proper use of streams to initialize a frequency table
+Map&lt;String, Long&gt; freq;
+try (Stream&lt;String&gt; words = new Scanner(file).tokens()) {
+    freq = words.collect(groupingBy(String::toLowerCase, counting()));
+}
+</code></pre><p>This snippet does the same thing as the previous one but makes proper use of the streams API. It&#x2019;s shorter and clearer. So why would anyone write it the other way? Because it uses tools they&#x2019;re already familiar with. Java programmers know how to use for-each loops, and the forEach terminal operation is similar. But the forEach operation is among the least powerful of the terminal operations and the least stream-friendly. It&#x2019;s explicitly iterative, and hence not amenable to parallelization. <strong>The forEach operation should be used only to report the result of a stream computation, not to perform the computation.</strong> Occasionally, it makes sense to use forEach for some other purpose, such as adding the results of a stream computation to a preexisting collection.</p>
+<p>&#x8FD9;&#x4E2A;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x4E0E;&#x524D;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x505A;&#x4E86;&#x76F8;&#x540C;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x4F46;&#x662F;&#x6B63;&#x786E;&#x5730;&#x4F7F;&#x7528;&#x4E86;&#x6D41; API&#x3002;&#x5B83;&#x66F4;&#x77ED;&#x66F4;&#x6E05;&#x6670;&#x3002;&#x4E3A;&#x4EC0;&#x4E48;&#x6709;&#x4EBA;&#x4F1A;&#x7528;&#x53E6;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x5199;&#x5462;&#xFF1F;&#x56E0;&#x4E3A;&#x5B83;&#x4F7F;&#x7528;&#x4E86;&#x4ED6;&#x4EEC;&#x5DF2;&#x7ECF;&#x719F;&#x6089;&#x7684;&#x5DE5;&#x5177;&#x3002;Java &#x7A0B;&#x5E8F;&#x5458;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x4F7F;&#x7528; for-each &#x5FAA;&#x73AF;&#xFF0C;&#x5E76;&#x4E14;&#x4E0E; forEach &#x64CD;&#x4F5C;&#x662F;&#x7C7B;&#x4F3C;&#x7684;&#x3002;&#x4F46;&#x662F; forEach &#x64CD;&#x4F5C;&#x662F; Terminal &#x64CD;&#x4F5C;&#x4E2D;&#x529F;&#x80FD;&#x6700;&#x5F31;&#x7684;&#x64CD;&#x4F5C;&#x4E4B;&#x4E00;&#xFF0C;&#x5BF9;&#x6D41;&#x6700;&#x4E0D;&#x53CB;&#x597D;&#x3002;&#x5B83;&#x662F;&#x663E;&#x5F0F;&#x8FED;&#x4EE3;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x9002;&#x5408;&#x5E76;&#x884C;&#x5316;&#x3002;<strong>forEach &#x64CD;&#x4F5C;&#x5E94;&#x8BE5;&#x53EA;&#x7528;&#x4E8E;&#x62A5;&#x544A;&#x6D41;&#x8BA1;&#x7B97;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6267;&#x884C;&#x8BA1;&#x7B97;&#x3002;</strong> &#x6709;&#x65F6;&#x5019;&#xFF0C;&#x5C06; forEach &#x7528;&#x4E8E;&#x5176;&#x4ED6;&#x76EE;&#x7684;&#x662F;&#x6709;&#x610F;&#x4E49;&#x7684;&#xFF0C;&#x4F8B;&#x5982;&#x5C06;&#x6D41;&#x8BA1;&#x7B97;&#x7684;&#x7ED3;&#x679C;&#x6DFB;&#x52A0;&#x5230;&#x73B0;&#x6709;&#x96C6;&#x5408;&#x4E2D;&#x3002;</p>
+<p>The improved code uses a collector, which is a new concept that you have to learn in order to use streams. The Collectors API is intimidating: it has thirty-nine methods, some of which have as many as five type parameters. The good news is that you can derive most of the benefit from this API without delving into its full complexity. For starters, you can ignore the Collector interface and think of a collector as an opaque object that encapsulates a reduction strategy. In this context, reduction means combining the elements of a stream into a single object. The object produced by a collector is typically a collection (which accounts for the name collector).</p>
+<p>&#x6539;&#x8FDB;&#x540E;&#x7684;&#x4EE3;&#x7801;&#x4F7F;&#x7528;&#x4E86; collector&#xFF0C;&#x8FD9;&#x662F;&#x4F7F;&#x7528;&#x6D41;&#x5FC5;&#x987B;&#x5B66;&#x4E60;&#x7684;&#x65B0;&#x6982;&#x5FF5;&#x3002;Collectors &#x7684; API &#x4EE4;&#x4EBA;&#x751F;&#x754F;&#xFF1A;&#x5B83;&#x6709; 39 &#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x6709;&#x591A;&#x8FBE; 5 &#x4E2A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x3002;&#x597D;&#x6D88;&#x606F;&#x662F;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4ECE;&#x8FD9;&#x4E2A; API &#x4E2D;&#x83B7;&#x5F97;&#x5927;&#x90E8;&#x5206;&#x597D;&#x5904;&#xFF0C;&#x800C;&#x4E0D;&#x5FC5;&#x6DF1;&#x5165;&#x7814;&#x7A76;&#x5B83;&#x7684;&#x5168;&#x90E8;&#x590D;&#x6742;&#x6027;&#x3002;&#x5BF9;&#x4E8E;&#x521D;&#x5B66;&#x8005;&#xFF0C;&#x53EF;&#x4EE5;&#x5FFD;&#x7565; Collector &#x63A5;&#x53E3;&#xFF0C;&#x5C06; collector &#x89C6;&#x4E3A;&#x5C01;&#x88C5;&#x4E86;&#x7F29;&#x51CF;&#x7B56;&#x7565;&#x7684;&#x4E0D;&#x900F;&#x660E;&#x5BF9;&#x8C61;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7F29;&#x51CF;&#x610F;&#x5473;&#x7740;&#x5C06;&#x6D41;&#x7684;&#x5143;&#x7D20;&#x7EC4;&#x5408;&#x6210;&#x5355;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;collector &#x751F;&#x6210;&#x7684;&#x5BF9;&#x8C61;&#x901A;&#x5E38;&#x662F;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#xFF08;&#x8FD9;&#x4E5F;&#x89E3;&#x91CA;&#x4E86;&#x4E3A;&#x4F55;&#x547D;&#x540D;&#x4E3A; collector&#xFF09;&#x3002;</p>
+<p>The collectors for gathering the elements of a stream into a true Collection are straightforward. There are three such collectors: toList(), toSet(), and toCollection(collectionFactory). They return, respectively, a set, a list, and a programmer-specified collection type. Armed with this knowledge, we can write a stream pipeline to extract a top-ten list from our frequency table.</p>
+<p>&#x5C06;&#x6D41;&#x7684;&#x5143;&#x7D20;&#x6536;&#x96C6;&#x5230;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684; Collection &#x4E2D;&#x7684; collector &#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;&#x8FD9;&#x6837;&#x7684; collector &#x6709;&#x4E09;&#x79CD;&#xFF1A;<code>toList()</code>&#x3001;<code>toSet()</code> &#x548C; <code>toCollection(collectionFactory)</code>&#x3002;&#x5B83;&#x4EEC;&#x5206;&#x522B;&#x8FD4;&#x56DE; List&#x3001;Set &#x548C;&#x7A0B;&#x5E8F;&#x5458;&#x6307;&#x5B9A;&#x7684;&#x96C6;&#x5408;&#x7C7B;&#x578B;&#x3002;&#x6709;&#x4E86;&#x8FD9;&#x4E9B;&#x77E5;&#x8BC6;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x6D41;&#x7BA1;&#x9053;&#x6765;&#x4ECE; freq &#x8868;&#x4E2D;&#x63D0;&#x53D6;&#x524D; 10 &#x4E2A;&#x5143;&#x7D20;&#x6765;&#x6784;&#x6210;&#x4E00;&#x4E2A;&#x65B0; List&#x3002;</p>
+<pre><code>// Pipeline to get a top-ten list of words from a frequency table
+List&lt;String&gt; topTen = freq.keySet().stream()
+    .sorted(comparing(freq::get).reversed())
+    .limit(10)
+    .collect(toList());
+</code></pre><p>Note that we haven&#x2019;t qualified the toList method with its class, Collectors. <strong>It is customary and wise to statically import all members of Collectors because it makes stream pipelines more readable.</strong></p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x7528;&#x5B83;&#x7684;&#x7C7B; Collectors &#x5BF9; toList &#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x9650;&#x5B9A;&#x3002;<strong>&#x9759;&#x6001;&#x5BFC;&#x5165; Collectors &#x7684;&#x6240;&#x6709;&#x6210;&#x5458;&#x662F;&#x4E60;&#x60EF;&#x7528;&#x6CD5;&#xFF0C;&#x4E5F;&#x662F;&#x660E;&#x667A;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4F7F;&#x6D41;&#x7BA1;&#x9053;&#x66F4;&#x5177;&#x53EF;&#x8BFB;&#x6027;&#x3002;</strong></p>
+<p>The only tricky part of this code is the comparator that we pass to sorted, comparing(freq::get).reversed(). The comparing method is a comparator construction method (Item 14) that takes a key extraction function. The function takes a word, and the &#x201C;extraction&#x201D; is actually a table lookup: the bound method reference freq::get looks up the word in the frequency table and returns the number of times the word appears in the file. Finally, we call reversed on the comparator, so we&#x2019;re sorting the words from most frequent to least frequent. Then it&#x2019;s a simple matter to limit the stream to ten words and collect them into a list.</p>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x4E2D;&#x552F;&#x4E00;&#x68D8;&#x624B;&#x7684;&#x90E8;&#x5206;&#x662F;&#x6211;&#x4EEC;&#x4F20;&#x9012;&#x7ED9; sorted &#x7684; <code>comparing(freq::get).reversed()</code>&#x3002;comparing &#x65B9;&#x6CD5;&#x662F; comparator &#x7684;&#x4E00;&#x79CD;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF08;<a href="../Chapter-3/Chapter-3-Item-14-Consider-implementing-Comparable.html">Item-14</a>&#xFF09;&#xFF0C;&#x5B83;&#x5177;&#x6709;&#x952E;&#x63D0;&#x53D6;&#x529F;&#x80FD;&#x3002;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x5355;&#x8BCD;&#xFF0C;&#x800C;&#x300C;&#x63D0;&#x53D6;&#x300D;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x8868;&#x67E5;&#x627E;&#xFF1A;&#x7ED1;&#x5B9A;&#x65B9;&#x6CD5;&#x5F15;&#x7528; <code>freq::get</code> &#x5728; freq &#x8868;&#x4E2D;&#x67E5;&#x627E;&#x8BE5;&#x5355;&#x8BCD;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x8BE5;&#x5355;&#x8BCD;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x6B21;&#x6570;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x6BD4;&#x8F83;&#x5668;&#x4E0A;&#x8C03;&#x7528; reverse &#x51FD;&#x6570;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5355;&#x8BCD;&#x4ECE;&#x6700;&#x9891;&#x7E41;&#x6392;&#x5E8F;&#x5230;&#x6700;&#x4E0D;&#x9891;&#x7E41;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x5C06;&#x6D41;&#x9650;&#x5236;&#x4E3A; 10 &#x4E2A;&#x5355;&#x8BCD;&#x5E76;&#x5C06;&#x5B83;&#x4EEC;&#x6536;&#x96C6;&#x5230;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x4E2D;&#x3002;</p>
+<p>The previous code snippets use Scanner&#x2019;s stream method to get a stream over the scanner. This method was added in Java 9. If you&#x2019;re using an earlier release, you can translate the scanner, which implements Iterator, into a stream using an adapter similar to the one in Item 47 (<code>streamOf(Iterable&lt;E&gt;)</code>).</p>
+<p>&#x524D;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x4F7F;&#x7528; Scanner &#x7684;&#x6D41;&#x65B9;&#x6CD5;&#x5728;&#x626B;&#x63CF;&#x5668;&#x4E0A;&#x83B7;&#x53D6;&#x6D41;&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x5728; Java 9 &#x4E2D;&#x6DFB;&#x52A0;&#x7684;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x8F83;&#x65E9;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;&#x4E8E; <a href="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">Item-47</a>&#xFF08;<code>streamOf(Iterable&lt;E&gt;)</code>&#xFF09;&#x4E2D;&#x7684;&#x9002;&#x914D;&#x5668;&#x5C06;&#x5B9E;&#x73B0; Iterator &#x7684;&#x626B;&#x63CF;&#x7A0B;&#x5E8F;&#x8F6C;&#x6362;&#x4E3A;&#x6D41;&#x3002;</p>
+<p>So what about the other thirty-six methods in Collectors? Most of them exist to let you collect streams into maps, which is far more complicated than collecting them into true collections. Each stream element is associated with a key and a value, and multiple stream elements can be associated with the same key.</p>
+<p>&#x90A3;&#x4E48; Collectors &#x4E2D;&#x7684;&#x5176;&#x4ED6; 36 &#x4E2A;&#x65B9;&#x6CD5;&#x5462;&#xFF1F;&#x5B83;&#x4EEC;&#x4E2D;&#x7684;&#x5927;&#x591A;&#x6570;&#x90FD;&#x5141;&#x8BB8;&#x4F60;&#x5C06;&#x6D41;&#x6536;&#x96C6;&#x5230; Map &#x4E2D;&#xFF0C;&#x8FD9;&#x6BD4;&#x5C06;&#x5B83;&#x4EEC;&#x6536;&#x96C6;&#x5230;&#x771F;&#x6B63;&#x7684;&#x96C6;&#x5408;&#x8981;&#x590D;&#x6742;&#x5F97;&#x591A;&#x3002;&#x6BCF;&#x4E2A;&#x6D41;&#x5143;&#x7D20;&#x4E0E;&#x4E00;&#x4E2A;&#x952E;&#x548C;&#x4E00;&#x4E2A;&#x503C;&#x76F8;&#x5173;&#x8054;&#xFF0C;&#x591A;&#x4E2A;&#x6D41;&#x5143;&#x7D20;&#x53EF;&#x4EE5;&#x4E0E;&#x540C;&#x4E00;&#x4E2A;&#x952E;&#x76F8;&#x5173;&#x8054;&#x3002;</p>
+<p>The simplest map collector is toMap(keyMapper, valueMapper), which takes two functions, one of which maps a stream element to a key, the other, to a value. We used this collector in our fromString implementation in Item 34 to make a map from the string form of an enum to the enum itself:</p>
+<p>&#x6700;&#x7B80;&#x5355;&#x7684; Map &#x6536;&#x96C6;&#x5668;&#x662F; <code>toMap(keyMapper, valueMapper)</code>&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x4E00;&#x4E2A;&#x5C06;&#x6D41;&#x5143;&#x7D20;&#x6620;&#x5C04;&#x5230;&#x952E;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x6620;&#x5C04;&#x5230;&#x503C;&#x3002;&#x6211;&#x4EEC;&#x5728; <a href="../Chapter-6/Chapter-6-Item-34-Use-enums-instead-of-int-constants.html">Item-34</a> &#x4E2D;&#x7684; fromString &#x5B9E;&#x73B0;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;&#x6536;&#x96C6;&#x5668;&#x6765;&#x521B;&#x5EFA;&#x679A;&#x4E3E;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5F62;&#x5F0F;&#x5230;&#x679A;&#x4E3E;&#x672C;&#x8EAB;&#x7684;&#x6620;&#x5C04;&#xFF1A;</p>
+<pre><code>// Using a toMap collector to make a map from string to enum
+private static final Map&lt;String, Operation&gt; stringToEnum =Stream.of(values()).collect(toMap(Object::toString, e -&gt; e));
+</code></pre><p>This simple form of toMap is perfect if each element in the stream maps to a unique key. If multiple stream elements map to the same key, the pipeline will terminate with an IllegalStateException.</p>
+<p>&#x5982;&#x679C;&#x6D41;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x6620;&#x5C04;&#x5230;&#x552F;&#x4E00;&#x7684;&#x952E;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x79CD;&#x7B80;&#x5355;&#x7684; toMap &#x5F62;&#x5F0F;&#x5C31;&#x662F;&#x5B8C;&#x7F8E;&#x7684;&#x3002;&#x5982;&#x679C;&#x591A;&#x4E2A;&#x6D41;&#x5143;&#x7D20;&#x6620;&#x5C04;&#x5230;&#x540C;&#x4E00;&#x4E2A;&#x952E;&#xFF0C;&#x7BA1;&#x9053;&#x5C06;&#x4EE5; IllegalStateException &#x7ED3;&#x675F;&#x3002;</p>
+<p>The more complicated forms of toMap, as well as the groupingBy method, give you various ways to provide strategies for dealing with such collisions. One way is to provide the toMap method with a merge function in addition to its key and value mappers. The merge function is a <code>BinaryOperator&lt;V&gt;</code>, where V is the value type of the map. Any additional values associated with a key are combined with the existing value using the merge function, so, for example, if the merge function is multiplication, you end up with a value that is the product of all the values associated with the key by the value mapper.</p>
+<p>toMap &#x66F4;&#x4E3A;&#x590D;&#x6742;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x4EE5;&#x53CA; groupingBy &#x65B9;&#x6CD5;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x63D0;&#x4F9B;&#x5904;&#x7406;&#x6B64;&#x7C7B;&#x51B2;&#x7A81;&#x7684;&#x7B56;&#x7565;&#x3002;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x662F;&#x4E3A; toMap &#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A; merge &#x51FD;&#x6570;&#xFF0C;&#x4EE5;&#x53CA;&#x5B83;&#x7684;&#x952E;&#x548C;&#x503C;&#x6620;&#x5C04;&#x5668;&#x3002;merge &#x51FD;&#x6570;&#x662F;&#x4E00;&#x4E2A; <code>BinaryOperator&lt;V&gt;</code>&#xFF0C;&#x5176;&#x4E2D; V &#x662F; Map &#x7684;&#x503C;&#x7C7B;&#x578B;&#x3002;&#x4E0E;&#x952E;&#x5173;&#x8054;&#x7684;&#x4EFB;&#x4F55;&#x9644;&#x52A0;&#x503C;&#x90FD;&#x5C06;&#x4F7F;&#x7528; merge &#x51FD;&#x6570;&#x4E0E;&#x73B0;&#x6709;&#x503C;&#x7EC4;&#x5408;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C; merge &#x51FD;&#x6570;&#x662F;&#x4E58;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x5C06;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8BE5;&#x503C;&#x662F; value mapper &#x4E0E;&#x952E;&#x5173;&#x8054;&#x7684;&#x6240;&#x6709;&#x503C;&#x7684;&#x4E58;&#x79EF;&#x3002;</p>
+<p>The three-argument form of toMap is also useful to make a map from a key to a chosen element associated with that key. For example, suppose we have a stream of record albums by various artists, and we want a map from recording artist to best-selling album. This collector will do the job.</p>
+<p>toMap &#x7684;&#x4E09;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x5BF9;&#x4E8E;&#x4ECE;&#x952E;&#x5230;&#x4E0E;&#x8BE5;&#x952E;&#x5173;&#x8054;&#x7684;&#x6240;&#x9009;&#x5143;&#x7D20;&#x7684;&#x6620;&#x5C04;&#x4E5F;&#x5F88;&#x6709;&#x7528;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E2A;&#x7531;&#x4E0D;&#x540C;&#x827A;&#x672F;&#x5BB6;&#x5F55;&#x5236;&#x7684;&#x5531;&#x7247;&#x6D41;&#xFF0C;&#x5E76;&#x4E14;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x4E00;&#x4E2A;&#x4ECE;&#x5531;&#x7247;&#x827A;&#x672F;&#x5BB6;&#x5230;&#x7545;&#x9500;&#x5531;&#x7247;&#x7684;&#x6620;&#x5C04;&#x3002;&#x8FD9;&#x4E2A; collector &#x5C06;&#x5B8C;&#x6210;&#x8FD9;&#x9879;&#x5DE5;&#x4F5C;&#x3002;</p>
+<pre><code>// Collector to generate a map from key to chosen element for key
+Map&lt;Artist, Album&gt; topHits = albums.collect(
+        toMap(Album::artist, a-&gt;a, maxBy(comparing(Album::sales)
+    )
+));
+</code></pre><p>Note that the comparator uses the static factory method maxBy, which is statically imported from BinaryOperator. This method converts a <code>Comparator&lt;T&gt;</code> into a <code>BinaryOperator&lt;T&gt;</code> that computes the maximum implied by the specified comparator. In this case, the comparator is returned by the comparator construction method comparing, which takes the key extractor function Album::sales. This may seem a bit convoluted, but the code reads nicely. Loosely speaking, it says, &#x201C;convert the stream of albums to a map, mapping each artist to the album that has the best album by sales.&#x201D; This is surprisingly close to the problem statement.</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x6BD4;&#x8F83;&#x5668;&#x4F7F;&#x7528;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x65B9;&#x6CD5; maxBy&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4ECE; BinaryOperator &#x9759;&#x6001;&#x5BFC;&#x5165;&#x3002;&#x6B64;&#x65B9;&#x6CD5;&#x5C06; <code>Comparator&lt;T&gt;</code> &#x8F6C;&#x6362;&#x4E3A; <code>BinaryOperator&lt;T&gt;</code>&#xFF0C;&#x8BE5;&#x64CD;&#x4F5C;&#x7B26;&#x8BA1;&#x7B97;&#x6307;&#x5B9A;&#x6BD4;&#x8F83;&#x5668;&#x6240;&#x9690;&#x542B;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6BD4;&#x8F83;&#x5668;&#x662F;&#x901A;&#x8FC7;&#x6BD4;&#x8F83;&#x5668;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#xFF0C;&#x6BD4;&#x8F83;&#x5668;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x53D6; <code>Album::sales</code>&#x3002;&#x8FD9;&#x770B;&#x8D77;&#x6765;&#x6709;&#x70B9;&#x590D;&#x6742;&#xFF0C;&#x4F46;&#x662F;&#x4EE3;&#x7801;&#x53EF;&#x8BFB;&#x6027;&#x5F88;&#x597D;&#x3002;&#x7C97;&#x7565;&#x5730;&#x8BF4;&#xFF0C;&#x4EE3;&#x7801;&#x662F;&#x8FD9;&#x6837;&#x63CF;&#x8FF0;&#x7684;:&#x300C;&#x5C06;&#x4E13;&#x8F91;&#x6D41;&#x8F6C;&#x6362;&#x4E3A; Map&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x827A;&#x4EBA;&#x6620;&#x5C04;&#x5230;&#x9500;&#x91CF;&#x6700;&#x597D;&#x7684;&#x4E13;&#x8F91;&#x3002;&#x300D;&#x8FD9;&#x4E0E;&#x95EE;&#x9898;&#x7684;&#x6587;&#x5B57;&#x9648;&#x8FF0;&#x60CA;&#x4EBA;&#x5730;&#x63A5;&#x8FD1;&#x3002;</p>
+<p>Another use of the three-argument form of toMap is to produce a collector that imposes a last-write-wins policy when there are collisions. For many streams, the results will be nondeterministic, but if all the values that may be associated with a key by the mapping functions are identical, or if they are all acceptable, this collector&#x2019;s s behavior may be just what you want:</p>
+<p>toMap &#x7684;&#x4E09;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x7528;&#x9014;&#x662F;&#x751F;&#x6210;&#x4E00;&#x4E2A; collector&#xFF0C;&#x5F53;&#x53D1;&#x751F;&#x51B2;&#x7A81;&#x65F6;&#xFF0C;&#x5B83;&#x5F3A;&#x5236;&#x6267;&#x884C; last-write-wins &#x7B56;&#x7565;&#x3002;&#x5BF9;&#x4E8E;&#x8BB8;&#x591A;&#x6D41;&#xFF0C;&#x7ED3;&#x679C;&#x5C06;&#x662F;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x6620;&#x5C04;&#x51FD;&#x6570;&#x53EF;&#x80FD;&#x4E0E;&#x952E;&#x5173;&#x8054;&#x7684;&#x6240;&#x6709;&#x503C;&#x90FD;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x6216;&#x8005;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x53EF;&#x63A5;&#x53D7;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A; collector &#x7684;&#x884C;&#x4E3A;&#x53EF;&#x80FD;&#x6B63;&#x662F;&#x4F60;&#x60F3;&#x8981;&#x7684;&#xFF1A;</p>
+<pre><code>// Collector to impose last-write-wins policy
+toMap(keyMapper, valueMapper, (v1, v2) -&gt; v2)
+</code></pre><p>The third and final version of toMap takes a fourth argument, which is a map factory, for use when you want to specify a particular map implementation such as an EnumMap or a TreeMap.</p>
+<p>toMap &#x7684;&#x7B2C;&#x4E09;&#x4E2A;&#x4E5F;&#x662F;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x91C7;&#x7528;&#x4E86;&#x7B2C;&#x56DB;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A; Map &#x5DE5;&#x5382;&#xFF0C;&#x5F53;&#x4F60;&#x60F3;&#x8981;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684; Map &#x5B9E;&#x73B0;&#xFF08;&#x5982; EnumMap &#x6216; TreeMap&#xFF09;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<p>There are also variant forms of the first three versions of toMap, named toConcurrentMap, that run efficiently in parallel and produce ConcurrentHashMap instances.</p>
+<p>&#x8FD8;&#x6709;&#x524D;&#x4E09;&#x4E2A;&#x7248;&#x672C;&#x7684; toMap &#x7684;&#x53D8;&#x4F53;&#x5F62;&#x5F0F;&#xFF0C;&#x540D;&#x4E3A; toConcurrentMap&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x5730;&#x5E76;&#x884C;&#x8FD0;&#x884C;&#xFF0C;&#x540C;&#x65F6;&#x751F;&#x6210; ConcurrentHashMap &#x5B9E;&#x4F8B;&#x3002;</p>
+<p>In addition to the toMap method, the Collectors API provides the groupingBy method, which returns collectors to produce maps that group elements into categories based on a classifier function. The classifier function takes an element and returns the category into which it falls. This category serves as the element&#x2019;s map key. The simplest version of the groupingBy method takes only a classifier and returns a map whose values are lists of all the elements in each category. This is the collector that we used in the Anagram program in Item 45 to generate a map from alphabetized word to a list of the words sharing the alphabetization:</p>
+<p>&#x9664;&#x4E86; toMap &#x65B9;&#x6CD5;&#x4E4B;&#x5916;&#xFF0C;collector API &#x8FD8;&#x63D0;&#x4F9B; groupingBy &#x65B9;&#x6CD5;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE; collector&#xFF0C;&#x4EE5;&#x751F;&#x6210;&#x57FA;&#x4E8E;&#x5206;&#x7C7B;&#x5668;&#x51FD;&#x6570;&#x5C06;&#x5143;&#x7D20;&#x5206;&#x7EC4;&#x4E3A;&#x7C7B;&#x522B;&#x7684;&#x6620;&#x5C04;&#x3002;&#x5206;&#x7C7B;&#x5668;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5E76;&#x8FD4;&#x56DE;&#x5B83;&#x6240;&#x5C5E;&#x7684;&#x7C7B;&#x522B;&#x3002;&#x8FD9;&#x4E2A;&#x7C7B;&#x522B;&#x7528;&#x4F5C;&#x5143;&#x7D20;&#x7684; Map &#x952E;&#x3002;groupingBy &#x65B9;&#x6CD5;&#x7684;&#x6700;&#x7B80;&#x5355;&#x7248;&#x672C;&#x53EA;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x5668;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Map&#xFF0C;&#x5176;&#x503C;&#x662F;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x4E2D;&#x6240;&#x6709;&#x5143;&#x7D20;&#x7684;&#x5217;&#x8868;&#x3002;&#x8FD9;&#x662F;&#x6211;&#x4EEC;&#x5728; <a href="Chapter-7-Item-45-Use-streams-judiciously.html">Item-45</a> &#x7684;&#x5B57;&#x8C1C;&#x7A0B;&#x5E8F;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x6536;&#x96C6;&#x5668;&#xFF0C;&#x7528;&#x4E8E;&#x751F;&#x6210;&#x4ECE;&#x6309;&#x5B57;&#x6BCD;&#x987A;&#x5E8F;&#x6392;&#x5217;&#x7684;&#x5355;&#x8BCD;&#x5230;&#x5171;&#x4EAB;&#x5B57;&#x6BCD;&#x987A;&#x5E8F;&#x7684;&#x5355;&#x8BCD;&#x5217;&#x8868;&#x7684;&#x6620;&#x5C04;&#xFF1A;</p>
+<pre><code>words.collect(groupingBy(word -&gt; alphabetize(word)))
+</code></pre><p>If you want groupingBy to return a collector that produces a map with values other than lists, you can specify a downstream collector in addition to a classifier. A downstream collector produces a value from a stream containing all the elements in a category. The simplest use of this parameter is to pass toSet(), which results in a map whose values are sets of elements rather than lists.</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x5E0C;&#x671B; groupingBy &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;&#x5217;&#x8868;&#x4E4B;&#x5916;&#x7684;&#x503C;&#x751F;&#x6210;&#x6620;&#x5C04;&#x7684;&#x6536;&#x96C6;&#x5668;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x548C;&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x5668;&#x3002;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x4ECE;&#x5305;&#x542B;&#x7C7B;&#x522B;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x7684;&#x6D41;&#x4E2D;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x503C;&#x3002;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x6700;&#x7B80;&#x5355;&#x7684;&#x7528;&#x6CD5;&#x662F;&#x4F20;&#x9012; toSet()&#xFF0C;&#x8FD9;&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x4E2A; Map&#xFF0C;&#x5176;&#x503C;&#x662F; Set&#xFF0C;&#x800C;&#x4E0D;&#x662F; List&#x3002;</p>
+<p>Alternatively, you can pass toCollection(collectionFactory), which lets you create the collections into which each category of elements is placed. This gives you the flexibility to choose any collection type you want. Another simple use of the two-argument form of groupingBy is to pass counting() as the downstream collector. This results in a map that associates each category with the number of elements in the category, rather than a collection containing the elements. That&#x2019;s what you saw in the frequency table example at the beginning of this item:</p>
+<p>&#x6216;&#x8005;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F20;&#x9012; <code>toCollection(collectionFactory)</code>&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x96C6;&#x5408;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x7684;&#x5143;&#x7D20;&#x653E;&#x5165;&#x5176;&#x4E2D;&#x3002;&#x8FD9;&#x4F7F;&#x4F60;&#x53EF;&#x4EE5;&#x7075;&#x6D3B;&#x5730;&#x9009;&#x62E9;&#x6240;&#x9700;&#x7684;&#x4EFB;&#x4F55;&#x96C6;&#x5408;&#x7C7B;&#x578B;&#x3002;groupingBy &#x7684;&#x4E24;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7528;&#x6CD5;&#x662F;&#x5C06; <code>counting()</code> &#x4F5C;&#x4E3A;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x4F20;&#x9012;&#x3002;&#x8FD9;&#x5C06;&#x751F;&#x6210;&#x4E00;&#x4E2A; Map&#xFF0C;&#x8BE5; Map &#x5C06;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x4E0E;&#x7C7B;&#x522B;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x6570;&#x91CF;&#x76F8;&#x5173;&#x8054;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5305;&#x542B;&#x5143;&#x7D20;&#x7684;&#x96C6;&#x5408;&#x3002;&#x8FD9;&#x662F;&#x4F60;&#x5728;&#x8FD9;&#x4E00;&#x9879;&#x5F00;&#x59CB;&#x7684; freq &#x8868;&#x4F8B;&#x5B50;&#x4E2D;&#x770B;&#x5230;&#x7684;&#xFF1A;</p>
+<pre><code>Map&lt;String, Long&gt; freq = words.collect(groupingBy(String::toLowerCase, counting()));
+</code></pre><p>The third version of groupingBy lets you specify a map factory in addition to a downstream collector. Note that this method violates the standard telescoping argument list pattern: the mapFactory parameter precedes, rather than follows, the downStream parameter. This version of groupingBy gives you control over the containing map as well as the contained collections, so, for example, you can specify a collector that returns a TreeMap whose values are TreeSets.</p>
+<p>groupingBy &#x7684;&#x7B2C;&#x4E09;&#x4E2A;&#x7248;&#x672C;&#x5141;&#x8BB8;&#x4F60;&#x6307;&#x5B9A;&#x9664;&#x4E86;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x4E4B;&#x5916;&#x7684; Map &#x5DE5;&#x5382;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x8FDD;&#x53CD;&#x4E86;&#x6807;&#x51C6;&#x7684;&#x53EF;&#x4F38;&#x7F29;&#x53C2;&#x6570;&#x5217;&#x8868;&#x6A21;&#x5F0F;&#xFF1A;mapFactory &#x53C2;&#x6570;&#x4F4D;&#x4E8E;&#x4E0B;&#x6E38;&#x53C2;&#x6570;&#x4E4B;&#x524D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E4B;&#x540E;&#x3002;groupingBy &#x7684;&#x8FD9;&#x4E2A;&#x7248;&#x672C;&#x5141;&#x8BB8;&#x4F60;&#x63A7;&#x5236;&#x5305;&#x542B;&#x7684; Map &#x548C;&#x5305;&#x542B;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6536;&#x96C6;&#x5668;&#xFF0C;&#x8BE5;&#x6536;&#x96C6;&#x5668;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; TreeMap&#xFF0C;&#x5176;&#x503C;&#x4E3A; TreeSet&#x3002;</p>
+<p>The groupingByConcurrent method provides variants of all three overloadings of groupingBy. These variants run efficiently in parallel and produce ConcurrentHashMap instances. There is also a rarely used relative of groupingBy called partitioningBy. In lieu of a classifier method, it takes a predicate and returns a map whose key is a Boolean. There are two overloadings of this method, one of which takes a downstream collector in addition to a predicate.</p>
+<p>groupingByConcurrent &#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x4E86; groupingBy &#x7684;&#x6240;&#x6709;&#x4E09;&#x79CD;&#x91CD;&#x8F7D;&#x7684;&#x53D8;&#x4F53;&#x3002;&#x8FD9;&#x4E9B;&#x53D8;&#x4F53;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x5730;&#x5E76;&#x884C;&#x8FD0;&#x884C;&#xFF0C;&#x5E76;&#x751F;&#x6210; ConcurrentHashMap &#x5B9E;&#x4F8B;&#x3002;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x4E0E; groupingBy &#x5173;&#x7CFB;&#x4E0D;&#x5927;&#x7684;&#x8BCD;&#xFF0C;&#x53EB;&#x505A; partitioningBy &#x3002;&#x4EE3;&#x66FF;&#x5206;&#x7C7B;&#x5668;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x4E00;&#x4E2A; Predicate &#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x952E;&#x4E3A;&#x5E03;&#x5C14;&#x503C;&#x7684; Map&#x3002;&#x6B64;&#x65B9;&#x6CD5;&#x6709;&#x4E24;&#x4E2A;&#x91CD;&#x8F7D;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x9664;&#x4E86; Predicate &#x5916;&#x8FD8;&#x63A5;&#x53D7;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x3002;</p>
+<p>The collectors returned by the counting method are intended only for use as downstream collectors. The same functionality is available directly on Stream, via the count method, so <strong>there is never a reason to say collect(counting()).</strong> There are fifteen more Collectors methods with this property. They include the nine methods whose names begin with summing, averaging, and summarizing (whose functionality is available on the corresponding primitive stream types). They also include all overloadings of the reducing method, and the filtering, mapping, flatMapping, and collectingAndThen methods. Most programmers can safely ignore the majority of these methods. From a design perspective, these collectors represent an attempt to partially duplicate the functionality of streams in collectors so that downstream collectors can act as &#x201C;ministreams.&#x201D;</p>
+<p>&#x8BA1;&#x6570;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x6536;&#x96C6;&#x5668;&#x4EC5;&#x7528;&#x4E8E;&#x4F5C;&#x4E3A;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x3002;&#x76F8;&#x540C;&#x7684;&#x529F;&#x80FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; count &#x65B9;&#x6CD5;&#x76F4;&#x63A5;&#x5728;&#x6D41;&#x4E0A;&#x4F7F;&#x7528;&#xFF0C;<strong>&#x6240;&#x4EE5;&#x6C38;&#x8FDC;&#x6CA1;&#x6709;&#x7406;&#x7531;&#x8BF4; <code>collect(counting())</code>&#x3002;</strong> &#x8FD8;&#x6709; 15 &#x4E2A;&#x5177;&#x6709;&#x6B64;&#x5C5E;&#x6027;&#x7684;&#x6536;&#x96C6;&#x5668;&#x65B9;&#x6CD5;&#x3002;&#x5B83;&#x4EEC;&#x5305;&#x62EC; 9 &#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x540D;&#x79F0;&#x4EE5;&#x6C42;&#x548C;&#x3001;&#x5E73;&#x5747;&#x548C;&#x6C47;&#x603B;&#x5F00;&#x5934;&#xFF08;&#x5B83;&#x4EEC;&#x7684;&#x529F;&#x80FD;&#x5728;&#x76F8;&#x5E94;&#x7684;&#x539F;&#x59CB;&#x6D41;&#x7C7B;&#x578B;&#x4E0A;&#x53EF;&#x7528;&#xFF09;&#x3002;&#x5B83;&#x4EEC;&#x8FD8;&#x5305;&#x62EC; reduce &#x65B9;&#x6CD5;&#x7684;&#x6240;&#x6709;&#x91CD;&#x8F7D;&#xFF0C;&#x4EE5;&#x53CA;&#x8FC7;&#x6EE4;&#x3001;&#x6620;&#x5C04;&#x3001;&#x5E73;&#x9762;&#x6620;&#x5C04;&#x548C; collectingAndThen &#x65B9;&#x6CD5;&#x3002;&#x5927;&#x591A;&#x6570;&#x7A0B;&#x5E8F;&#x5458;&#x53EF;&#x4EE5;&#x5B89;&#x5168;&#x5730;&#x5FFD;&#x7565;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x4E2D;&#x7684;&#x5927;&#x591A;&#x6570;&#x3002;&#x4ECE;&#x8BBE;&#x8BA1;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x770B;&#xFF0C;&#x8FD9;&#x4E9B;&#x6536;&#x96C6;&#x5668;&#x8BD5;&#x56FE;&#x90E8;&#x5206;&#x590D;&#x5236;&#x6536;&#x96C6;&#x5668;&#x4E2D;&#x7684;&#x6D41;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4EE5;&#x4FBF;&#x4E0B;&#x6E38;&#x6536;&#x96C6;&#x5668;&#x53EF;&#x4EE5;&#x5145;&#x5F53;&#x300C;&#x8FF7;&#x4F60;&#x5B58;&#x50A8;&#x5668;&#x300D;&#x3002;</p>
+<p>There are three Collectors methods we have yet to mention. Though they are in Collectors, they don&#x2019;t involve collections. The first two are minBy and maxBy, which take a comparator and return the minimum or maximum element in the stream as determined by the comparator. They are minor generalizations of the min and max methods in the Stream interface and are the collector analogues of the binary operators returned by the like-named methods in BinaryOperator. Recall that we used BinaryOperator.maxBy in our best-selling album example.</p>
+<p>&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x63D0;&#x5230;&#x4E09;&#x79CD; Collectors &#x65B9;&#x6CD5;&#x3002;&#x867D;&#x7136;&#x5B83;&#x4EEC;&#x662F;&#x5728; Collectors &#x4E2D;&#xFF0C;&#x4F46;&#x5B83;&#x4EEC;&#x4E0D;&#x6D89;&#x53CA;&#x6536;&#x96C6;&#x3002;&#x524D;&#x4E24;&#x4E2A;&#x662F; minBy &#x548C; maxBy&#xFF0C;&#x5B83;&#x4EEC;&#x63A5;&#x53D7; comparator &#x5E76;&#x8FD4;&#x56DE;&#x7531; comparator &#x786E;&#x5B9A;&#x7684;&#x6D41;&#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x6216;&#x6700;&#x5927;&#x5143;&#x7D20;&#x3002;&#x5B83;&#x4EEC;&#x662F;&#x6D41;&#x63A5;&#x53E3;&#x4E2D;&#x6700;&#x5C0F;&#x548C;&#x6700;&#x5927;&#x65B9;&#x6CD5;&#x7684;&#x4E00;&#x4E9B;&#x5C0F;&#x6CDB;&#x5316;&#xFF0C;&#x662F; BinaryOperator &#x4E2D;&#x540C;&#x540D;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x64CD;&#x4F5C;&#x7B26;&#x7684; collector &#x7C7B;&#x4F3C;&#x7269;&#x3002;&#x56DE;&#x60F3;&#x4E00;&#x4E0B;&#xFF0C;&#x5728;&#x6211;&#x4EEC;&#x6700;&#x7545;&#x9500;&#x7684;&#x4E13;&#x8F91;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86; <code>BinaryOperator.maxBy</code>&#x3002;</p>
+<p>The final Collectors method is joining, which operates only on streams of CharSequence instances such as strings. In its parameterless form, it returns a collector that simply concatenates the elements. Its one argument form takes a single CharSequence parameter named delimiter and returns a collector that joins the stream elements, inserting the delimiter between adjacent elements. If you pass in a comma as the delimiter, the collector returns a comma-separated values string (but beware that the string will be ambiguous if any of the elements in the stream contain commas). The three argument form takes a prefix and suffix in addition to the delimiter. The resulting collector generates strings like the ones that you get when you print a collection, for example [came, saw, conquered].</p>
+<p>&#x6700;&#x540E;&#x4E00;&#x4E2A; Collectors &#x65B9;&#x6CD5;&#x662F; join&#xFF0C;&#x5B83;&#x53EA;&#x5BF9; CharSequence &#x5B9E;&#x4F8B;&#x6D41;&#xFF08;&#x5982;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x3002;&#x5728;&#x5176;&#x65E0;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x4E2D;&#xFF0C;&#x5B83;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6536;&#x96C6;&#x5668;&#xFF0C;&#x8BE5;&#x6536;&#x96C6;&#x5668;&#x53EA;&#x662F;&#x5C06;&#x5143;&#x7D20;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#x3002;&#x5B83;&#x7684;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; delimiter &#x7684; CharSequence &#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x6D41;&#x5143;&#x7D20;&#x7684;&#x6536;&#x96C6;&#x5668;&#xFF0C;&#x5728;&#x76F8;&#x90BB;&#x5143;&#x7D20;&#x4E4B;&#x95F4;&#x63D2;&#x5165;&#x5206;&#x9694;&#x7B26;&#x3002;&#x5982;&#x679C;&#x4F20;&#x5165;&#x9017;&#x53F7;&#x4F5C;&#x4E3A;&#x5206;&#x9694;&#x7B26;&#xFF0C;&#x6536;&#x96C6;&#x5668;&#x5C06;&#x8FD4;&#x56DE;&#x9017;&#x53F7;&#x5206;&#x9694;&#x7684;&#x503C;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x6D41;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#x5305;&#x542B;&#x9017;&#x53F7;&#xFF0C;&#x8BE5;&#x5B57;&#x7B26;&#x4E32;&#x5C06;&#x662F;&#x4E0D;&#x660E;&#x786E;&#x7684;&#xFF09;&#x3002;&#x9664;&#x4E86;&#x5206;&#x9694;&#x7B26;&#x5916;&#xFF0C;&#x4E09;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x8FD8;&#x63A5;&#x53D7;&#x524D;&#x7F00;&#x548C;&#x540E;&#x7F00;&#x3002;&#x751F;&#x6210;&#x7684;&#x6536;&#x96C6;&#x5668;&#x751F;&#x6210;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x4E0E;&#x6253;&#x5370;&#x96C6;&#x5408;&#x65F6;&#x5F97;&#x5230;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F8B;&#x5982; <code>[came, saw, conquer]</code>&#x3002;</p>
+<p>In summary, the essence of programming stream pipelines is side-effect-free function objects. This applies to all of the many function objects passed to streams and related objects. The terminal operation forEach should only be used to report the result of a computation performed by a stream, not to perform the computation. In order to use streams properly, you have to know about collectors. The most important collector factories are toList, toSet, toMap, groupingBy, and joining.</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;&#x6D41;&#x7BA1;&#x9053;&#x7F16;&#x7A0B;&#x7684;&#x672C;&#x8D28;&#x662F;&#x65E0;&#x526F;&#x4F5C;&#x7528;&#x7684;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x9002;&#x7528;&#x4E8E;&#x4F20;&#x9012;&#x7ED9;&#x6D41;&#x548C;&#x76F8;&#x5173;&#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3002;Terminal &#x64CD;&#x4F5C; forEach &#x53EA;&#x5E94;&#x7528;&#x4E8E;&#x62A5;&#x544A;&#x7531;&#x6D41;&#x6267;&#x884C;&#x7684;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#xFF0C;&#x800C;&#x4E0D;&#x5E94;&#x7528;&#x4E8E;&#x6267;&#x884C;&#x8BA1;&#x7B97;&#x3002;&#x4E3A;&#x4E86;&#x6B63;&#x786E;&#x4F7F;&#x7528;&#x6D41;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x4E86;&#x89E3; collector&#x3002;&#x6700;&#x91CD;&#x8981;&#x7684; collector &#x5DE5;&#x5382;&#x662F; toList&#x3001;toSet&#x3001;toMap&#x3001;groupingBy &#x548C; join&#x3002;</p>
+<hr>
+<p><strong><a href="Chapter-7-Introduction.html">Back to contents of the chapter&#xFF08;&#x8FD4;&#x56DE;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#xFF09;</a></strong></p>
+<ul>
+<li><strong>Previous Item&#xFF08;&#x4E0A;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-7-Item-45-Use-streams-judiciously.html">Item 45: Use streams judiciously&#xFF08;&#x660E;&#x667A;&#x5730;&#x4F7F;&#x7528;&#x6D41;&#xFF09;</a></strong></li>
+<li><strong>Next Item&#xFF08;&#x4E0B;&#x4E00;&#x6761;&#x76EE;&#xFF09;&#xFF1A;<a href="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html">Item 47: Prefer Collection to Stream as a return type&#xFF08;&#x4F18;&#x5148;&#x9009;&#x62E9; Collection &#x800C;&#x4E0D;&#x662F;&#x6D41;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#xFF09;</a></strong></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Chapter-7-Item-45-Use-streams-judiciously.html" class="navigation navigation-prev " aria-label="Previous page: Item 45: Use streams judiciously（明智地使用流）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.html" class="navigation navigation-next " aria-label="Next page: Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Item 46: Prefer side effect free functions in streams（在流中使用无副作用的函数）","level":"1.7.6","depth":2,"next":{"title":"Item 47: Prefer Collection to Stream as a return type（优先选择 Collection 而不是流作为返回类型）","level":"1.7.7","depth":2,"path":"Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.md","ref":"Chapter-7/Chapter-7-Item-47-Prefer-Collection-to-Stream-as-a-return-type.md","articles":[]},"previous":{"title":"Item 45: Use streams judiciously（明智地使用流）","level":"1.7.5","depth":2,"path":"Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.md","ref":"Chapter-7/Chapter-7-Item-45-Use-streams-judiciously.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Chapter-7/Chapter-7-Item-46-Prefer-side-effect-free-functions-in-streams.md","mtime":"2021-12-19T09:10:38.065Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-19T10:16:38.761Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
